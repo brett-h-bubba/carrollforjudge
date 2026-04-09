@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About Keri",
@@ -133,12 +134,17 @@ export default function AboutPage() {
       <section className="py-16 sm:py-24 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-5 gap-10 lg:gap-16 items-start">
-            {/* Photo placeholder */}
+            {/* Photo */}
             <div className="md:col-span-2">
-              <div className="aspect-[3/4] w-full max-w-sm mx-auto rounded-2xl bg-slate-300 flex items-center justify-center">
-                <span className="text-slate-light text-sm tracking-wide uppercase">
-                  Photo
-                </span>
+              <div className="aspect-[3/4] w-full max-w-sm mx-auto rounded-2xl overflow-hidden relative shadow-lg">
+                <Image
+                  src="/images/headshot-2.jpg"
+                  alt="Keri H. Carroll"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  priority
+                />
               </div>
             </div>
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Page() {
   return (
@@ -10,7 +11,8 @@ export default function Page() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(200,169,81,0.12)_0%,_transparent_60%)]" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
-          <div className="max-w-3xl">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
             <p className="text-gold font-semibold tracking-widest uppercase text-sm mb-4">
               20th Chancery Court District, Place 1
             </p>
@@ -38,6 +40,21 @@ export default function Page() {
                 Learn More
               </Link>
             </div>
+          </div>
+
+          {/* Hero headshot */}
+          <div className="hidden lg:block">
+            <div className="relative aspect-[3/4] max-w-md ml-auto rounded-2xl overflow-hidden shadow-2xl ring-4 ring-gold/30">
+              <Image
+                src="/images/headshot-main.jpg"
+                alt="Keri H. Carroll"
+                fill
+                className="object-cover"
+                sizes="400px"
+                priority
+              />
+            </div>
+          </div>
           </div>
         </div>
 
@@ -157,9 +174,18 @@ export default function Page() {
       <section className="bg-white py-20 sm:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Photo placeholder */}
+            {/* Photo */}
             <div className="relative">
-              <div className="aspect-[4/5] bg-slate-300 rounded-xl shadow-lg" />
+              <div className="aspect-[4/5] rounded-xl shadow-lg overflow-hidden relative">
+                <Image
+                  src="/images/headshot-2.jpg"
+                  alt="Keri H. Carroll — candidate for Chancery Court Judge"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+              </div>
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gold/20 rounded-xl -z-10" />
             </div>
 

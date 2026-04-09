@@ -10,6 +10,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://carrollforjudge.com"),
   title: {
     default: "Keri H. Carroll | Chancery Court Judge — Rankin County, Mississippi",
     template: "%s | Keri H. Carroll for Chancery Court Judge",
@@ -34,6 +35,14 @@ export const metadata: Metadata = {
     siteName: "Carroll for Judge",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/images/social-share.png",
+        width: 1200,
+        height: 630,
+        alt: "Keri H. Carroll for Chancery Court Judge",
+      },
+    ],
   },
 };
 

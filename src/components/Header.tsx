@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const navLinks = [
@@ -21,8 +22,14 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo / Name */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center text-forest-dark font-bold text-lg">
-              KC
+            <div className="w-10 h-10 rounded-full overflow-hidden relative">
+              <Image
+                src="/images/logo.png"
+                alt="Carroll for Judge logo"
+                fill
+                className="object-cover"
+                sizes="40px"
+              />
             </div>
             <div className="leading-tight">
               <span className="text-gold font-bold text-lg tracking-wide">
