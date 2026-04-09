@@ -11,16 +11,38 @@
   --color-cream-dark: #F0EDE0;
   --color-slate: #374151;
   --color-slate-light: #6B7280;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
 }
+
+/* ── Base ──────────────────────────────────────── */
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background: #FAF8F0;
+  background: #ffffff;
   color: #374151;
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Text-shadow utilities ─────────────────────── */
+
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.text-shadow-hero {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Selection highlight ───────────────────────── */
+
+::selection {
+  background: #C8A951;
+  color: #0B2B1E;
 }

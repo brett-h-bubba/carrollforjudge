@@ -9,44 +9,67 @@ export const metadata: Metadata = {
 
 const caseTypes = [
   {
-    title: "Divorce and Marital Disputes",
+    title: "Divorce",
     description:
-      "When a marriage ends, the chancellor divides property, determines alimony, and helps families move forward. These decisions shape the financial future of both spouses.",
+      "When a marriage ends, the chancellor divides property, determines alimony, and shapes the financial future of both spouses.",
   },
   {
-    title: "Child Custody and Support",
+    title: "Child Custody",
     description:
-      "Who a child lives with, how much time they spend with each parent, and how their needs are financially supported — the chancellor decides all of it.",
+      "Who a child lives with, how much time they spend with each parent, and how their needs are supported — the chancellor decides all of it.",
   },
   {
-    title: "Adoption Proceedings",
+    title: "Adoption",
     description:
-      "Adoption gives children a permanent, loving home. The chancellor reviews every adoption to ensure it serves the child's best interests and finalizes the new family bond.",
+      "Adoption gives children a permanent, loving home. The chancellor reviews every case to ensure it serves the child's best interests.",
   },
   {
-    title: "Guardianship and Conservatorship",
+    title: "Guardianship",
     description:
-      "When an aging parent can no longer manage their own affairs, or a child needs a guardian other than a parent, the chancellor appoints someone to protect them.",
+      "When an aging parent can no longer manage their affairs, or a child needs a guardian, the chancellor appoints someone to protect them.",
   },
   {
-    title: "Estate and Probate Matters",
+    title: "Probate & Estate",
     description:
-      "After a loved one passes, the chancellor oversees how their estate is handled — ensuring wills are honored, debts are settled, and heirs receive what they're owed.",
+      "After a loved one passes, the chancellor oversees how their estate is handled — ensuring wills are honored and heirs receive what they are owed.",
   },
   {
     title: "Property Disputes",
     description:
-      "Boundary disagreements, easement conflicts, and disputes over land ownership come before the chancellor, who resolves them based on the principles of equity and fairness.",
+      "Boundary disagreements, easement conflicts, and land ownership disputes come before the chancellor for resolution based on equity and fairness.",
   },
   {
-    title: "Juvenile Matters",
+    title: "Juvenile",
     description:
-      "Cases involving minors in need of supervision or protection are heard in chancery court. The chancellor's priority is always the safety and well-being of the child.",
+      "Cases involving minors in need of supervision or protection are heard in chancery court. The chancellor's priority is the safety of the child.",
   },
   {
-    title: "Domestic Violence Protection",
+    title: "Domestic Violence",
     description:
-      "Victims of domestic abuse can seek protective orders through chancery court. The chancellor has the authority to provide immediate safety measures for families in crisis.",
+      "Victims of domestic abuse can seek protective orders through chancery court. The chancellor provides immediate safety measures for families in crisis.",
+  },
+];
+
+const pillars = [
+  {
+    title: "Deep Experience",
+    description:
+      "A chancellor needs years of hands-on practice in family law, custody, estates, and guardianship. Keri Carroll has spent 21 years practicing in these exact areas.",
+  },
+  {
+    title: "Judicial Temperament",
+    description:
+      "Families in chancery court are going through the hardest moments of their lives. A good chancellor listens carefully, treats everyone with respect, and keeps the courtroom fair.",
+  },
+  {
+    title: "Preparation",
+    description:
+      "Every case is someone's entire life. A good chancellor comes to the bench having read every filing, reviewed every exhibit, and thought carefully about the issues.",
+  },
+  {
+    title: "Patience",
+    description:
+      "The right decision takes time. A good chancellor gives every party the opportunity to be heard, considers all evidence, and does not rush to judgment.",
   },
 ];
 
@@ -54,7 +77,7 @@ const faqs = [
   {
     question: "Is this a partisan election?",
     answer:
-      "No. Judicial elections in Mississippi are nonpartisan. Candidates do not run under a party label, and the election appears on the nonpartisan section of the ballot. The focus is on qualifications, experience, and judicial temperament — not party affiliation.",
+      "No. Judicial elections in Mississippi are nonpartisan. Candidates do not run under a party label. The focus is on qualifications, experience, and judicial temperament — not party affiliation.",
   },
   {
     question: "When is the election?",
@@ -65,7 +88,7 @@ const faqs = [
     question:
       "Do I vote for chancellor even if I don't have a pending case?",
     answer:
-      "Yes. The chancellor handles matters that could affect any family at any time — divorce, custody, guardianship of an aging parent, probate after a death in the family. You may not need chancery court today, but when you do, the judge on the bench will make decisions that reshape your family's life.",
+      "Yes. The chancellor handles matters that could affect any family at any time — divorce, custody, guardianship of an aging parent, probate after a death. You may not need chancery court today, but when you do, the judge on the bench will make decisions that reshape your family's life.",
   },
   {
     question: "What district am I in?",
@@ -77,12 +100,13 @@ const faqs = [
 export default function ChanceryCourtPage() {
   return (
     <div>
-      {/* Hero */}
-      <section className="bg-forest text-white py-20 sm:py-28">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
+      {/* ── Hero ─────────────────────────────────────────────── */}
+      <section className="bg-forest-dark text-white py-24 sm:py-32">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-shadow-hero mb-6">
             Why Chancery Court Matters
           </h1>
+          <div className="w-20 h-[3px] bg-gold mx-auto mb-8" />
           <p className="text-lg sm:text-xl text-cream/80 max-w-2xl mx-auto leading-relaxed">
             Most voters have never set foot in a chancery courtroom. But the
             decisions made there affect families more deeply than almost any
@@ -91,59 +115,80 @@ export default function ChanceryCourtPage() {
         </div>
       </section>
 
-      {/* What Is Chancery Court? */}
-      <section className="py-16 sm:py-20 bg-cream">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-forest mb-8">
+      {/* ── What Is Chancery Court ───────────────────────────── */}
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
             What Is Chancery Court?
           </h2>
-          <div className="space-y-5 text-lg leading-relaxed text-slate">
-            <p>
-              Mississippi&apos;s chancery courts are courts of equity — not
-              criminal courts. There are no juries, no prosecutors, and no
-              criminal defendants. Instead, a single judge called the{" "}
-              <strong className="text-forest">chancellor</strong> hears cases
-              and makes decisions based on fairness and the facts before them.
-            </p>
-            <p>
-              Chancery court handles the most personal legal matters families
-              face: divorce, child custody, adoption, guardianship of aging
-              parents, estates after a loved one passes, and the protection of
-              people who cannot protect themselves. These are not abstract legal
-              proceedings. They are the moments when families need the court to
-              get it right.
-            </p>
-            <p>
-              Mississippi is one of the few states that still maintains a
-              separate system of chancery courts, a tradition dating back to
-              English common law. The chancellor sits without a jury and has
-              broad discretion to fashion remedies that are just and equitable.
-            </p>
+          <div className="w-20 h-[3px] bg-gold mb-12" />
+
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left — Text */}
+            <div className="space-y-5 text-lg leading-relaxed text-slate">
+              <p>
+                Mississippi&apos;s chancery courts are courts of equity — not
+                criminal courts. There are no juries, no prosecutors, and no
+                criminal defendants. Instead, a single judge called the{" "}
+                <strong className="text-forest">chancellor</strong> hears cases
+                and makes decisions based on fairness and the facts before them.
+              </p>
+              <p>
+                Chancery court handles the most personal legal matters families
+                face: divorce, child custody, adoption, guardianship of aging
+                parents, estates after a loved one passes, and the protection of
+                people who cannot protect themselves.
+              </p>
+              <p>
+                Mississippi is one of the few states that still maintains a
+                separate system of chancery courts, a tradition dating back to
+                English common law. The chancellor sits without a jury and has
+                broad discretion to fashion remedies that are just and equitable.
+              </p>
+            </div>
+
+            {/* Right — Dramatic stat */}
+            <div className="flex flex-col items-center justify-center text-center p-12 bg-cream rounded-sm">
+              <span className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gold uppercase tracking-tight leading-none">
+                Every Family
+              </span>
+              <span className="mt-4 text-xl sm:text-2xl text-slate font-medium">
+                could face chancery court
+              </span>
+              <span className="mt-2 text-sm text-slate-light max-w-xs">
+                Divorce, custody, guardianship, probate — these cases touch
+                every stage of life
+              </span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* What Cases Does Chancery Court Handle? */}
-      <section className="py-16 sm:py-20 bg-cream-dark">
+      {/* ── Case Types Grid ──────────────────────────────────── */}
+      <section className="py-20 sm:py-28 bg-cream-dark">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-forest mb-4 text-center">
-            What Cases Does Chancery Court Handle?
-          </h2>
-          <p className="text-center text-slate-light mb-12 max-w-2xl mx-auto text-lg">
-            The chancellor presides over cases that touch every stage of family
-            life — from bringing a child home through adoption to settling an
-            estate after a loss.
-          </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+              Cases the Chancellor Decides
+            </h2>
+            <div className="w-20 h-[3px] bg-gold mx-auto mb-6" />
+            <p className="text-slate-light text-lg max-w-2xl mx-auto">
+              The chancellor presides over cases that touch every stage of
+              family life — from bringing a child home through adoption to
+              settling an estate after a loss.
+            </p>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {caseTypes.map((caseType) => (
               <div
                 key={caseType.title}
-                className="bg-white rounded-xl p-6 shadow-sm border border-cream-dark hover:shadow-md transition-shadow"
+                className="bg-forest-dark border-l-4 border-gold p-6 shadow-md hover:shadow-lg transition-shadow"
               >
-                <h3 className="text-lg font-bold text-forest mb-3">
+                <h3 className="text-base font-bold text-white uppercase tracking-wide mb-3">
                   {caseType.title}
                 </h3>
-                <p className="text-sm text-slate-light leading-relaxed">
+                <p className="text-sm text-cream/70 leading-relaxed">
                   {caseType.description}
                 </p>
               </div>
@@ -152,13 +197,15 @@ export default function ChanceryCourtPage() {
         </div>
       </section>
 
-      {/* Why Your Chancellor Matters */}
-      <section className="py-16 sm:py-20 bg-cream">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-forest mb-8">
+      {/* ── Why Your Chancellor Matters ──────────────────────── */}
+      <section className="py-20 sm:py-28 bg-forest text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-tight text-shadow mb-2">
             Why Your Chancellor Matters
           </h2>
-          <div className="space-y-5 text-lg leading-relaxed text-slate">
+          <div className="w-20 h-[3px] bg-gold mx-auto mb-10" />
+
+          <div className="space-y-6 text-lg leading-relaxed text-cream/85 max-w-3xl mx-auto text-left sm:text-center">
             <p>
               In chancery court, there is no jury. The chancellor alone hears
               the evidence, weighs the arguments, and makes the decision. That
@@ -170,16 +217,9 @@ export default function ChanceryCourtPage() {
               The chancellor determines whether a grandparent can gain custody
               of a grandchild in danger. The chancellor appoints a guardian for
               an elderly parent who can no longer manage their own finances or
-              medical decisions. The chancellor decides how a family farm or
-              business is divided when a marriage ends.
+              medical decisions.
             </p>
-            <p>
-              These are not abstract legal questions. They are the most
-              important decisions families face — and they deserve a chancellor
-              who is prepared, patient, and committed to treating every person
-              in the courtroom with dignity and respect.
-            </p>
-            <p className="font-semibold text-forest">
+            <p className="text-xl font-semibold text-gold">
               Your vote for chancellor is a vote for the person who will make
               these decisions for Rankin County families. It matters.
             </p>
@@ -187,117 +227,58 @@ export default function ChanceryCourtPage() {
         </div>
       </section>
 
-      {/* The 20th District */}
-      <section className="py-16 sm:py-20 bg-forest text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-8">
-            The 20th Chancery Court District
-          </h2>
-          <div className="space-y-5 text-lg leading-relaxed text-cream/85">
-            <p>
-              The 20th Chancery Court District covers{" "}
-              <strong className="text-white">Rankin County, Mississippi</strong>
-              . If you live in Rankin County, this is your chancery court
-              district.
-            </p>
-            <p>
-              The district has multiple chancellor positions, called
-              &ldquo;places.&rdquo; Each place is a separate seat on the bench,
-              and voters elect each chancellor individually. This election is
-              for{" "}
-              <strong className="text-gold">
-                Place 1
-              </strong>{" "}
-              of the 20th Chancery Court District.
-            </p>
-            <p>
-              The general election will be held on{" "}
-              <strong className="text-gold">November 3, 2026</strong>. As a
-              judicial race, it appears on the nonpartisan section of the
-              ballot — every registered voter in Rankin County can vote
-              regardless of party affiliation.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* What Makes a Good Chancellor */}
-      <section className="py-16 sm:py-20 bg-cream">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-forest mb-8">
-            What Makes a Good Chancellor
-          </h2>
-          <div className="space-y-5 text-lg leading-relaxed text-slate mb-10">
-            <p>
+      {/* ── What Makes a Good Chancellor ─────────────────────── */}
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+              What Makes a Good Chancellor
+            </h2>
+            <div className="w-20 h-[3px] bg-gold mx-auto mb-6" />
+            <p className="text-slate-light text-lg max-w-xl mx-auto">
               A chancellor must do more than know the law. The best chancellors
-              bring a combination of qualities that cannot be learned from a
-              textbook:
+              bring qualities that cannot be learned from a textbook.
             </p>
           </div>
+
           <div className="grid gap-6 sm:grid-cols-2">
-            <div className="bg-white rounded-xl p-6 border border-cream-dark">
-              <h3 className="text-lg font-bold text-forest mb-2">
-                Deep Experience
-              </h3>
-              <p className="text-slate-light leading-relaxed">
-                A chancellor needs years of hands-on practice in the types of
-                cases they will decide — family law, custody, estates,
-                guardianship. Keri Carroll has spent 21 years practicing in
-                these exact areas.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl p-6 border border-cream-dark">
-              <h3 className="text-lg font-bold text-forest mb-2">
-                Judicial Temperament
-              </h3>
-              <p className="text-slate-light leading-relaxed">
-                Families in chancery court are going through the hardest moments
-                of their lives. A good chancellor listens carefully, treats
-                everyone with respect, and keeps the courtroom calm and fair.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl p-6 border border-cream-dark">
-              <h3 className="text-lg font-bold text-forest mb-2">
-                Preparation
-              </h3>
-              <p className="text-slate-light leading-relaxed">
-                Every case is someone&apos;s entire life. A good chancellor
-                comes to the bench having read every filing, reviewed every
-                exhibit, and thought carefully about the issues before hearing a
-                single word of testimony.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl p-6 border border-cream-dark">
-              <h3 className="text-lg font-bold text-forest mb-2">
-                Patience
-              </h3>
-              <p className="text-slate-light leading-relaxed">
-                The right decision takes time. A good chancellor gives every
-                party the opportunity to be heard, considers all the evidence,
-                and does not rush to judgment — because what is at stake cannot
-                be undone.
-              </p>
-            </div>
+            {pillars.map((pillar) => (
+              <div
+                key={pillar.title}
+                className="bg-cream p-8 border-l-4 border-gold shadow-sm hover:shadow-md transition-shadow"
+              >
+                <h3 className="text-lg font-bold text-forest uppercase tracking-wide mb-3">
+                  {pillar.title}
+                </h3>
+                <p className="text-slate-light leading-relaxed">
+                  {pillar.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-16 sm:py-20 bg-cream-dark">
+      {/* ── FAQ ──────────────────────────────────────────────── */}
+      <section className="py-20 sm:py-28 bg-cream-dark">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-forest mb-10 text-center">
-            Frequently Asked Questions
-          </h2>
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+              Frequently Asked Questions
+            </h2>
+            <div className="w-20 h-[3px] bg-gold mx-auto" />
+          </div>
+
           <div className="space-y-6">
             {faqs.map((faq) => (
               <div
                 key={faq.question}
-                className="bg-white rounded-xl p-6 shadow-sm border border-cream-dark"
+                className="bg-white p-6 shadow-sm"
               >
-                <h3 className="text-lg font-bold text-forest mb-3">
+                <h3 className="text-lg font-bold text-gold mb-3">
                   {faq.question}
                 </h3>
-                <p className="text-slate-light leading-relaxed">
+                <p className="text-slate leading-relaxed">
                   {faq.answer}
                 </p>
               </div>
@@ -306,13 +287,13 @@ export default function ChanceryCourtPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 sm:py-20 bg-forest text-white">
+      {/* ── CTA ──────────────────────────────────────────────── */}
+      <section className="py-20 sm:py-28 bg-gold">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-5">
+          <h2 className="text-3xl sm:text-4xl font-bold text-forest-dark uppercase tracking-tight mb-5">
             Learn More About Keri Carroll
           </h2>
-          <p className="text-lg text-cream/80 mb-10 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg text-forest-dark/80 mb-10 max-w-xl mx-auto leading-relaxed">
             With 21 years of family law experience in the cases chancery court
             handles every day, Keri brings the preparation, patience, and
             temperament Rankin County families deserve.
@@ -320,13 +301,13 @@ export default function ChanceryCourtPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/about"
-              className="px-8 py-3.5 bg-gold text-forest-dark font-bold rounded-md hover:bg-gold-light transition-colors shadow-md text-lg"
+              className="px-10 py-4 bg-forest-dark text-white font-bold uppercase tracking-wide hover:bg-forest transition-colors shadow-md text-lg"
             >
               About Keri
             </Link>
             <Link
               href="/get-involved"
-              className="px-8 py-3.5 border-2 border-cream/40 text-cream font-bold rounded-md hover:bg-white/10 transition-colors text-lg"
+              className="px-10 py-4 bg-white text-forest-dark font-bold uppercase tracking-wide hover:bg-cream transition-colors shadow-md text-lg"
             >
               Get Involved
             </Link>

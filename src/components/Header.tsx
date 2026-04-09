@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Keri" },
-  { href: "/chancery-court", label: "Chancery Court" },
+  { href: "/chancery-court", label: "Why Chancery Court" },
   { href: "/endorsements", label: "Endorsements" },
   { href: "/get-involved", label: "Get Involved" },
   { href: "/news", label: "News" },
@@ -15,105 +15,153 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="bg-forest text-white sticky top-0 z-50 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo / Name */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-full overflow-hidden relative">
-              <Image
-                src="/images/logo.png"
-                alt="Carroll for Judge logo"
-                fill
-                className="object-cover"
-                sizes="40px"
-              />
-            </div>
-            <div className="leading-tight">
-              <span className="text-gold font-bold text-lg tracking-wide">
-                Keri H. Carroll
-              </span>
-              <span className="hidden sm:block text-xs text-cream/70 tracking-widest uppercase">
-                Chancery Court Judge
-              </span>
-            </div>
-          </Link>
+    <header className="sticky top-0 z-50">
+      {/* ── Top bar ─────────────────────────────────── */}
+      <div className="bg-forest-dark text-cream/70 text-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-9">
+          <span className="hidden sm:inline tracking-wide">
+            Paid for by Committee to Elect Keri H. Carroll
+          </span>
+          <span className="sm:hidden tracking-wide">
+            Committee to Elect Keri H. Carroll
+          </span>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-3 py-2 text-sm font-medium text-cream/90 hover:text-gold transition-colors rounded-md hover:bg-white/10"
+          <div className="flex items-center gap-4">
+            {/* Facebook */}
+            <a
+              href="https://www.facebook.com/kerihcarroll"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gold transition-colors"
+              aria-label="Facebook"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="currentColor"
+                viewBox="0 0 24 24"
               >
-                {link.label}
-              </Link>
-            ))}
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+            </a>
+
+            {/* Donate button */}
             <Link
               href="/donate"
-              className="ml-3 px-5 py-2.5 bg-gold text-forest-dark text-sm font-bold rounded-md hover:bg-gold-light transition-colors shadow-md"
+              className="bg-gold text-forest-dark font-bold uppercase text-xs tracking-wider px-4 py-1 hover:bg-gold-light transition-colors"
             >
               Donate
             </Link>
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 text-cream/90 hover:text-gold"
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {mobileOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
+          </div>
         </div>
-
-        {/* Mobile Nav */}
-        {mobileOpen && (
-          <nav className="lg:hidden pb-4 border-t border-white/10 pt-3 space-y-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="block px-3 py-2 text-sm font-medium text-cream/90 hover:text-gold hover:bg-white/10 rounded-md"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href="/donate"
-              onClick={() => setMobileOpen(false)}
-              className="block mx-3 mt-3 px-5 py-2.5 bg-gold text-forest-dark text-sm font-bold rounded-md text-center hover:bg-gold-light"
-            >
-              Donate
-            </Link>
-          </nav>
-        )}
       </div>
+
+      {/* ── Main nav bar ────────────────────────────── */}
+      <nav
+        className={`bg-forest transition-shadow duration-300 ${
+          scrolled ? "shadow-lg shadow-black/20" : ""
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 lg:h-[72px]">
+            {/* Logo + Name */}
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="w-10 h-10 overflow-hidden relative shrink-0">
+                <Image
+                  src="/images/logo.png"
+                  alt="Carroll for Judge logo"
+                  fill
+                  className="object-contain"
+                  sizes="40px"
+                  priority
+                />
+              </div>
+              <div className="leading-tight">
+                <span className="text-white font-bold text-lg tracking-wide uppercase">
+                  Keri H. Carroll
+                </span>
+                <span className="hidden sm:block text-xs text-gold tracking-widest uppercase">
+                  For Chancery Court Judge
+                </span>
+              </div>
+            </Link>
+
+            {/* Desktop links */}
+            <div className="hidden lg:flex items-center gap-0">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="px-4 py-2 text-sm font-bold text-white uppercase tracking-wider hover:text-gold transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile hamburger */}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="lg:hidden p-2 text-white hover:text-gold transition-colors"
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {mobileOpen ? (
+                  <path
+                    strokeLinecap="square"
+                    strokeLinejoin="miter"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="square"
+                    strokeLinejoin="miter"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+
+          {/* Mobile nav */}
+          {mobileOpen && (
+            <div className="lg:hidden border-t border-white/10 pb-4 pt-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-4 py-3 text-sm font-bold text-white uppercase tracking-wider hover:text-gold hover:bg-white/5 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="/donate"
+                onClick={() => setMobileOpen(false)}
+                className="block mx-4 mt-3 px-5 py-3 bg-gold text-forest-dark text-sm font-bold uppercase tracking-wider text-center hover:bg-gold-light transition-colors"
+              >
+                Donate
+              </Link>
+            </div>
+          )}
+        </div>
+      </nav>
     </header>
   );
 }

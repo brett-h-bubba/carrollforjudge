@@ -32,83 +32,79 @@ const blogPosts = [
 export default function NewsPage() {
   return (
     <div>
-      {/* Hero */}
-      <section className="bg-forest text-white py-16 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
+      {/* ── Hero ─────────────────────────────────────────────── */}
+      <section className="bg-forest-dark text-white py-24 sm:py-32">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-shadow-hero mb-6">
             News &amp; Updates
           </h1>
-          <p className="mt-4 text-lg sm:text-xl text-cream/80 max-w-2xl mx-auto">
+          <div className="w-20 h-[3px] bg-gold mx-auto mb-8" />
+          <p className="text-lg sm:text-xl text-cream/80 max-w-2xl mx-auto leading-relaxed">
             Follow the campaign trail across Rankin County
           </p>
         </div>
       </section>
 
-      {/* Featured Post */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <article className="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
-          <div className="md:w-1/2 bg-slate-300 min-h-[260px] md:min-h-[360px] flex items-center justify-center">
-            <span className="text-slate-light text-sm uppercase tracking-widest">
-              Campaign Photo
-            </span>
-          </div>
-          <div className="md:w-1/2 p-8 sm:p-10 flex flex-col justify-center">
-            <span className="text-sm font-medium text-gold-dark uppercase tracking-wide">
-              April 2026
-            </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-forest-dark leading-tight">
-              Keri Carroll Announces Campaign for Chancery Court Judge
-            </h2>
-            <p className="mt-4 text-slate-light leading-relaxed">
-              With 21 years of family law experience, Keri H. Carroll formally
-              announces her candidacy for Chancery Court Judge of
-              Mississippi&apos;s 20th District, Place 1, serving Rankin County.
-            </p>
-            <Link
-              href="#"
-              className="mt-6 inline-flex items-center gap-2 text-forest font-semibold hover:text-gold-dark transition-colors group"
-            >
-              Read More
-              <svg
-                className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+      {/* ── Featured Post ────────────────────────────────────── */}
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <article className="shadow-lg overflow-hidden md:flex">
+            {/* Placeholder image area */}
+            <div className="md:w-1/2 bg-cream-dark min-h-[260px] md:min-h-[380px] flex items-center justify-center border-t-4 border-gold md:border-t-0 md:border-l-4">
+              <span className="text-slate-light text-sm uppercase tracking-widest font-bold">
+                Campaign Photo
+              </span>
+            </div>
+            <div className="md:w-1/2 p-8 sm:p-10 flex flex-col justify-center bg-cream">
+              <span className="text-sm font-bold text-gold uppercase tracking-widest">
+                April 2026
+              </span>
+              <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-forest-dark uppercase tracking-tight leading-tight">
+                Keri Carroll Announces Campaign for Chancery Court Judge
+              </h2>
+              <p className="mt-4 text-slate-light leading-relaxed">
+                With 21 years of family law experience, Keri H. Carroll formally
+                announces her candidacy for Chancery Court Judge of
+                Mississippi&apos;s 20th District, Place 1, serving Rankin County.
+              </p>
+              <Link
+                href="#"
+                className="mt-6 inline-block px-8 py-3 bg-forest-dark text-white font-bold uppercase tracking-wide hover:bg-forest transition-colors shadow-sm w-fit text-sm"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </Link>
-          </div>
-        </article>
+                Read More
+              </Link>
+            </div>
+          </article>
+        </div>
       </section>
 
-      {/* Blog Grid */}
-      <section className="bg-cream-dark py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-forest-dark text-center mb-10">
-            Latest from the Campaign
-          </h2>
+      {/* ── Blog Grid ────────────────────────────────────────── */}
+      <section className="py-20 sm:py-28 bg-cream">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+              Latest from the Campaign
+            </h2>
+            <div className="w-20 h-[3px] bg-gold mx-auto" />
+          </div>
+
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {blogPosts.map((post) => (
               <article
                 key={post.title}
-                className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow"
+                className="bg-white border-t-4 border-gold shadow-md overflow-hidden flex flex-col hover:shadow-xl transition-shadow"
               >
-                <div className="bg-slate-300 h-48 flex items-center justify-center">
-                  <span className="text-slate-light text-sm uppercase tracking-widest">
+                {/* Placeholder image */}
+                <div className="bg-cream-dark h-48 flex items-center justify-center">
+                  <span className="text-slate-light text-sm uppercase tracking-widest font-bold">
                     Post Image
                   </span>
                 </div>
                 <div className="p-6 flex flex-col flex-1">
-                  <span className="text-xs font-medium text-gold-dark uppercase tracking-wide">
+                  <span className="text-xs font-bold text-gold uppercase tracking-widest">
                     {post.date}
                   </span>
-                  <h3 className="mt-2 text-lg font-bold text-forest-dark leading-snug">
+                  <h3 className="mt-2 text-lg font-bold text-forest-dark leading-snug uppercase tracking-tight">
                     {post.title}
                   </h3>
                   <p className="mt-3 text-sm text-slate-light leading-relaxed flex-1">
@@ -116,22 +112,9 @@ export default function NewsPage() {
                   </p>
                   <Link
                     href="#"
-                    className="mt-4 inline-flex items-center gap-1.5 text-sm text-forest font-semibold hover:text-gold-dark transition-colors group"
+                    className="mt-5 inline-block px-6 py-2.5 bg-forest-dark text-white font-bold uppercase tracking-wide text-xs hover:bg-forest transition-colors shadow-sm w-fit"
                   >
                     Read More
-                    <svg
-                      className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
                   </Link>
                 </div>
               </article>
@@ -140,13 +123,14 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* Email Signup */}
-      <section className="py-12 sm:py-16 bg-white">
+      {/* ── Email Signup ─────────────────────────────────────── */}
+      <section className="py-20 sm:py-28 bg-forest text-white">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-forest-dark">
+          <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-shadow mb-2">
             Stay Connected
           </h2>
-          <p className="mt-3 text-slate-light leading-relaxed">
+          <div className="w-20 h-[3px] bg-gold mx-auto mb-6" />
+          <p className="text-cream/70 leading-relaxed">
             Get campaign updates, event invitations, and news delivered to your
             inbox.
           </p>
@@ -154,55 +138,32 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* Social Media Feed Placeholder */}
-      <section className="bg-cream-dark py-12 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-forest-dark">
+      {/* ── Social ───────────────────────────────────────────── */}
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
             Follow Us
           </h2>
-          <p className="mt-3 text-slate-light">
+          <div className="w-20 h-[3px] bg-gold mx-auto mb-8" />
+          <p className="text-slate-light mb-8">
             Stay connected on social media for real-time campaign updates.
           </p>
-          <div className="mt-8 flex justify-center">
-            <a
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-6 py-3 bg-forest text-white font-semibold rounded-lg hover:bg-forest-light transition-colors shadow-md"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
-              </svg>
-              Follow on Facebook
-            </a>
-          </div>
-          <div className="mt-10 rounded-xl border-2 border-dashed border-slate-300 p-10 text-slate-light text-sm">
-            Social media feed coming soon
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="bg-forest py-12 sm:py-16">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">
-            Ready to Make a Difference?
-          </h2>
-          <p className="mt-3 text-cream/80 leading-relaxed">
-            Join the campaign and help bring experienced, fair leadership to
-            Rankin County&apos;s Chancery Court.
-          </p>
-          <Link
-            href="/get-involved"
-            className="mt-6 inline-block px-8 py-3.5 bg-gold text-forest-dark font-bold rounded-lg hover:bg-gold-light transition-colors shadow-lg text-lg"
+          <a
+            href="https://www.facebook.com/kerihcarroll"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-10 py-4 bg-gold text-forest-dark font-bold uppercase tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg"
           >
-            Get Involved
-          </Link>
+            <svg
+              className="w-6 h-6"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+            Follow on Facebook
+          </a>
         </div>
       </section>
     </div>

@@ -15,13 +15,13 @@ export default function EmailSignup() {
 
   if (submitted) {
     return (
-      <div className="mt-8 rounded-lg bg-forest/5 border border-forest/20 p-6">
-        <p className="text-forest font-semibold text-lg">
+      <div className="mt-8 bg-forest-dark border-l-4 border-gold p-6 text-left">
+        <p className="text-gold font-bold text-lg uppercase tracking-wide">
           Thank you for subscribing!
         </p>
-        <p className="mt-1 text-slate-light text-sm">
+        <p className="mt-1 text-cream/70 text-sm">
           You&apos;ll receive campaign updates at{" "}
-          <span className="font-medium text-forest-dark">{email}</span>.
+          <span className="font-bold text-white">{email}</span>.
         </p>
       </div>
     );
@@ -42,11 +42,11 @@ export default function EmailSignup() {
         placeholder="you@example.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="flex-1 px-4 py-3 rounded-lg border border-slate-300 text-slate focus:outline-none focus:ring-2 focus:ring-forest focus:border-forest"
+        className="flex-1 px-4 py-3 border-2 border-cream/30 bg-white/10 text-white placeholder:text-cream/40 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold"
       />
       <button
         type="submit"
-        className="px-6 py-3 bg-gold text-forest-dark font-bold rounded-lg hover:bg-gold-light transition-colors shadow-md whitespace-nowrap"
+        className="px-8 py-3 bg-gold text-forest-dark font-bold uppercase tracking-wide hover:bg-gold-light transition-colors shadow-md whitespace-nowrap"
       >
         Subscribe
       </button>
