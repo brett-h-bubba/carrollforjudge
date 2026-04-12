@@ -29,12 +29,9 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  return new NextResponse("Authentication required.", {
-    status: 401,
-    headers: {
-      "WWW-Authenticate": 'Basic realm="Carroll for Judge — Admin", charset="UTF-8"',
-    },
-  });
+  const res = new NextResponse("Authentication required.", { status: 401 });
+  res.headers.set("WWW-Authenticate", 'Basic realm="Admin"');
+  return res;
 }
 
 export const config = {
