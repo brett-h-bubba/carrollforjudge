@@ -1,12 +1,48 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import EndorseCTA from "@/components/EndorseCTA";
+import { getServerSupabase } from "@/lib/supabase";
+import type { Endorsement, EndorsementCategory } from "@/lib/supabase";
+
+// Pull fresh each request so newly-approved endorsements appear immediately
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Endorsements",
   description:
     "See who supports Keri H. Carroll for Chancery Court Judge in Mississippi's 20th District. Endorsements from legal professionals, community leaders, organizations, and elected officials across Rankin County.",
 };
+
+function categoryLabel(category: EndorsementCategory | null): string {
+  switch (category) {
+    case "former_client":          return "Former Client";
+    case "professional_reference": return "Professional Reference";
+    case "community_leader":       return "Community Leader";
+    case "fellow_attorney":        return "Fellow Attorney";
+    case "friend_family":          return "Friend of the Campaign";
+    default:                       return "Supporter";
+  }
+}
+
+async function fetchApproved(): Promise<Endorsement[]> {
+  try {
+    const supabase = getServerSupabase();
+    const { data, error } = await supabase
+      .from("endorsements")
+      .select("*")
+      .eq("status", "approved")
+      .order("created_at", { ascending: false });
+    if (error) {
+      console.error("[endorsements] fetch error:", error);
+      return [];
+    }
+    return (data as Endorsement[]) || [];
+  } catch (err) {
+    console.error("[endorsements] fetch failed:", err);
+    return [];
+  }
+}
 
 /* ------------------------------------------------------------------ */
 /*  Data — swap placeholder text for real endorsements as they arrive  */
@@ -78,7 +114,9 @@ const categories = [
 /*  Page                                                               */
 /* ------------------------------------------------------------------ */
 
-export default function EndorsementsPage() {
+export default async function EndorsementsPage() {
+  const approved = await fetchApproved();
+
   return (
     <div>
       {/* ── Hero ─────────────────────────────────────────────── */}
@@ -93,6 +131,56 @@ export default function EndorsementsPage() {
           </p>
         </div>
       </section>
+
+      {/* ── Voices of Support (live, from DB) ─────────────────── */}
+      {approved.length > 0 && (
+        <section className="py-20 sm:py-28 bg-cream">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-14">
+              <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-3">
+                Voices of Support
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-teal-dark mb-2">
+                In Their Own Words
+              </h2>
+              <div className="w-20 h-[3px] bg-gold mx-auto mt-4" />
+              <p className="text-slate-light max-w-2xl mx-auto text-lg mt-6">
+                Real endorsements from Rankin County neighbors, clients, and colleagues.
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {approved.map((e) => (
+                <div
+                  key={e.id}
+                  className="bg-white border-l-4 border-gold p-7 shadow-md hover:shadow-xl transition-shadow flex flex-col"
+                >
+                  <p className="text-xs font-semibold text-gold uppercase tracking-[0.2em] mb-3">
+                    {categoryLabel(e.category)}
+                  </p>
+
+                  {e.zinger && (
+                    <p className="text-xl text-teal-dark font-semibold italic leading-snug mb-4">
+                      &ldquo;{e.zinger}&rdquo;
+                    </p>
+                  )}
+
+                  <p className="text-slate leading-relaxed mb-6 flex-1 text-[15px]">
+                    {e.endorsement}
+                  </p>
+
+                  <div className="pt-4 border-t border-cream-dark">
+                    <p className="font-semibold text-teal-dark">{e.name}</p>
+                    {e.location && (
+                      <p className="text-sm text-slate-light">{e.location}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── Featured Endorsements ────────────────────────────── */}
       <section className="py-20 sm:py-28 bg-white">
