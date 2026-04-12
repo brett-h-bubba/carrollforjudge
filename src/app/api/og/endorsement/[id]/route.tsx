@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 import { getServerSupabase } from "@/lib/supabase";
 import type { EndorsementCategory } from "@/lib/supabase";
 
-export const runtime = "nodejs";
+export const runtime = "edge";
 
 function headlineForCategory(category: EndorsementCategory): string {
   switch (category) {
