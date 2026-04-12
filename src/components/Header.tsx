@@ -26,7 +26,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50">
       {/* ── Top bar ─────────────────────────────────── */}
-      <div className="bg-forest-dark text-cream/70 text-xs">
+      <div className="bg-teal-dark text-cream/70 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-9">
           <span className="hidden sm:inline tracking-wide">
             Paid for by Committee to Elect Keri H. Carroll
@@ -56,7 +56,7 @@ export default function Header() {
             {/* Donate button */}
             <Link
               href="/donate"
-              className="bg-gold text-forest-dark font-bold uppercase text-xs tracking-wider px-4 py-1 hover:bg-gold-light transition-colors"
+              className="bg-gold text-teal-dark font-semibold text-xs tracking-wide px-4 py-1 hover:bg-gold-light transition-colors"
             >
               Donate
             </Link>
@@ -66,7 +66,7 @@ export default function Header() {
 
       {/* ── Main nav bar ────────────────────────────── */}
       <nav
-        className={`bg-forest transition-shadow duration-300 ${
+        className={`bg-teal transition-shadow duration-300 ${
           scrolled ? "shadow-lg shadow-black/20" : ""
         }`}
       >
@@ -85,10 +85,10 @@ export default function Header() {
                 />
               </div>
               <div className="leading-tight">
-                <span className="text-white font-bold text-lg tracking-wide uppercase">
+                <span className="text-white font-semibold text-xl tracking-wide">
                   Keri H. Carroll
                 </span>
-                <span className="hidden sm:block text-xs text-gold tracking-widest uppercase">
+                <span className="hidden sm:block text-[10px] text-gold tracking-[0.2em] uppercase font-medium">
                   For Chancery Court Judge
                 </span>
               </div>
@@ -100,7 +100,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-2 text-sm font-bold text-white uppercase tracking-wider hover:text-gold transition-colors"
+                  className="px-4 py-2 text-[11px] font-semibold text-white uppercase tracking-[0.2em] hover:text-gold transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -146,7 +146,7 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-sm font-bold text-white uppercase tracking-wider hover:text-gold hover:bg-white/5 transition-colors"
+                  className="block px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-[0.2em] hover:text-gold hover:bg-white/5 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -154,7 +154,7 @@ export default function Header() {
               <Link
                 href="/donate"
                 onClick={() => setMobileOpen(false)}
-                className="block mx-4 mt-3 px-5 py-3 bg-gold text-forest-dark text-sm font-bold uppercase tracking-wider text-center hover:bg-gold-light transition-colors"
+                className="block mx-4 mt-3 px-5 py-3 bg-gold text-teal-dark text-sm font-semibold tracking-wide text-center hover:bg-gold-light transition-colors"
               >
                 Donate
               </Link>

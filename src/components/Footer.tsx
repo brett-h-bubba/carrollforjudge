@@ -12,7 +12,7 @@ const quickLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-forest-dark text-cream/80">
+    <footer className="bg-teal-dark text-cream/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Column 1: Brand */}
@@ -27,7 +27,7 @@ export default function Footer() {
                   sizes="40px"
                 />
               </div>
-              <span className="text-gold font-bold text-lg uppercase tracking-wide">
+              <span className="text-gold font-semibold text-xl tracking-wide">
                 Keri H. Carroll
               </span>
             </div>
@@ -38,23 +38,23 @@ export default function Footer() {
               <br />
               Rankin County, Mississippi
             </p>
-            <p className="mt-4 text-sm font-bold text-gold-light tracking-wide">
+            <p className="mt-4 text-sm font-semibold text-gold-light tracking-wide">
               Election Day: November 3, 2026
             </p>
           </div>
 
           {/* Column 2: Quick Links */}
           <div>
-            <h4 className="text-xs font-bold text-cream uppercase tracking-[0.2em] mb-5">
+            <h4 className="text-xs font-semibold text-cream uppercase tracking-[0.2em] mb-5">
               Quick Links
             </h4>
             <div className="w-8 h-0.5 bg-gold mb-5" />
-            <ul className="space-y-3 text-sm">
+            <ul className="space-y-3 text-base">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="uppercase text-xs tracking-wider font-medium hover:text-gold transition-colors"
+                    className="hover:text-gold transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -65,7 +65,7 @@ export default function Footer() {
 
           {/* Column 3: Connect */}
           <div>
-            <h4 className="text-xs font-bold text-cream uppercase tracking-[0.2em] mb-5">
+            <h4 className="text-xs font-semibold text-cream uppercase tracking-[0.2em] mb-5">
               Connect
             </h4>
             <div className="w-8 h-0.5 bg-gold mb-5" />
@@ -82,7 +82,7 @@ export default function Footer() {
               >
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
               </svg>
-              <span className="uppercase text-xs tracking-wider font-bold">
+              <span className="text-base font-medium">
                 Follow on Facebook
               </span>
             </a>

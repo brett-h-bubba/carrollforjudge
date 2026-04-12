@@ -101,9 +101,9 @@ export default function ChanceryCourtPage() {
   return (
     <div>
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="bg-forest-dark text-white py-24 sm:py-32">
+      <section className="bg-teal-dark text-white py-24 sm:py-32">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-shadow-hero mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-shadow-hero mb-6">
             Why Chancery Court Matters
           </h1>
           <div className="w-20 h-[3px] bg-gold mx-auto mb-8" />
@@ -118,7 +118,7 @@ export default function ChanceryCourtPage() {
       {/* ── What Is Chancery Court ───────────────────────────── */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-teal mb-2">
             What Is Chancery Court?
           </h2>
           <div className="w-20 h-[3px] bg-gold mb-12" />
@@ -130,7 +130,7 @@ export default function ChanceryCourtPage() {
                 Mississippi&apos;s chancery courts are courts of equity — not
                 criminal courts. There are no juries, no prosecutors, and no
                 criminal defendants. Instead, a single judge called the{" "}
-                <strong className="text-forest">chancellor</strong> hears cases
+                <strong className="text-teal">chancellor</strong> hears cases
                 and makes decisions based on fairness and the facts before them.
               </p>
               <p>
@@ -149,7 +149,7 @@ export default function ChanceryCourtPage() {
 
             {/* Right — Dramatic stat */}
             <div className="flex flex-col items-center justify-center text-center p-12 bg-cream rounded-sm">
-              <span className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gold uppercase tracking-tight leading-none">
+              <span className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gold leading-none">
                 Every Family
               </span>
               <span className="mt-4 text-xl sm:text-2xl text-slate font-medium">
@@ -168,7 +168,7 @@ export default function ChanceryCourtPage() {
       <section className="py-20 sm:py-28 bg-cream-dark">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+            <h2 className="text-3xl sm:text-4xl font-bold text-teal mb-2">
               Cases the Chancellor Decides
             </h2>
             <div className="w-20 h-[3px] bg-gold mx-auto mb-6" />
@@ -183,9 +183,9 @@ export default function ChanceryCourtPage() {
             {caseTypes.map((caseType) => (
               <div
                 key={caseType.title}
-                className="bg-forest-dark border-l-4 border-gold p-6 shadow-md hover:shadow-lg transition-shadow"
+                className="bg-teal-dark border-l-4 border-gold p-6 shadow-md hover:shadow-lg transition-shadow"
               >
-                <h3 className="text-base font-bold text-white uppercase tracking-wide mb-3">
+                <h3 className="text-lg font-semibold text-white mb-3">
                   {caseType.title}
                 </h3>
                 <p className="text-sm text-cream/70 leading-relaxed">
@@ -198,9 +198,9 @@ export default function ChanceryCourtPage() {
       </section>
 
       {/* ── Why Your Chancellor Matters ──────────────────────── */}
-      <section className="py-20 sm:py-28 bg-forest text-white">
+      <section className="py-20 sm:py-28 bg-teal text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-tight text-shadow mb-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-shadow mb-2">
             Why Your Chancellor Matters
           </h2>
           <div className="w-20 h-[3px] bg-gold mx-auto mb-10" />
@@ -231,7 +231,7 @@ export default function ChanceryCourtPage() {
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+            <h2 className="text-3xl sm:text-4xl font-bold text-teal mb-2">
               What Makes a Good Chancellor
             </h2>
             <div className="w-20 h-[3px] bg-gold mx-auto mb-6" />
@@ -247,7 +247,7 @@ export default function ChanceryCourtPage() {
                 key={pillar.title}
                 className="bg-cream p-8 border-l-4 border-gold shadow-sm hover:shadow-md transition-shadow"
               >
-                <h3 className="text-lg font-bold text-forest uppercase tracking-wide mb-3">
+                <h3 className="text-xl font-semibold text-teal mb-3">
                   {pillar.title}
                 </h3>
                 <p className="text-slate-light leading-relaxed">
@@ -263,7 +263,7 @@ export default function ChanceryCourtPage() {
       <section className="py-20 sm:py-28 bg-cream-dark">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+            <h2 className="text-3xl sm:text-4xl font-bold text-teal mb-2">
               Frequently Asked Questions
             </h2>
             <div className="w-20 h-[3px] bg-gold mx-auto" />
@@ -275,7 +275,7 @@ export default function ChanceryCourtPage() {
                 key={faq.question}
                 className="bg-white p-6 shadow-sm"
               >
-                <h3 className="text-lg font-bold text-gold mb-3">
+                <h3 className="text-xl font-semibold text-gold mb-3">
                   {faq.question}
                 </h3>
                 <p className="text-slate leading-relaxed">
@@ -290,10 +290,10 @@ export default function ChanceryCourtPage() {
       {/* ── CTA ──────────────────────────────────────────────── */}
       <section className="py-20 sm:py-28 bg-gold">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-forest-dark uppercase tracking-tight mb-5">
+          <h2 className="text-3xl sm:text-4xl font-bold text-teal-dark mb-5">
             Learn More About Keri Carroll
           </h2>
-          <p className="text-lg text-forest-dark/80 mb-10 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg text-teal-dark/80 mb-10 max-w-xl mx-auto leading-relaxed">
             With 21 years of family law experience in the cases chancery court
             handles every day, Keri brings the preparation, patience, and
             temperament Rankin County families deserve.
@@ -301,13 +301,13 @@ export default function ChanceryCourtPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/about"
-              className="px-10 py-4 bg-forest-dark text-white font-bold uppercase tracking-wide hover:bg-forest transition-colors shadow-md text-lg"
+              className="px-10 py-4 bg-teal-dark text-white font-semibold tracking-wide hover:bg-teal transition-colors shadow-md text-lg"
             >
               About Keri
             </Link>
             <Link
               href="/get-involved"
-              className="px-10 py-4 bg-white text-forest-dark font-bold uppercase tracking-wide hover:bg-cream transition-colors shadow-md text-lg"
+              className="px-10 py-4 bg-white text-teal-dark font-semibold tracking-wide hover:bg-cream transition-colors shadow-md text-lg"
             >
               Get Involved
             </Link>

@@ -81,9 +81,9 @@ export default function EndorsementsPage() {
   return (
     <div>
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="bg-forest-dark text-white py-24 sm:py-32">
+      <section className="bg-teal-dark text-white py-24 sm:py-32">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-shadow-hero mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-shadow-hero mb-6">
             Endorsements
           </h1>
           <div className="w-20 h-[3px] bg-gold mx-auto mb-8" />
@@ -97,7 +97,7 @@ export default function EndorsementsPage() {
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+            <h2 className="text-3xl sm:text-4xl font-bold text-teal mb-2">
               Featured Endorsements
             </h2>
             <div className="w-20 h-[3px] bg-gold mx-auto mb-6" />
@@ -127,7 +127,7 @@ export default function EndorsementsPage() {
                 </p>
 
                 <div>
-                  <p className="font-bold text-forest text-lg">
+                  <p className="font-semibold text-teal text-lg">
                     {endorsement.name}
                   </p>
                   <p className="text-sm text-slate-light">
@@ -147,7 +147,7 @@ export default function EndorsementsPage() {
           className={`py-16 sm:py-20 ${cat.bg}`}
         >
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-forest uppercase tracking-tight mb-2">
+            <h2 className="text-2xl sm:text-3xl font-bold text-teal mb-2">
               {cat.label}
             </h2>
             <div className="w-20 h-[3px] bg-gold mb-4" />
@@ -159,7 +159,7 @@ export default function EndorsementsPage() {
                   key={j}
                   className="flex items-center gap-4 bg-white p-4 border-l-4 border-gold/40 shadow-sm"
                 >
-                  <div className="w-10 h-10 shrink-0 bg-forest-dark flex items-center justify-center">
+                  <div className="w-10 h-10 shrink-0 bg-teal-dark flex items-center justify-center">
                     <svg
                       className="w-5 h-5 text-gold"
                       fill="currentColor"
@@ -169,7 +169,7 @@ export default function EndorsementsPage() {
                     </svg>
                   </div>
                   <div>
-                    <p className="font-bold text-forest">{person.name}</p>
+                    <p className="font-semibold text-teal">{person.name}</p>
                     <p className="text-sm text-slate-light">{person.title}</p>
                   </div>
                 </div>
@@ -180,9 +180,9 @@ export default function EndorsementsPage() {
       ))}
 
       {/* ── Add Your Endorsement ─────────────────────────────── */}
-      <section className="py-20 sm:py-28 bg-forest text-white">
+      <section className="py-20 sm:py-28 bg-teal text-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-shadow mb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-shadow mb-2">
             Add Your Endorsement
           </h2>
           <div className="w-20 h-[3px] bg-gold mx-auto mb-8" />
@@ -197,7 +197,7 @@ export default function EndorsementsPage() {
           </p>
           <Link
             href="/get-involved"
-            className="inline-block px-10 py-4 bg-gold text-forest-dark font-bold uppercase tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg"
+            className="inline-block px-10 py-4 bg-gold text-teal-dark font-semibold tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg"
           >
             Share Your Support
           </Link>
@@ -207,10 +207,10 @@ export default function EndorsementsPage() {
       {/* ── Bottom CTA ───────────────────────────────────────── */}
       <section className="py-20 sm:py-28 bg-gold">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-forest-dark uppercase tracking-tight mb-5">
+          <h2 className="text-3xl sm:text-4xl font-bold text-teal-dark mb-5">
             Join the Movement
           </h2>
-          <p className="text-forest-dark/80 max-w-2xl mx-auto mb-10 leading-relaxed text-lg">
+          <p className="text-teal-dark/80 max-w-2xl mx-auto mb-10 leading-relaxed text-lg">
             Whether you volunteer your time, contribute to the campaign, or
             simply spread the word, every action helps bring experienced,
             compassionate leadership to the Chancery Court bench.
@@ -218,13 +218,13 @@ export default function EndorsementsPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/get-involved"
-              className="w-full sm:w-auto px-10 py-4 bg-forest-dark text-white font-bold uppercase tracking-wide hover:bg-forest transition-colors shadow-md text-center text-lg"
+              className="w-full sm:w-auto px-10 py-4 bg-teal-dark text-white font-semibold tracking-wide hover:bg-teal transition-colors shadow-md text-center text-lg"
             >
               Get Involved
             </Link>
             <Link
               href="/donate"
-              className="w-full sm:w-auto px-10 py-4 bg-white text-forest-dark font-bold uppercase tracking-wide hover:bg-cream transition-colors shadow-md text-center text-lg"
+              className="w-full sm:w-auto px-10 py-4 bg-white text-teal-dark font-semibold tracking-wide hover:bg-cream transition-colors shadow-md text-center text-lg"
             >
               Donate
             </Link>

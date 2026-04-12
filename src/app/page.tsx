@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <>
       {/* ===== HERO SECTION ===== */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-forest-dark">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-teal-dark">
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
@@ -19,36 +19,36 @@ export default function Page() {
           />
         </div>
         {/* Dark overlay gradient — heavy on left for text, fading right to show photo */}
-        <div className="absolute inset-0 bg-gradient-to-r from-forest-dark via-forest-dark/95 to-forest-dark/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-dark/80 via-transparent to-forest-dark/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-teal-dark via-teal-dark/95 to-teal-dark/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-teal-dark/80 via-transparent to-teal-dark/30" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-40 sm:py-48 lg:py-56 w-full">
           <div className="max-w-3xl">
-            <p className="text-gold font-bold tracking-[0.25em] uppercase text-sm sm:text-base mb-6 text-shadow">
-              20TH CHANCERY COURT DISTRICT &middot; PLACE 1
+            <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-8 text-shadow">
+              20th Chancery Court District &middot; Place 1
             </p>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white uppercase leading-[1.05] tracking-tight text-shadow-hero">
-              THE EXPERIENCE
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[1.1] tracking-normal text-shadow-hero">
+              The Experience
               <br />
-              RANKIN COUNTY
+              Rankin County
               <br />
-              FAMILIES <span className="text-gold">DESERVE</span>
+              Families <span className="text-gold italic">Deserve</span>
             </h1>
             {/* Gold accent divider */}
-            <div className="mt-8 w-20 h-[3px] bg-gold" />
-            <p className="mt-8 text-xl sm:text-2xl text-cream/90 font-medium tracking-wide text-shadow">
+            <div className="mt-10 w-20 h-[2px] bg-gold" />
+            <p className="mt-8 text-xl sm:text-2xl text-cream/90 font-normal italic leading-relaxed text-shadow">
               21 years of family law. Ready on Day One.
             </p>
             <div className="mt-12 flex flex-wrap gap-5">
               <Link
                 href="/get-involved"
-                className="inline-flex items-center px-10 py-5 bg-gold text-forest-dark font-black uppercase tracking-wider text-lg hover:bg-gold-light transition-colors shadow-xl"
+                className="inline-flex items-center px-10 py-5 bg-gold text-teal-dark font-semibold tracking-wide text-lg hover:bg-gold-light transition-colors shadow-xl"
               >
                 Get Involved
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center px-10 py-5 border-2 border-white text-white font-bold uppercase tracking-wider text-lg hover:bg-white/10 transition-colors"
+                className="inline-flex items-center px-10 py-5 border-2 border-white text-white font-semibold tracking-wide text-lg hover:bg-white/10 transition-colors"
               >
                 Meet Keri
               </Link>
@@ -64,19 +64,22 @@ export default function Page() {
       <section className="bg-white py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-black text-forest-dark uppercase tracking-tight">
-              Why Keri Carroll
+            <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-4">
+              The Case for Keri
+            </p>
+            <h2 className="text-4xl sm:text-5xl font-bold text-teal-dark tracking-normal">
+              Why <span className="font-script text-6xl sm:text-7xl text-teal align-middle">K</span>eri Carroll
             </h2>
-            <div className="mt-6 w-20 h-[3px] bg-gold mx-auto" />
+            <div className="mt-6 w-20 h-[2px] bg-gold mx-auto" />
           </div>
 
           <div className="grid md:grid-cols-3 gap-10 lg:gap-14">
             {/* Pillar 1: Experienced */}
-            <div className="border-t-4 border-gold pt-8">
-              <h3 className="text-2xl sm:text-3xl font-black text-forest-dark uppercase tracking-tight mb-4">
+            <div className="border-t-2 border-gold pt-8">
+              <h3 className="text-3xl sm:text-4xl font-bold text-teal-dark tracking-normal mb-5">
                 Experienced
               </h3>
-              <p className="text-slate-light text-lg leading-relaxed">
+              <p className="text-slate-light text-lg leading-loose">
                 21 years practicing the exact law chancery court handles — divorce,
                 custody, adoption, guardianship, and probate. Not a generalist.
                 A specialist in the work of this court.
@@ -84,11 +87,11 @@ export default function Page() {
             </div>
 
             {/* Pillar 2: Prepared */}
-            <div className="border-t-4 border-gold pt-8">
-              <h3 className="text-2xl sm:text-3xl font-black text-forest-dark uppercase tracking-tight mb-4">
+            <div className="border-t-2 border-gold pt-8">
+              <h3 className="text-3xl sm:text-4xl font-bold text-teal-dark tracking-normal mb-5">
                 Prepared
               </h3>
-              <p className="text-slate-light text-lg leading-relaxed">
+              <p className="text-slate-light text-lg leading-loose">
                 Mississippi Supreme Court clerkship. Solo practice owner.
                 Public defender. Adjunct law professor. A career built on
                 preparation, discipline, and service.
@@ -96,11 +99,11 @@ export default function Page() {
             </div>
 
             {/* Pillar 3: Ready */}
-            <div className="border-t-4 border-gold pt-8">
-              <h3 className="text-2xl sm:text-3xl font-black text-forest-dark uppercase tracking-tight mb-4">
+            <div className="border-t-2 border-gold pt-8">
+              <h3 className="text-3xl sm:text-4xl font-bold text-teal-dark tracking-normal mb-5">
                 Ready
               </h3>
-              <p className="text-slate-light text-lg leading-relaxed">
+              <p className="text-slate-light text-lg leading-loose">
                 Not learning on the job. Not figuring it out as she goes.
                 Keri H. Carroll is ready to serve Rankin County families
                 from Day One.
@@ -111,7 +114,7 @@ export default function Page() {
       </section>
 
       {/* ===== ABOUT PREVIEW ===== */}
-      <section className="bg-forest-dark py-24 sm:py-32">
+      <section className="bg-teal-dark py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Photo with gold border frame */}
@@ -126,18 +129,22 @@ export default function Page() {
                 />
               </div>
               {/* Decorative gold corner accents */}
-              <div className="absolute -top-3 -left-3 w-16 h-16 border-t-4 border-l-4 border-gold" />
-              <div className="absolute -bottom-3 -right-3 w-16 h-16 border-b-4 border-r-4 border-gold" />
+              <div className="absolute -top-3 -left-3 w-16 h-16 border-t-2 border-l-2 border-gold" />
+              <div className="absolute -bottom-3 -right-3 w-16 h-16 border-b-2 border-r-2 border-gold" />
             </div>
 
             {/* Bio content */}
             <div>
-              <h2 className="text-4xl sm:text-5xl font-black text-gold uppercase tracking-tight mb-8">
-                About Keri
+              <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-4">
+                Meet the Candidate
+              </p>
+              <h2 className="text-4xl sm:text-5xl font-bold text-gold tracking-normal mb-8 leading-tight">
+                About <span className="font-script text-6xl sm:text-7xl text-gold align-middle">K</span>eri
                 <br />
                 H. Carroll
               </h2>
-              <p className="text-white/90 text-lg leading-relaxed mb-8">
+              <div className="w-20 h-[2px] bg-gold mb-8" />
+              <p className="text-white/90 text-lg leading-loose mb-8">
                 Keri H. Carroll has spent more than two decades serving Mississippi
                 families through the legal system. Her career reflects a deep,
                 unwavering commitment to the exact work chancery court judges do
@@ -154,7 +161,7 @@ export default function Page() {
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-4">
                     <svg
-                      className="w-6 h-6 text-gold mt-0.5 shrink-0"
+                      className="w-6 h-6 text-gold mt-1 shrink-0"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -164,22 +171,22 @@ export default function Page() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className="text-white/80 text-lg">{item}</span>
+                    <span className="text-white/85 text-lg leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
 
               <Link
                 href="/about"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gold text-forest-dark font-black uppercase tracking-wider text-lg hover:bg-gold-light transition-colors shadow-lg"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gold text-teal-dark font-semibold tracking-wide text-lg hover:bg-gold-light transition-colors shadow-lg"
               >
-                READ FULL BIO
+                Read Full Bio
                 <svg
                   className="w-5 h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  strokeWidth={3}
+                  strokeWidth={2}
                 >
                   <path
                     strokeLinecap="round"
@@ -197,11 +204,14 @@ export default function Page() {
       <section className="bg-white py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-black text-forest-dark uppercase tracking-tight">
+            <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-4">
+              The Work of the Court
+            </p>
+            <h2 className="text-4xl sm:text-5xl font-bold text-teal-dark tracking-normal">
               Why Your Chancellor Matters
             </h2>
-            <div className="mt-6 w-20 h-[3px] bg-gold mx-auto" />
-            <p className="mt-8 text-slate text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
+            <div className="mt-6 w-20 h-[2px] bg-gold mx-auto" />
+            <p className="mt-10 text-slate text-lg sm:text-xl max-w-3xl mx-auto leading-loose">
               Your chancellor decides who gets custody of your children. Who
               inherits your estate. Whether an adoption goes through. These are
               the most personal, consequential decisions a court can make.
@@ -220,7 +230,7 @@ export default function Page() {
             ].map((item) => (
               <div
                 key={item.label}
-                className="bg-forest-dark border-l-4 border-gold p-6 sm:p-8 flex flex-col items-center text-center"
+                className="bg-teal-dark border-l-2 border-gold p-6 sm:p-8 flex flex-col items-center text-center"
               >
                 <svg
                   className="w-8 h-8 text-gold mb-4"
@@ -235,7 +245,7 @@ export default function Page() {
                     d={item.icon}
                   />
                 </svg>
-                <span className="text-white font-bold uppercase tracking-wider text-sm sm:text-base">
+                <span className="text-white font-semibold uppercase tracking-[0.2em] text-xs sm:text-sm">
                   {item.label}
                 </span>
               </div>
@@ -245,15 +255,15 @@ export default function Page() {
           <div className="text-center mt-14">
             <Link
               href="/chancery-court"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-forest-dark text-white font-bold uppercase tracking-wider text-lg hover:bg-forest transition-colors shadow-lg"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-teal-dark text-white font-semibold tracking-wide text-lg hover:bg-teal transition-colors shadow-lg"
             >
-              LEARN ABOUT CHANCERY COURT
+              Learn About Chancery Court
               <svg
                 className="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                strokeWidth={3}
+                strokeWidth={2}
               >
                 <path
                   strokeLinecap="round"
@@ -270,10 +280,13 @@ export default function Page() {
       <section className="bg-cream-dark py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-black text-forest-dark uppercase tracking-tight">
+            <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-4">
+              Voices of Support
+            </p>
+            <h2 className="text-4xl sm:text-5xl font-bold text-teal-dark tracking-normal">
               Endorsed by the Community
             </h2>
-            <div className="mt-6 w-20 h-[3px] bg-gold mx-auto" />
+            <div className="mt-6 w-20 h-[2px] bg-gold mx-auto" />
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
@@ -296,7 +309,7 @@ export default function Page() {
             ].map((endorsement, i) => (
               <div
                 key={i}
-                className="bg-white border-t-4 border-gold p-10 shadow-md"
+                className="bg-white border-t-2 border-gold p-10 shadow-md"
               >
                 {/* Large gold quotation mark */}
                 <svg
@@ -306,7 +319,7 @@ export default function Page() {
                 >
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11h4v10H0z" />
                 </svg>
-                <p className="text-slate italic text-lg leading-relaxed min-h-[5rem]">
+                <p className="text-slate italic text-lg leading-loose min-h-[5rem]">
                   &ldquo;{endorsement.quote}&rdquo;
                 </p>
                 <div className="mt-8 pt-6 border-t border-cream-dark">
@@ -320,15 +333,15 @@ export default function Page() {
           <div className="text-center mt-14">
             <Link
               href="/endorsements"
-              className="inline-flex items-center gap-3 text-forest-dark font-bold uppercase tracking-wider text-lg hover:text-forest-light transition-colors"
+              className="inline-flex items-center gap-3 text-teal-dark font-semibold tracking-wide text-lg hover:text-teal-light transition-colors"
             >
-              VIEW ALL ENDORSEMENTS
+              View All Endorsements
               <svg
                 className="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                strokeWidth={3}
+                strokeWidth={2}
               >
                 <path
                   strokeLinecap="round"
@@ -346,35 +359,39 @@ export default function Page() {
         <div className="absolute inset-0 bg-gradient-to-br from-gold-dark/20 via-transparent to-gold-light/20" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
           <div className="text-center">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-forest-dark uppercase tracking-tight mb-4">
+            <p className="text-teal-dark font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-5">
+              Join the Campaign
+            </p>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-teal-dark tracking-normal mb-5">
               Every Conversation Matters
             </h2>
-            <p className="text-forest-dark/80 text-xl sm:text-2xl font-medium mb-14">
+            <div className="mx-auto w-20 h-[2px] bg-teal-dark/40 mb-6" />
+            <p className="text-teal-dark/80 text-xl sm:text-2xl italic font-normal mb-14">
               Election Day is November 3, 2026
             </p>
 
             <div className="flex flex-wrap justify-center gap-5">
               <Link
                 href="/get-involved"
-                className="inline-flex items-center px-8 py-4 bg-forest-dark text-white font-bold uppercase tracking-wider text-lg hover:bg-forest transition-colors shadow-lg"
+                className="inline-flex items-center px-8 py-4 bg-teal-dark text-white font-semibold tracking-wide text-lg hover:bg-teal transition-colors shadow-lg"
               >
                 Volunteer
               </Link>
               <Link
                 href="/get-involved"
-                className="inline-flex items-center px-8 py-4 bg-forest-dark text-white font-bold uppercase tracking-wider text-lg hover:bg-forest transition-colors shadow-lg"
+                className="inline-flex items-center px-8 py-4 bg-teal-dark text-white font-semibold tracking-wide text-lg hover:bg-teal transition-colors shadow-lg"
               >
                 Yard Sign
               </Link>
               <Link
                 href="/get-involved"
-                className="inline-flex items-center px-8 py-4 bg-forest-dark text-white font-bold uppercase tracking-wider text-lg hover:bg-forest transition-colors shadow-lg"
+                className="inline-flex items-center px-8 py-4 bg-teal-dark text-white font-semibold tracking-wide text-lg hover:bg-teal transition-colors shadow-lg"
               >
                 Host Event
               </Link>
               <Link
                 href="/donate"
-                className="inline-flex items-center px-8 py-4 bg-forest-dark text-white font-bold uppercase tracking-wider text-lg hover:bg-forest transition-colors shadow-lg"
+                className="inline-flex items-center px-8 py-4 bg-teal-dark text-white font-semibold tracking-wide text-lg hover:bg-teal transition-colors shadow-lg"
               >
                 Donate
               </Link>
@@ -384,18 +401,18 @@ export default function Page() {
       </section>
 
       {/* ===== ELECTION INFO BAR ===== */}
-      <section className="bg-forest-dark">
+      <section className="bg-teal-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-sm sm:text-base font-bold tracking-wider uppercase text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-center">
             <span className="text-white">
-              ELECTION DAY:{" "}
-              <span className="text-gold">NOVEMBER 3, 2026</span>
+              Election Day:{" "}
+              <span className="text-gold">November 3, 2026</span>
             </span>
             <span className="hidden sm:inline text-cream/30">|</span>
-            <span className="text-white">RANKIN COUNTY, MISSISSIPPI</span>
+            <span className="text-white">Rankin County, Mississippi</span>
             <span className="hidden sm:inline text-cream/30">|</span>
             <span className="text-white">
-              20TH CHANCERY COURT DISTRICT, PLACE 1
+              20th Chancery Court District, Place 1
             </span>
           </div>
         </div>

@@ -15,13 +15,13 @@ export default function EmailSignup() {
 
   if (submitted) {
     return (
-      <div className="mt-8 bg-forest-dark border-l-4 border-gold p-6 text-left">
-        <p className="text-gold font-bold text-lg uppercase tracking-wide">
+      <div className="mt-8 bg-teal-dark border-l-4 border-gold p-6 text-left">
+        <p className="text-gold font-semibold text-xl">
           Thank you for subscribing!
         </p>
         <p className="mt-1 text-cream/70 text-sm">
           You&apos;ll receive campaign updates at{" "}
-          <span className="font-bold text-white">{email}</span>.
+          <span className="font-semibold text-white">{email}</span>.
         </p>
       </div>
     );
@@ -46,7 +46,7 @@ export default function EmailSignup() {
       />
       <button
         type="submit"
-        className="px-8 py-3 bg-gold text-forest-dark font-bold uppercase tracking-wide hover:bg-gold-light transition-colors shadow-md whitespace-nowrap"
+        className="px-8 py-3 bg-gold text-teal-dark font-semibold tracking-wide hover:bg-gold-light transition-colors shadow-md whitespace-nowrap"
       >
         Subscribe
       </button>

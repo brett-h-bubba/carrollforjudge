@@ -44,7 +44,7 @@ export default function DonateForm() {
 
   if (submitted) {
     return (
-      <div className="bg-forest-dark p-10 text-center">
+      <div className="bg-teal-dark p-10 text-center">
         <div className="w-16 h-16 bg-gold/20 flex items-center justify-center mx-auto mb-4">
           <svg
             className="w-8 h-8 text-gold"
@@ -60,7 +60,7 @@ export default function DonateForm() {
             />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-white uppercase tracking-tight mb-2">
+        <h3 className="text-2xl font-semibold text-white mb-2">
           Thank You for Your Support!
         </h3>
         <p className="text-cream/70">
@@ -73,13 +73,13 @@ export default function DonateForm() {
   }
 
   const inputClasses =
-    "w-full border-2 border-forest-dark bg-white px-4 py-3 text-slate focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-colors";
+    "w-full border-2 border-teal-dark bg-white px-4 py-3 text-slate focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-colors";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Amount Selection */}
       <div>
-        <label className="block text-sm font-bold text-forest uppercase tracking-wide mb-3">
+        <label className="block text-sm font-semibold text-teal mb-3">
           Select an Amount
         </label>
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
@@ -88,10 +88,10 @@ export default function DonateForm() {
               key={amount}
               type="button"
               onClick={() => handleAmountSelect(amount)}
-              className={`py-3 px-4 border-2 font-bold text-lg transition-all ${
+              className={`py-3 px-4 border-2 font-semibold text-lg transition-all ${
                 selectedAmount === amount
-                  ? "border-gold bg-gold text-forest-dark"
-                  : "border-forest-dark bg-white text-slate hover:border-gold"
+                  ? "border-gold bg-gold text-teal-dark"
+                  : "border-teal-dark bg-white text-slate hover:border-gold"
               }`}
             >
               ${amount.toLocaleString()}
@@ -101,7 +101,7 @@ export default function DonateForm() {
         {/* Custom amount */}
         <div className="mt-3">
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-light font-bold">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-light font-semibold">
               $
             </span>
             <input
@@ -110,10 +110,10 @@ export default function DonateForm() {
               placeholder="Other amount"
               value={customAmount}
               onChange={handleCustomAmount}
-              className={`w-full border-2 pl-8 pr-4 py-3 text-lg font-bold text-slate bg-white placeholder:font-normal placeholder:text-slate-light/50 focus:outline-none focus:ring-2 focus:ring-gold/40 transition-all ${
+              className={`w-full border-2 pl-8 pr-4 py-3 text-lg font-semibold text-slate bg-white placeholder:font-normal placeholder:text-slate-light/50 focus:outline-none focus:ring-2 focus:ring-gold/40 transition-all ${
                 customAmount
                   ? "border-gold bg-gold/10"
-                  : "border-forest-dark"
+                  : "border-teal-dark"
               }`}
             />
           </div>
@@ -122,7 +122,7 @@ export default function DonateForm() {
 
       {/* Contributor Information */}
       <div className="space-y-5">
-        <h3 className="text-lg font-bold text-forest uppercase tracking-wide">
+        <h3 className="text-xl font-semibold text-teal">
           Contributor Information
         </h3>
 
@@ -130,7 +130,7 @@ export default function DonateForm() {
         <div>
           <label
             htmlFor="name"
-            className="block text-sm font-bold text-forest uppercase tracking-wide mb-2"
+            className="block text-sm font-semibold text-teal mb-2"
           >
             Full Name <span className="text-red-500">*</span>
           </label>
@@ -149,7 +149,7 @@ export default function DonateForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-bold text-forest uppercase tracking-wide mb-2"
+            className="block text-sm font-semibold text-teal mb-2"
           >
             Email <span className="text-red-500">*</span>
           </label>
@@ -168,7 +168,7 @@ export default function DonateForm() {
         <div>
           <label
             htmlFor="phone"
-            className="block text-sm font-bold text-forest uppercase tracking-wide mb-2"
+            className="block text-sm font-semibold text-teal mb-2"
           >
             Phone{" "}
             <span className="text-slate-light text-xs font-normal normal-case">
@@ -190,7 +190,7 @@ export default function DonateForm() {
           <div>
             <label
               htmlFor="employer"
-              className="block text-sm font-bold text-forest uppercase tracking-wide mb-2"
+              className="block text-sm font-semibold text-teal mb-2"
             >
               Employer <span className="text-red-500">*</span>
             </label>
@@ -210,7 +210,7 @@ export default function DonateForm() {
           <div>
             <label
               htmlFor="occupation"
-              className="block text-sm font-bold text-forest uppercase tracking-wide mb-2"
+              className="block text-sm font-semibold text-teal mb-2"
             >
               Occupation <span className="text-red-500">*</span>
             </label>
@@ -231,7 +231,7 @@ export default function DonateForm() {
       {/* Submit */}
       <button
         type="submit"
-        className="w-full py-4 bg-gold text-forest-dark font-bold uppercase tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg"
+        className="w-full py-4 bg-gold text-teal-dark font-semibold tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg"
       >
         Submit Contribution
       </button>

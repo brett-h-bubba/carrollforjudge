@@ -1,19 +1,27 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Cormorant_Garamond, Allura } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const inter = Inter({
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const allura = Allura({
+  variable: "--font-allura",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://carrollforjudge.com"),
   title: {
-    default:
-      "Keri H. Carroll | Chancery Court Judge — Rankin County, Mississippi",
+    default: "Keri H. Carroll | Chancery Court Judge — Rankin County, Mississippi",
     template: "%s | Keri H. Carroll for Chancery Court Judge",
   },
   description:
@@ -53,7 +61,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${allura.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col">
         <Header />
         <main className="flex-1">{children}</main>

@@ -45,7 +45,7 @@ export default function GetInvolvedForm() {
 
   if (submitted) {
     return (
-      <div className="bg-forest-dark p-10 text-center">
+      <div className="bg-teal-dark p-10 text-center">
         <div className="w-16 h-16 bg-gold/20 flex items-center justify-center mx-auto mb-4">
           <svg
             className="w-8 h-8 text-gold"
@@ -61,7 +61,7 @@ export default function GetInvolvedForm() {
             />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-white uppercase tracking-tight mb-2">
+        <h3 className="text-2xl font-semibold text-white mb-2">
           Thank You!
         </h3>
         <p className="text-cream/70">
@@ -73,7 +73,7 @@ export default function GetInvolvedForm() {
   }
 
   const inputClasses =
-    "w-full border-2 border-forest-dark bg-white px-4 py-3 text-slate focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-colors";
+    "w-full border-2 border-teal-dark bg-white px-4 py-3 text-slate focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold transition-colors";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -82,7 +82,7 @@ export default function GetInvolvedForm() {
         <div>
           <label
             htmlFor="firstName"
-            className="block text-sm font-bold text-forest uppercase tracking-wide mb-2"
+            className="block text-sm font-semibold text-teal mb-2"
           >
             First Name <span className="text-red-500">*</span>
           </label>
@@ -101,7 +101,7 @@ export default function GetInvolvedForm() {
         <div>
           <label
             htmlFor="lastName"
-            className="block text-sm font-bold text-forest uppercase tracking-wide mb-2"
+            className="block text-sm font-semibold text-teal mb-2"
           >
             Last Name <span className="text-red-500">*</span>
           </label>
@@ -121,7 +121,7 @@ export default function GetInvolvedForm() {
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-bold text-forest uppercase tracking-wide mb-2"
+          className="block text-sm font-semibold text-teal mb-2"
         >
           Email <span className="text-red-500">*</span>
         </label>
@@ -140,7 +140,7 @@ export default function GetInvolvedForm() {
       <div>
         <label
           htmlFor="phone"
-          className="block text-sm font-bold text-forest uppercase tracking-wide mb-2"
+          className="block text-sm font-semibold text-teal mb-2"
         >
           Phone{" "}
           <span className="text-slate-light text-xs font-normal normal-case">
@@ -161,7 +161,7 @@ export default function GetInvolvedForm() {
       <div>
         <label
           htmlFor="address"
-          className="block text-sm font-bold text-forest uppercase tracking-wide mb-2"
+          className="block text-sm font-semibold text-teal mb-2"
         >
           Address{" "}
           <span className="text-slate-light text-xs font-normal normal-case">
@@ -181,21 +181,21 @@ export default function GetInvolvedForm() {
 
       {/* Interests */}
       <fieldset>
-        <legend className="block text-sm font-bold text-forest uppercase tracking-wide mb-3">
+        <legend className="block text-sm font-semibold text-teal mb-3">
           I&apos;m interested in:
         </legend>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {interestOptions.map((option) => (
             <label
               key={option.id}
-              className="flex items-center gap-3 p-4 border-2 border-forest-dark bg-white hover:border-gold transition-colors cursor-pointer"
+              className="flex items-center gap-3 p-4 border-2 border-teal-dark bg-white hover:border-gold transition-colors cursor-pointer"
             >
               <input
                 type="checkbox"
                 value={option.id}
                 checked={formData.interests.includes(option.id)}
                 onChange={handleCheckbox}
-                className="w-4 h-4 border-forest-dark text-gold focus:ring-gold/40"
+                className="w-4 h-4 border-teal-dark text-gold focus:ring-gold/40"
               />
               <span className="text-sm font-semibold text-slate">
                 {option.label}
@@ -209,7 +209,7 @@ export default function GetInvolvedForm() {
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-bold text-forest uppercase tracking-wide mb-2"
+          className="block text-sm font-semibold text-teal mb-2"
         >
           Message{" "}
           <span className="text-slate-light text-xs font-normal normal-case">
@@ -230,7 +230,7 @@ export default function GetInvolvedForm() {
       {/* Submit */}
       <button
         type="submit"
-        className="w-full sm:w-auto px-10 py-4 bg-gold text-forest-dark font-bold uppercase tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg"
+        className="w-full sm:w-auto px-10 py-4 bg-gold text-teal-dark font-semibold tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg"
       >
         Sign Up
       </button>

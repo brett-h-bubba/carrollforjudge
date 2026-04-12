@@ -33,9 +33,9 @@ export default function NewsPage() {
   return (
     <div>
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="bg-forest-dark text-white py-24 sm:py-32">
+      <section className="bg-teal-dark text-white py-24 sm:py-32">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-shadow-hero mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-shadow-hero mb-6">
             News &amp; Updates
           </h1>
           <div className="w-20 h-[3px] bg-gold mx-auto mb-8" />
@@ -51,15 +51,15 @@ export default function NewsPage() {
           <article className="shadow-lg overflow-hidden md:flex">
             {/* Placeholder image area */}
             <div className="md:w-1/2 bg-cream-dark min-h-[260px] md:min-h-[380px] flex items-center justify-center border-t-4 border-gold md:border-t-0 md:border-l-4">
-              <span className="text-slate-light text-sm uppercase tracking-widest font-bold">
+              <span className="text-slate-light text-xs uppercase tracking-[0.2em] font-semibold">
                 Campaign Photo
               </span>
             </div>
             <div className="md:w-1/2 p-8 sm:p-10 flex flex-col justify-center bg-cream">
-              <span className="text-sm font-bold text-gold uppercase tracking-widest">
+              <span className="text-xs font-semibold text-gold uppercase tracking-[0.2em]">
                 April 2026
               </span>
-              <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-forest-dark uppercase tracking-tight leading-tight">
+              <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-teal-dark leading-tight">
                 Keri Carroll Announces Campaign for Chancery Court Judge
               </h2>
               <p className="mt-4 text-slate-light leading-relaxed">
@@ -69,7 +69,7 @@ export default function NewsPage() {
               </p>
               <Link
                 href="#"
-                className="mt-6 inline-block px-8 py-3 bg-forest-dark text-white font-bold uppercase tracking-wide hover:bg-forest transition-colors shadow-sm w-fit text-sm"
+                className="mt-6 inline-block px-8 py-3 bg-teal-dark text-white font-semibold tracking-wide hover:bg-teal transition-colors shadow-sm w-fit text-sm"
               >
                 Read More
               </Link>
@@ -82,7 +82,7 @@ export default function NewsPage() {
       <section className="py-20 sm:py-28 bg-cream">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+            <h2 className="text-3xl sm:text-4xl font-bold text-teal mb-2">
               Latest from the Campaign
             </h2>
             <div className="w-20 h-[3px] bg-gold mx-auto" />
@@ -96,15 +96,15 @@ export default function NewsPage() {
               >
                 {/* Placeholder image */}
                 <div className="bg-cream-dark h-48 flex items-center justify-center">
-                  <span className="text-slate-light text-sm uppercase tracking-widest font-bold">
+                  <span className="text-slate-light text-xs uppercase tracking-[0.2em] font-semibold">
                     Post Image
                   </span>
                 </div>
                 <div className="p-6 flex flex-col flex-1">
-                  <span className="text-xs font-bold text-gold uppercase tracking-widest">
+                  <span className="text-xs font-semibold text-gold uppercase tracking-[0.2em]">
                     {post.date}
                   </span>
-                  <h3 className="mt-2 text-lg font-bold text-forest-dark leading-snug uppercase tracking-tight">
+                  <h3 className="mt-2 text-xl font-semibold text-teal-dark leading-snug">
                     {post.title}
                   </h3>
                   <p className="mt-3 text-sm text-slate-light leading-relaxed flex-1">
@@ -112,7 +112,7 @@ export default function NewsPage() {
                   </p>
                   <Link
                     href="#"
-                    className="mt-5 inline-block px-6 py-2.5 bg-forest-dark text-white font-bold uppercase tracking-wide text-xs hover:bg-forest transition-colors shadow-sm w-fit"
+                    className="mt-5 inline-block px-6 py-2.5 bg-teal-dark text-white font-semibold tracking-wide text-xs hover:bg-teal transition-colors shadow-sm w-fit"
                   >
                     Read More
                   </Link>
@@ -124,9 +124,9 @@ export default function NewsPage() {
       </section>
 
       {/* ── Email Signup ─────────────────────────────────────── */}
-      <section className="py-20 sm:py-28 bg-forest text-white">
+      <section className="py-20 sm:py-28 bg-teal text-white">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-shadow mb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-shadow mb-2">
             Stay Connected
           </h2>
           <div className="w-20 h-[3px] bg-gold mx-auto mb-6" />
@@ -141,7 +141,7 @@ export default function NewsPage() {
       {/* ── Social ───────────────────────────────────────────── */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-teal mb-2">
             Follow Us
           </h2>
           <div className="w-20 h-[3px] bg-gold mx-auto mb-8" />
@@ -152,7 +152,7 @@ export default function NewsPage() {
             href="https://www.facebook.com/kerihcarroll"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-10 py-4 bg-gold text-forest-dark font-bold uppercase tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg"
+            className="inline-flex items-center gap-3 px-10 py-4 bg-gold text-teal-dark font-semibold tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg"
           >
             <svg
               className="w-6 h-6"

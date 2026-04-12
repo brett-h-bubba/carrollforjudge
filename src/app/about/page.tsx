@@ -118,13 +118,16 @@ export default function AboutPage() {
   return (
     <>
       {/* ═══════ SECTION 1: HERO BANNER ═══════ */}
-      <section className="bg-forest-dark py-24 sm:py-32 lg:py-40">
+      <section className="bg-teal-dark py-24 sm:py-32 lg:py-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-widest text-white text-shadow-hero">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gold mb-6">
+            An Introduction
+          </p>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
             About Keri H. Carroll
           </h1>
           <div className="mx-auto mt-6 w-24 h-1 bg-gold" />
-          <p className="mt-8 text-lg sm:text-xl lg:text-2xl text-cream/90 max-w-3xl mx-auto font-medium leading-relaxed tracking-wide">
+          <p className="mt-8 text-lg sm:text-xl lg:text-2xl text-cream/90 max-w-3xl mx-auto leading-relaxed italic">
             The only candidate whose entire career has focused on the cases
             chancery court hears every day.
           </p>
@@ -153,9 +156,12 @@ export default function AboutPage() {
             </div>
 
             {/* Narrative bio */}
-            <div className="md:col-span-3 space-y-6 text-slate text-lg leading-relaxed">
-              <p className="text-xl font-semibold text-forest-dark leading-relaxed">
-                For twenty-one years, Keri Haralson Carroll has done one thing:
+            <div className="md:col-span-3 text-slate text-lg lg:text-xl leading-relaxed space-y-6">
+              <p className="relative text-xl lg:text-2xl text-teal-dark leading-relaxed">
+                <span className="font-script text-gold text-6xl leading-none float-left mr-3 -mt-2">
+                  F
+                </span>
+                or twenty-one years, Keri Haralson Carroll has done one thing:
                 practice the law that chancellors apply every single day. She is
                 not pivoting to family law for a campaign. She has lived it for
                 her entire career.
@@ -196,7 +202,7 @@ export default function AboutPage() {
                 originated right here in Rankin County Chancery Court — the very
                 court she is asking voters to let her serve.
               </p>
-              <p className="text-forest font-semibold">
+              <p className="text-teal italic">
                 With twenty-one years of experience in the law that chancellors
                 apply every day, Keri is not running to learn on the job. She is
                 running because she is ready.
@@ -207,7 +213,7 @@ export default function AboutPage() {
       </section>
 
       {/* ═══════ SECTION 3: KEY QUALIFICATIONS ═══════ */}
-      <section className="py-20 sm:py-28 bg-forest">
+      <section className="py-20 sm:py-28 bg-teal">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
             {[
@@ -232,10 +238,11 @@ export default function AboutPage() {
                 key={item.stat}
                 className="text-center py-10 px-6 border border-white/10"
               >
-                <div className="text-3xl sm:text-4xl font-black uppercase tracking-wider text-gold text-shadow">
+                <div className="text-2xl sm:text-3xl font-bold uppercase tracking-[0.15em] text-gold">
                   {item.stat}
                 </div>
-                <div className="mt-4 text-lg text-white/90 font-medium tracking-wide">
+                <div className="mx-auto mt-4 w-8 h-px bg-gold/60" />
+                <div className="mt-4 text-lg text-white/90 italic">
                   {item.desc}
                 </div>
               </div>
@@ -248,10 +255,13 @@ export default function AboutPage() {
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-widest text-forest text-shadow">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gold mb-4">
+              A Lifetime in the Law
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-teal">
               Career Timeline
             </h2>
-            <div className="mx-auto mt-4 w-16 h-1 bg-gold" />
+            <div className="mx-auto mt-6 w-16 h-1 bg-gold" />
           </div>
 
           <div className="relative">
@@ -262,15 +272,15 @@ export default function AboutPage() {
               {timelineEvents.map((event, idx) => (
                 <div key={idx} className="relative pl-14 sm:pl-18">
                   {/* Gold dot */}
-                  <div className="absolute left-2 sm:left-4 top-1 w-4 h-4 bg-gold border-4 border-white shadow-md" />
+                  <div className="absolute left-2 sm:left-4 top-2 w-4 h-4 bg-gold border-4 border-white shadow-md" />
 
-                  <span className="inline-block text-sm font-black text-gold tracking-widest uppercase mb-1">
+                  <span className="inline-block text-xs font-semibold text-gold tracking-[0.25em] uppercase mb-2">
                     {event.year}
                   </span>
-                  <h3 className="text-lg font-bold uppercase tracking-wide text-forest">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-teal leading-tight">
                     {event.label}
                   </h3>
-                  <p className="mt-2 text-slate leading-relaxed">
+                  <p className="mt-3 text-slate text-lg leading-relaxed">
                     {event.description}
                   </p>
                 </div>
@@ -284,11 +294,14 @@ export default function AboutPage() {
       <section className="py-20 sm:py-28 bg-cream-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-widest text-forest text-shadow">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gold mb-4">
+              Where She Practices
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-teal">
               Practice Areas
             </h2>
-            <div className="mx-auto mt-4 w-16 h-1 bg-gold" />
-            <p className="mt-6 text-slate-light text-lg max-w-2xl mx-auto">
+            <div className="mx-auto mt-6 w-16 h-1 bg-gold" />
+            <p className="mt-8 text-slate-light text-lg lg:text-xl max-w-2xl mx-auto italic leading-relaxed">
               Every area of Keri&apos;s practice maps directly to the jurisdiction
               of Mississippi&apos;s chancery courts.
             </p>
@@ -298,15 +311,15 @@ export default function AboutPage() {
             {practiceAreas.map((area) => (
               <div
                 key={area.title}
-                className="bg-forest-dark p-6 border-t-4 border-t-gold shadow-lg hover:shadow-xl transition-shadow"
+                className="bg-teal-dark p-6 border-t-4 border-t-gold shadow-lg hover:shadow-xl transition-shadow"
               >
-                <h3 className="text-base font-bold uppercase tracking-wider text-white mb-3">
+                <h3 className="text-xl font-bold text-white mb-3 leading-tight">
                   {area.title}
                 </h3>
-                <p className="text-white/80 text-sm leading-relaxed mb-4">
+                <p className="text-white/80 text-base leading-relaxed mb-5">
                   {area.description}
                 </p>
-                <span className="inline-block text-xs font-bold uppercase tracking-widest text-gold">
+                <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
                   Heard in Chancery Court
                 </span>
               </div>
@@ -316,21 +329,27 @@ export default function AboutPage() {
       </section>
 
       {/* ═══════ SECTION 6: WHY I'M RUNNING ═══════ */}
-      <section className="py-24 sm:py-32 bg-forest-dark">
+      <section className="py-24 sm:py-32 bg-teal-dark">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gold mb-6">
+            Why I&apos;m Running
+          </p>
           {/* Large gold quotation marks */}
           <div className="text-gold text-8xl sm:text-9xl font-serif leading-none select-none" aria-hidden="true">
             &ldquo;
           </div>
-          <blockquote className="text-2xl sm:text-3xl lg:text-4xl font-semibold leading-snug text-cream italic -mt-8 sm:-mt-12">
+          <blockquote className="text-2xl sm:text-3xl lg:text-4xl leading-snug text-cream italic -mt-8 sm:-mt-12">
             Rankin County deserves a chancellor with meaningful experience in
             the kinds of matters chancery court hears every day.
           </blockquote>
-          <div className="mx-auto mt-8 w-12 h-1 bg-gold" />
-          <p className="mt-6 text-gold text-lg font-bold uppercase tracking-widest">
-            &mdash; Keri H. Carroll
+          <div className="mx-auto mt-10 w-12 h-px bg-gold" />
+          <p className="mt-4 font-script text-gold text-5xl sm:text-6xl leading-none">
+            Keri
           </p>
-          <p className="mt-10 text-cream/80 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-2 text-gold/90 text-xs uppercase tracking-[0.3em]">
+            Keri H. Carroll
+          </p>
+          <p className="mt-12 text-cream/80 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed italic">
             Families who come before the chancery court are facing some of the
             most important moments of their lives — a child&apos;s future, a
             loved one&apos;s care, the division of everything they have built.
@@ -344,23 +363,27 @@ export default function AboutPage() {
       {/* ═══════ SECTION 7: CTA ═══════ */}
       <section className="py-16 sm:py-20 bg-gold">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-widest text-forest-dark text-shadow">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-teal-dark mb-4">
+            You&apos;re Invited
+          </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-teal-dark">
             Join the Campaign
           </h2>
-          <p className="mt-4 text-forest/80 text-lg font-medium">
+          <div className="mx-auto mt-6 w-16 h-1 bg-teal-dark" />
+          <p className="mt-6 text-teal-dark/90 text-lg sm:text-xl italic">
             Help bring twenty-one years of experience to the Rankin County
             bench.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
             <Link
               href="/get-involved"
-              className="inline-flex items-center justify-center px-10 py-4 text-base font-black uppercase tracking-widest bg-forest-dark text-white hover:bg-forest transition-colors shadow-lg"
+              className="inline-flex items-center justify-center px-10 py-4 text-base font-semibold bg-teal-dark text-white hover:bg-teal transition-colors shadow-lg"
             >
               Get Involved
             </Link>
             <Link
               href="/donate"
-              className="inline-flex items-center justify-center px-10 py-4 text-base font-black uppercase tracking-widest bg-white text-forest-dark hover:bg-cream transition-colors shadow-lg"
+              className="inline-flex items-center justify-center px-10 py-4 text-base font-semibold bg-white text-teal-dark hover:bg-cream transition-colors shadow-lg"
             >
               Donate
             </Link>

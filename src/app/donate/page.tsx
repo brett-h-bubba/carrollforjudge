@@ -27,11 +27,11 @@ export default function DonatePage() {
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="bg-gold py-24 sm:py-32">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-forest-dark uppercase tracking-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-teal-dark mb-6">
             Support the Campaign
           </h1>
-          <div className="w-20 h-[3px] bg-forest-dark mx-auto mb-8" />
-          <p className="text-lg sm:text-xl text-forest-dark/80 max-w-2xl mx-auto leading-relaxed">
+          <div className="w-20 h-[3px] bg-teal-dark mx-auto mb-8" />
+          <p className="text-lg sm:text-xl text-teal-dark/80 max-w-2xl mx-auto leading-relaxed">
             Your generosity helps bring experienced, fair-minded leadership to
             the Chancery Court bench in Rankin County.
           </p>
@@ -41,7 +41,7 @@ export default function DonatePage() {
       {/* ── Why Donate ───────────────────────────────────────── */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+          <h2 className="text-3xl sm:text-4xl font-bold text-teal mb-2">
             Why Your Support Matters
           </h2>
           <div className="w-20 h-[3px] bg-gold mx-auto mb-8" />
@@ -60,7 +60,7 @@ export default function DonatePage() {
       <section className="py-20 sm:py-28 bg-cream" id="contribute">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+            <h2 className="text-3xl sm:text-4xl font-bold text-teal mb-2">
               Make a Contribution
             </h2>
             <div className="w-20 h-[3px] bg-gold mx-auto mb-6" />
@@ -74,10 +74,10 @@ export default function DonatePage() {
       </section>
 
       {/* ── Legal Disclaimers ────────────────────────────────── */}
-      <section className="py-20 sm:py-28 bg-forest-dark">
+      <section className="py-20 sm:py-28 bg-teal-dark">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-cream uppercase tracking-tight mb-2">
+            <h2 className="text-2xl sm:text-3xl font-bold text-cream mb-2">
               Mississippi Campaign Finance Requirements
             </h2>
             <div className="w-20 h-[3px] bg-gold mx-auto" />
@@ -94,12 +94,12 @@ export default function DonatePage() {
             {disclaimers.map((item) => (
               <div
                 key={item.label}
-                className="p-5 bg-forest border-l-4 border-gold"
+                className="p-5 bg-teal border-l-4 border-gold"
               >
-                <p className="text-xs font-bold text-gold uppercase tracking-wider mb-1">
+                <p className="text-xs font-semibold text-gold uppercase tracking-[0.2em] mb-2">
                   {item.label}
                 </p>
-                <p className="text-cream font-bold text-lg">{item.value}</p>
+                <p className="text-cream font-semibold text-lg">{item.value}</p>
               </div>
             ))}
           </div>
@@ -110,7 +110,7 @@ export default function DonatePage() {
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold text-forest uppercase tracking-tight mb-2">
+            <h2 className="text-3xl sm:text-4xl font-bold text-teal mb-2">
               Other Ways to Contribute
             </h2>
             <div className="w-20 h-[3px] bg-gold mx-auto" />
@@ -119,14 +119,14 @@ export default function DonatePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Mail a Check */}
             <div className="bg-cream border-t-4 border-gold p-8 shadow-md">
-              <h3 className="text-xl font-bold text-forest uppercase tracking-wide mb-4">
+              <h3 className="text-xl font-semibold text-teal mb-4">
                 Mail a Check
               </h3>
               <p className="text-slate-light text-sm leading-relaxed mb-4">
                 Make checks payable to &ldquo;Committee to Elect Keri H.
                 Carroll&rdquo; and mail to:
               </p>
-              <p className="text-forest font-bold">
+              <p className="text-teal font-semibold">
                 Committee to Elect Keri H. Carroll
                 <br />
                 P.O. Box XXXX
@@ -137,7 +137,7 @@ export default function DonatePage() {
 
             {/* Host / Attend Fundraiser */}
             <div className="bg-cream border-t-4 border-gold p-8 shadow-md">
-              <h3 className="text-xl font-bold text-forest uppercase tracking-wide mb-4">
+              <h3 className="text-xl font-semibold text-teal mb-4">
                 Attend or Host a Fundraiser
               </h3>
               <p className="text-slate-light text-sm leading-relaxed mb-4">
@@ -147,7 +147,7 @@ export default function DonatePage() {
               </p>
               <Link
                 href="/get-involved#contact-form"
-                className="inline-block px-8 py-3 bg-gold text-forest-dark font-bold uppercase tracking-wide hover:bg-gold-light transition-colors shadow-sm text-sm"
+                className="inline-block px-8 py-3 bg-gold text-teal-dark font-semibold tracking-wide hover:bg-gold-light transition-colors shadow-sm text-sm"
               >
                 Get Started
               </Link>
