@@ -212,7 +212,7 @@ export default async function EndorsementsPage() {
                   title: e.location
                     ? `${categoryLabel(e.category)} · ${e.location}`
                     : categoryLabel(e.category),
-                  quote: e.zinger || e.endorsement,
+                  quote: e.endorsement,
                 }))
               : featuredEndorsements.map((e, i) => ({
                   key: `placeholder-${i}`,
