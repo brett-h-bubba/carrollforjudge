@@ -44,22 +44,6 @@ export async function GET(
   req: NextRequest,
   ctx: { params: Promise<{ id: string }> }
 ) {
-  try {
-    return await handle(req, ctx);
-  } catch (err) {
-    console.error("[og] Top-level crash:", err);
-    const msg = err instanceof Error ? `${err.name}: ${err.message}\n${err.stack}` : String(err);
-    return new Response(msg, {
-      status: 500,
-      headers: { "content-type": "text/plain" },
-    });
-  }
-}
-
-async function handle(
-  req: NextRequest,
-  ctx: { params: Promise<{ id: string }> }
-) {
   const { id } = await ctx.params;
   const reqUrl = new URL(req.url);
   const origin = reqUrl.origin;
