@@ -81,28 +81,8 @@ export async function GET(
   }
 
   // Choose layout by format
-  // TEMP debug: render a minimal placeholder to verify the route returns bytes
-  const DEBUG_MINIMAL = searchParams.get("debug") === "1";
   let body: React.ReactElement;
-  if (DEBUG_MINIMAL) {
-    body = (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          background: CREAM,
-          color: TEAL,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: 48,
-          fontFamily: "Cormorant",
-        }}
-      >
-        {headline} · {zinger} · {attribution}
-      </div>
-    );
-  } else if (format === "linkedin") {
+  if (format === "linkedin") {
     body = <LinkedinBanner headline={headline} zinger={zinger} attribution={attribution} />;
   } else if (format === "story") {
     body = <StoryTall headline={headline} zinger={zinger} attribution={attribution} />;
@@ -146,77 +126,141 @@ function Square({ headline, zinger, attribution }: LayoutProps) {
         color: INK,
       }}
     >
-      {/* Inner border frame */}
       <div
         style={{
           width: "100%",
           height: "100%",
           border: `2px solid ${GOLD}`,
-          padding: 54,
+          padding: 64,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
         }}
       >
-      {/* Top */}
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ fontSize: 120, color: GOLD, lineHeight: 1, fontWeight: 700, fontStyle: "italic" }}>
-          &ldquo;
+        {/* Top: headline */}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 72,
+              color: TEAL,
+              fontWeight: 700,
+              lineHeight: 1.1,
+            }}
+          >
+            {headline}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              width: 140,
+              height: 4,
+              background: GOLD,
+              marginTop: 24,
+            }}
+          />
         </div>
+
+        {/* Middle: zinger */}
         <div
           style={{
-            fontSize: 72,
-            color: TEAL,
-            fontWeight: 700,
-            letterSpacing: "0.03em",
-            lineHeight: 1.1,
-            marginTop: -40,
+            display: "flex",
+            fontSize: 54,
+            color: INK,
+            lineHeight: 1.25,
+            fontStyle: "italic",
+            fontWeight: 400,
           }}
         >
-          {headline}
+          &ldquo;{zinger}&rdquo;
         </div>
-        <div style={{ width: 140, height: 4, background: GOLD, marginTop: 24 }} />
-      </div>
 
-      {/* Middle: zinger */}
-      <div
-        style={{
-          fontSize: 54,
-          color: INK,
-          lineHeight: 1.25,
-          fontStyle: "italic",
-          fontWeight: 400,
-          display: "flex",
-        }}
-      >
-        &ldquo;{zinger}&rdquo;
-      </div>
-
-      {/* Bottom: attribution + campaign */}
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ fontSize: 32, color: TEAL, fontWeight: 700, letterSpacing: "0.05em" }}>
-          &mdash; {attribution}
-        </div>
-        <div style={{ width: "100%", height: 1, background: GOLD, opacity: 0.4, margin: "28px 0 24px" }} />
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: 40, fontFamily: "Allura", color: GOLD, lineHeight: 1 }}>
-              Keri H. Carroll
+        {/* Bottom: attribution + campaign */}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 32,
+              color: TEAL,
+              fontWeight: 700,
+            }}
+          >
+            — {attribution}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              height: 1,
+              background: GOLD,
+              marginTop: 28,
+              marginBottom: 24,
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+            }}
+          >
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div
+                style={{
+                  display: "flex",
+                  fontSize: 52,
+                  fontFamily: "Allura",
+                  color: GOLD,
+                  lineHeight: 1,
+                }}
+              >
+                Keri H. Carroll
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  fontSize: 22,
+                  color: TEAL,
+                  fontWeight: 700,
+                  letterSpacing: "0.2em",
+                  marginTop: 8,
+                }}
+              >
+                CHANCERY COURT JUDGE
+              </div>
             </div>
-            <div style={{ fontSize: 22, color: TEAL, fontWeight: 700, letterSpacing: "0.25em", marginTop: 4 }}>
-              CHANCERY COURT JUDGE
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  fontSize: 20,
+                  color: TEAL,
+                  fontWeight: 700,
+                  letterSpacing: "0.2em",
+                }}
+              >
+                VOTE NOV 3, 2026
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  fontSize: 14,
+                  color: GOLD,
+                  letterSpacing: "0.2em",
+                  marginTop: 8,
+                }}
+              >
+                CARROLLFORJUDGE.COM
+              </div>
             </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-            <div style={{ fontSize: 20, color: TEAL, fontWeight: 700, letterSpacing: "0.2em" }}>
-              VOTE NOVEMBER 3, 2026
-            </div>
-            <div style={{ fontSize: 14, color: GOLD, marginTop: 6, letterSpacing: "0.2em" }}>
-              CARROLLFORJUDGE.COM
-            </div>
-          </div>
         </div>
-      </div>
       </div>
     </div>
   );
@@ -242,64 +286,136 @@ function StoryTall({ headline, zinger, attribution }: LayoutProps) {
     >
       {/* Top band */}
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ fontSize: 36, color: GOLD, fontWeight: 700, letterSpacing: "0.3em" }}>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 36,
+            color: GOLD,
+            fontWeight: 700,
+            letterSpacing: "0.3em",
+          }}
+        >
           ENDORSEMENT
         </div>
-        <div style={{ width: 160, height: 4, background: GOLD, marginTop: 20 }} />
+        <div
+          style={{
+            display: "flex",
+            width: 160,
+            height: 4,
+            background: GOLD,
+            marginTop: 20,
+          }}
+        />
       </div>
 
       {/* Middle: headline + zinger */}
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div
           style={{
+            display: "flex",
             fontSize: 110,
             color: GOLD,
             fontWeight: 700,
             lineHeight: 1.05,
-            letterSpacing: "0.02em",
           }}
         >
           {headline}
         </div>
-        <div style={{ width: 140, height: 4, background: CREAM, marginTop: 36, marginBottom: 48 }} />
         <div
           style={{
+            display: "flex",
+            width: 140,
+            height: 4,
+            background: CREAM,
+            marginTop: 36,
+            marginBottom: 48,
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
             fontSize: 72,
             color: CREAM,
             lineHeight: 1.25,
             fontStyle: "italic",
             fontWeight: 400,
-            display: "flex",
           }}
         >
           &ldquo;{zinger}&rdquo;
         </div>
         <div
           style={{
+            display: "flex",
             fontSize: 40,
             color: GOLD,
             fontWeight: 700,
-            letterSpacing: "0.05em",
             marginTop: 48,
           }}
         >
-          &mdash; {attribution}
+          — {attribution}
         </div>
       </div>
 
       {/* Bottom: campaign */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-        <div style={{ width: "100%", height: 1, background: GOLD, opacity: 0.4, marginBottom: 32 }} />
-        <div style={{ fontSize: 80, fontFamily: "Allura", color: GOLD, lineHeight: 1 }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            height: 1,
+            background: GOLD,
+            marginBottom: 32,
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
+            fontSize: 100,
+            fontFamily: "Allura",
+            color: GOLD,
+            lineHeight: 1,
+          }}
+        >
           Keri H. Carroll
         </div>
-        <div style={{ fontSize: 30, color: CREAM, fontWeight: 700, letterSpacing: "0.3em", marginTop: 12 }}>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 30,
+            color: CREAM,
+            fontWeight: 700,
+            letterSpacing: "0.3em",
+            marginTop: 16,
+          }}
+        >
           CHANCERY COURT JUDGE
         </div>
-        <div style={{ fontSize: 24, color: GOLD, letterSpacing: "0.3em", marginTop: 24 }}>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 24,
+            color: GOLD,
+            letterSpacing: "0.3em",
+            marginTop: 24,
+          }}
+        >
           VOTE NOVEMBER 3, 2026
         </div>
-        <div style={{ fontSize: 18, color: CREAM, opacity: 0.7, letterSpacing: "0.3em", marginTop: 16 }}>
+        <div
+          style={{
+            display: "flex",
+            fontSize: 18,
+            color: CREAM,
+            letterSpacing: "0.3em",
+            marginTop: 16,
+          }}
+        >
           CARROLLFORJUDGE.COM
         </div>
       </div>
@@ -327,24 +443,44 @@ function LinkedinBanner({ headline, zinger, attribution }: LayoutProps) {
           width: 520,
           height: "100%",
           background: TEAL_DARK,
-          padding: "40px 48px",
+          paddingTop: 40,
+          paddingBottom: 40,
+          paddingLeft: 48,
+          paddingRight: 48,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           color: CREAM,
         }}
       >
-        <div style={{ fontSize: 18, color: GOLD, fontWeight: 700, letterSpacing: "0.35em" }}>
-          ENDORSEMENT
-        </div>
-        <div style={{ width: 80, height: 3, background: GOLD, marginTop: 14, marginBottom: 18 }} />
         <div
           style={{
+            display: "flex",
+            fontSize: 18,
+            color: GOLD,
+            fontWeight: 700,
+            letterSpacing: "0.35em",
+          }}
+        >
+          ENDORSEMENT
+        </div>
+        <div
+          style={{
+            display: "flex",
+            width: 80,
+            height: 3,
+            background: GOLD,
+            marginTop: 14,
+            marginBottom: 18,
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
             fontSize: 56,
             color: CREAM,
             fontWeight: 700,
             lineHeight: 1.1,
-            letterSpacing: "0.02em",
           }}
         >
           {headline}
@@ -354,8 +490,11 @@ function LinkedinBanner({ headline, zinger, attribution }: LayoutProps) {
       {/* Right cream panel */}
       <div
         style={{
-          flex: 1,
-          padding: "48px 56px",
+          flexGrow: 1,
+          paddingTop: 48,
+          paddingBottom: 48,
+          paddingLeft: 56,
+          paddingRight: 56,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -364,28 +503,64 @@ function LinkedinBanner({ headline, zinger, attribution }: LayoutProps) {
       >
         <div
           style={{
+            display: "flex",
             fontSize: 38,
             color: INK,
             lineHeight: 1.3,
             fontStyle: "italic",
             fontWeight: 400,
-            display: "flex",
           }}
         >
           &ldquo;{zinger}&rdquo;
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+          }}
+        >
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: 22, color: TEAL, fontWeight: 700, letterSpacing: "0.05em" }}>
-              &mdash; {attribution}
+            <div
+              style={{
+                display: "flex",
+                fontSize: 22,
+                color: TEAL,
+                fontWeight: 700,
+              }}
+            >
+              — {attribution}
             </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-            <div style={{ fontSize: 40, fontFamily: "Allura", color: GOLD, lineHeight: 1 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                fontSize: 48,
+                fontFamily: "Allura",
+                color: GOLD,
+                lineHeight: 1,
+              }}
+            >
               Keri H. Carroll
             </div>
-            <div style={{ fontSize: 14, color: TEAL, fontWeight: 700, letterSpacing: "0.3em", marginTop: 4 }}>
+            <div
+              style={{
+                display: "flex",
+                fontSize: 14,
+                color: TEAL,
+                fontWeight: 700,
+                letterSpacing: "0.3em",
+                marginTop: 8,
+              }}
+            >
               CHANCERY COURT JUDGE · NOV 3, 2026
             </div>
           </div>
