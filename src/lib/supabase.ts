@@ -52,7 +52,11 @@ export interface Endorsement {
   safe_to_publish: boolean;
   status: EndorsementStatus;
   admin_notes: string | null;
+  featured: boolean;
+  featured_at: string | null;
   created_at: string;
   reviewed_at: string | null;
   reviewed_by: string | null;
 }
+
+export const MAX_FEATURED = 3;

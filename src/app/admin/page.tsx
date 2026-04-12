@@ -3,12 +3,25 @@
 import { useEffect, useState, useCallback } from "react";
 import type { Endorsement, EndorsementStatus } from "@/lib/supabase";
 
+const MAX_FEATURED = 3;
+
 type StatusFilter = "pending" | "approved" | "rejected" | "all";
+
+interface PatchBody {
+  status?: EndorsementStatus;
+  zinger?: string;
+  featured?: boolean;
+}
 
 export default function AdminPage() {
   const [endorsements, setEndorsements] = useState<Endorsement[]>([]);
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState<StatusFilter>("pending");
+  const [actionError, setActionError] = useState<string | null>(null);
+
+  const featuredCount = endorsements.filter(
+    (e) => e.featured && e.status === "approved"
+  ).length;
 
   const loadEndorsements = useCallback(async () => {
     setLoading(true);
@@ -26,13 +39,28 @@ export default function AdminPage() {
     loadEndorsements();
   }, [filter, loadEndorsements]);
 
-  async function updateStatus(id: string, status: EndorsementStatus, zinger?: string) {
-    await fetch(`/api/admin/endorsements`, {
+  async function patch(id: string, body: PatchBody): Promise<{ ok: boolean; error?: string }> {
+    setActionError(null);
+    const res = await fetch(`/api/admin/endorsements`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ id, status, zinger }),
+      body: JSON.stringify({ id, ...body }),
     });
+    if (!res.ok) {
+      const { error } = await res.json().catch(() => ({ error: "Request failed" }));
+      setActionError(error || "Request failed");
+      return { ok: false, error };
+    }
     await loadEndorsements();
+    return { ok: true };
+  }
+
+  async function updateStatus(id: string, status: EndorsementStatus, zinger?: string) {
+    await patch(id, { status, zinger });
+  }
+
+  async function toggleFeatured(id: string, nextValue: boolean) {
+    await patch(id, { featured: nextValue });
   }
 
   return (
@@ -46,7 +74,23 @@ export default function AdminPage() {
             </p>
             <h1 className="text-3xl font-bold text-teal-dark">Endorsements</h1>
           </div>
+          {filter === "approved" && (
+            <div className="text-right">
+              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-ink-muted">
+                Featured
+              </p>
+              <p className="text-2xl font-bold text-gold-dark">
+                {featuredCount} <span className="text-ink-muted text-base font-normal">/ {MAX_FEATURED}</span>
+              </p>
+            </div>
+          )}
         </div>
+
+        {actionError && (
+          <div className="mb-6 border-l-4 border-red-600 bg-red-50 px-4 py-3 text-sm text-red-800">
+            {actionError}
+          </div>
+        )}
 
         {/* Filter tabs */}
         <div className="flex gap-2 mb-6 border-b border-teal/10">
@@ -75,7 +119,13 @@ export default function AdminPage() {
         ) : (
           <div className="space-y-6">
             {endorsements.map((e) => (
-              <EndorsementCard key={e.id} endorsement={e} onAction={updateStatus} />
+              <EndorsementCard
+                key={e.id}
+                endorsement={e}
+                onAction={updateStatus}
+                onToggleFeatured={toggleFeatured}
+                featuredCount={featuredCount}
+              />
             ))}
           </div>
         )}
@@ -88,9 +138,13 @@ export default function AdminPage() {
 function EndorsementCard({
   endorsement,
   onAction,
+  onToggleFeatured,
+  featuredCount,
 }: {
   endorsement: Endorsement;
   onAction: (id: string, status: EndorsementStatus, zinger?: string) => Promise<void>;
+  onToggleFeatured: (id: string, nextValue: boolean) => Promise<void>;
+  featuredCount: number;
 }) {
   const [zinger, setZinger] = useState(endorsement.zinger || "");
   const [busy, setBusy] = useState(false);
@@ -102,10 +156,19 @@ function EndorsementCard({
     setBusy(false);
   }
 
+  async function doFeature(next: boolean) {
+    setBusy(true);
+    await onToggleFeatured(endorsement.id, next);
+    setBusy(false);
+  }
+
   const statusColor =
     endorsement.status === "approved" ? "bg-green-600"
     : endorsement.status === "rejected" ? "bg-red-600"
     : "bg-gold";
+
+  const isApproved = endorsement.status === "approved";
+  const canFeature = isApproved && (endorsement.featured || featuredCount < MAX_FEATURED);
 
   return (
     <div className="bg-white border-2 border-teal/10 p-6">
@@ -119,6 +182,11 @@ function EndorsementCard({
             <span className={`text-[10px] font-bold tracking-[0.2em] uppercase text-white px-2 py-0.5 ${statusColor}`}>
               {endorsement.status}
             </span>
+            {endorsement.featured && (
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-teal-dark px-2 py-0.5 bg-gold">
+                ★ Featured
+              </span>
+            )}
             {!endorsement.safe_to_publish && (
               <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white px-2 py-0.5 bg-red-700">
                 Flagged
@@ -194,6 +262,28 @@ function EndorsementCard({
           >
             Reset to pending
           </button>
+        )}
+
+        {/* Feature toggle — only on approved */}
+        {isApproved && (
+          endorsement.featured ? (
+            <button
+              disabled={busy}
+              onClick={() => doFeature(false)}
+              className="px-4 py-2 text-sm font-semibold bg-gold text-teal-dark hover:bg-gold-light disabled:opacity-50"
+            >
+              ★ Unfeature
+            </button>
+          ) : (
+            <button
+              disabled={busy || !canFeature}
+              onClick={() => doFeature(true)}
+              title={canFeature ? "Mark as featured on the public page" : `Max ${MAX_FEATURED} featured — unfeature one first`}
+              className="px-4 py-2 text-sm font-semibold border-2 border-gold text-gold-dark hover:bg-gold/10 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              ☆ Feature
+            </button>
+          )
         )}
       </div>
     </div>

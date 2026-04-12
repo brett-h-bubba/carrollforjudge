@@ -116,6 +116,14 @@ const categories = [
 
 export default async function EndorsementsPage() {
   const approved = await fetchApproved();
+  const featured = approved
+    .filter((e) => e.featured)
+    .sort((a, b) => {
+      const at = a.featured_at ? Date.parse(a.featured_at) : 0;
+      const bt = b.featured_at ? Date.parse(b.featured_at) : 0;
+      return bt - at;
+    });
+  const nonFeatured = approved.filter((e) => !e.featured);
 
   return (
     <div>
@@ -133,7 +141,7 @@ export default async function EndorsementsPage() {
       </section>
 
       {/* ── Voices of Support (live, from DB) ─────────────────── */}
-      {approved.length > 0 && (
+      {nonFeatured.length > 0 && (
         <section className="py-20 sm:py-28 bg-cream">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-14">
@@ -150,7 +158,7 @@ export default async function EndorsementsPage() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {approved.map((e) => (
+              {nonFeatured.map((e) => (
                 <div
                   key={e.id}
                   className="bg-white border-l-4 border-gold p-7 shadow-md hover:shadow-xl transition-shadow flex flex-col"
@@ -197,9 +205,24 @@ export default async function EndorsementsPage() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {featuredEndorsements.map((endorsement, i) => (
+            {(featured.length > 0
+              ? featured.map((e) => ({
+                  key: e.id,
+                  name: e.name,
+                  title: e.location
+                    ? `${categoryLabel(e.category)} · ${e.location}`
+                    : categoryLabel(e.category),
+                  quote: e.zinger || e.endorsement,
+                }))
+              : featuredEndorsements.map((e, i) => ({
+                  key: `placeholder-${i}`,
+                  name: e.name,
+                  title: e.title,
+                  quote: e.quote,
+                }))
+            ).map((endorsement) => (
               <div
-                key={i}
+                key={endorsement.key}
                 className="bg-cream border-l-4 border-gold p-8 shadow-md hover:shadow-xl transition-shadow flex flex-col"
               >
                 {/* Gold quotation mark */}
@@ -211,7 +234,7 @@ export default async function EndorsementsPage() {
                   <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
                 </svg>
 
-                <p className="text-slate italic leading-relaxed mb-6 flex-1">
+                <p className="text-slate italic leading-relaxed mb-6 flex-1 text-lg">
                   &ldquo;{endorsement.quote}&rdquo;
                 </p>
 
