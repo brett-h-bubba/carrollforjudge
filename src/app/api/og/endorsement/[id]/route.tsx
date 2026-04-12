@@ -1,20 +1,18 @@
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
-import { readFile } from "node:fs/promises";
 import { getServerSupabase } from "@/lib/supabase";
 import { headlineForCategory } from "@/lib/ai";
 import type { EndorsementCategory } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
-// Static refs ensure Next.js includes these files in the function bundle
-const CORMORANT_REGULAR_URL = new URL("../../../../../fonts/cormorant-400.ttf", import.meta.url);
-const CORMORANT_BOLD_URL    = new URL("../../../../../fonts/cormorant-700.ttf", import.meta.url);
-const ALLURA_URL            = new URL("../../../../../fonts/allura-400.ttf",    import.meta.url);
-
-async function loadFont(url: URL): Promise<ArrayBuffer> {
-  const buf = await readFile(url);
-  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
+// Fonts are served from public/fonts/* — fetched at request time from the
+// same origin. Reliable on Vercel's serverless runtime where fs-relative
+// imports from outside the function bundle are unreliable.
+async function loadFont(origin: string, filename: string): Promise<ArrayBuffer> {
+  const res = await fetch(`${origin}/fonts/${filename}`);
+  if (!res.ok) throw new Error(`Font fetch failed: ${filename} (${res.status})`);
+  return res.arrayBuffer();
 }
 
 // Brand colors
@@ -37,7 +35,9 @@ export async function GET(
   ctx: { params: Promise<{ id: string }> }
 ) {
   const { id } = await ctx.params;
-  const { searchParams } = new URL(req.url);
+  const reqUrl = new URL(req.url);
+  const origin = reqUrl.origin;
+  const { searchParams } = reqUrl;
   const format = (searchParams.get("format") || "square") as Format;
   const dims = DIMS[format] || DIMS.square;
 
@@ -57,12 +57,18 @@ export async function GET(
   const zinger = data.zinger || "I'm with Keri.";
   const attribution = data.location ? `${data.name} · ${data.location}` : data.name;
 
-  // Load fonts from repo (bundled with the function)
-  const [cormorantRegular, cormorantBold, allura] = await Promise.all([
-    loadFont(CORMORANT_REGULAR_URL),
-    loadFont(CORMORANT_BOLD_URL),
-    loadFont(ALLURA_URL),
-  ]);
+  // Load fonts from /public/fonts (served as static assets, fetched over HTTP)
+  let cormorantRegular: ArrayBuffer, cormorantBold: ArrayBuffer, allura: ArrayBuffer;
+  try {
+    [cormorantRegular, cormorantBold, allura] = await Promise.all([
+      loadFont(origin, "cormorant-400.ttf"),
+      loadFont(origin, "cormorant-700.ttf"),
+      loadFont(origin, "allura-400.ttf"),
+    ]);
+  } catch (err) {
+    console.error("[og] Font load failed:", err);
+    return new Response("Font load failed", { status: 500 });
+  }
 
   // Choose layout by format
   let body: React.ReactElement;
@@ -74,15 +80,24 @@ export async function GET(
     body = <Square headline={headline} zinger={zinger} attribution={attribution} />;
   }
 
-  return new ImageResponse(body, {
-    width:  dims.w,
-    height: dims.h,
-    fonts: [
-      { name: "Cormorant", data: cormorantRegular, weight: 400, style: "normal" },
-      { name: "Cormorant", data: cormorantBold,    weight: 700, style: "normal" },
-      { name: "Allura",    data: allura,           weight: 400, style: "normal" },
-    ],
-  });
+  try {
+    return new ImageResponse(body, {
+      width:  dims.w,
+      height: dims.h,
+      fonts: [
+        { name: "Cormorant", data: cormorantRegular, weight: 400, style: "normal" },
+        { name: "Cormorant", data: cormorantBold,    weight: 700, style: "normal" },
+        { name: "Allura",    data: allura,           weight: 400, style: "normal" },
+      ],
+    });
+  } catch (err) {
+    console.error("[og] ImageResponse failed:", err);
+    const msg = err instanceof Error ? err.message : String(err);
+    return new Response(`Image render failed: ${msg}`, {
+      status: 500,
+      headers: { "content-type": "text/plain" },
+    });
+  }
 }
 
 // ───────────────────────────────────────────────────────────────
