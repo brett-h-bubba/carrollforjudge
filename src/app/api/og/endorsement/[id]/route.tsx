@@ -1,10 +1,21 @@
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
+import { readFile } from "node:fs/promises";
 import { getServerSupabase } from "@/lib/supabase";
 import { headlineForCategory } from "@/lib/ai";
 import type { EndorsementCategory } from "@/lib/supabase";
 
 export const runtime = "nodejs";
+
+// Static refs ensure Next.js includes these files in the function bundle
+const CORMORANT_REGULAR_URL = new URL("../../../../../fonts/cormorant-400.ttf", import.meta.url);
+const CORMORANT_BOLD_URL    = new URL("../../../../../fonts/cormorant-700.ttf", import.meta.url);
+const ALLURA_URL            = new URL("../../../../../fonts/allura-400.ttf",    import.meta.url);
+
+async function loadFont(url: URL): Promise<ArrayBuffer> {
+  const buf = await readFile(url);
+  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
+}
 
 // Brand colors
 const TEAL = "#215b64";
@@ -46,17 +57,11 @@ export async function GET(
   const zinger = data.zinger || "I'm with Keri.";
   const attribution = data.location ? `${data.name} · ${data.location}` : data.name;
 
-  // Load fonts
-  const [cormorantBold, cormorantRegular, allura] = await Promise.all([
-    fetch(
-      "https://fonts.gstatic.com/s/cormorantgaramond/v16/co3YmX5slCNuHLi8bLeY9MK7whWMhyjYrEPjuw.ttf"
-    ).then((r) => r.arrayBuffer()),
-    fetch(
-      "https://fonts.gstatic.com/s/cormorantgaramond/v16/co3bmX5slCNuHLi8bLeY9MK7whWMhyjQAllvuQ.ttf"
-    ).then((r) => r.arrayBuffer()),
-    fetch(
-      "https://fonts.gstatic.com/s/allura/v21/9oRPNYsQpSyG3Sz6ckRhXoA7.ttf"
-    ).then((r) => r.arrayBuffer()),
+  // Load fonts from repo (bundled with the function)
+  const [cormorantRegular, cormorantBold, allura] = await Promise.all([
+    loadFont(CORMORANT_REGULAR_URL),
+    loadFont(CORMORANT_BOLD_URL),
+    loadFont(ALLURA_URL),
   ]);
 
   // Choose layout by format
