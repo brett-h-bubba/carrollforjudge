@@ -1,10 +1,20 @@
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 import { getServerSupabase } from "@/lib/supabase";
-import { headlineForCategory } from "@/lib/ai";
 import type { EndorsementCategory } from "@/lib/supabase";
 
 export const runtime = "nodejs";
+
+function headlineForCategory(category: EndorsementCategory): string {
+  switch (category) {
+    case "former_client":          return "Keri Helped Me";
+    case "professional_reference": return "I've Worked With Keri";
+    case "community_leader":       return "Keri Has My Support";
+    case "fellow_attorney":        return "Keri Belongs on the Bench";
+    case "friend_family":          return "I'm With Keri";
+    default:                       return "I'm With Keri";
+  }
+}
 
 // Fonts are served from public/fonts/* — fetched at request time from the
 // same origin. Reliable on Vercel's serverless runtime where fs-relative
