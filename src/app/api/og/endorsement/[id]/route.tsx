@@ -81,8 +81,28 @@ export async function GET(
   }
 
   // Choose layout by format
+  // TEMP debug: render a minimal placeholder to verify the route returns bytes
+  const DEBUG_MINIMAL = searchParams.get("debug") === "1";
   let body: React.ReactElement;
-  if (format === "linkedin") {
+  if (DEBUG_MINIMAL) {
+    body = (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          background: CREAM,
+          color: TEAL,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: 48,
+          fontFamily: "Cormorant",
+        }}
+      >
+        {headline} · {zinger} · {attribution}
+      </div>
+    );
+  } else if (format === "linkedin") {
     body = <LinkedinBanner headline={headline} zinger={zinger} attribution={attribution} />;
   } else if (format === "story") {
     body = <StoryTall headline={headline} zinger={zinger} attribution={attribution} />;
