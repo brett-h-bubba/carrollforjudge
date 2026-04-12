@@ -5,53 +5,61 @@ export default function Page() {
   return (
     <>
       {/* ===== HERO SECTION ===== */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-teal-dark">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/headshot-3.jpg"
-            alt=""
-            fill
-            className="object-cover object-top"
-            sizes="100vw"
-            priority
-            aria-hidden="true"
-          />
-        </div>
-        {/* Dark overlay gradient — heavy on left for text, fading right to show photo */}
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-dark via-teal-dark/95 to-teal-dark/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-teal-dark/80 via-transparent to-teal-dark/30" />
+      <section className="relative overflow-hidden bg-teal-dark">
+        {/* Subtle decorative gold radial behind photo */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(176,138,73,0.18)_0%,_transparent_60%)]" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-40 sm:py-48 lg:py-56 w-full">
-          <div className="max-w-3xl">
-            <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-8 text-shadow">
-              20th Chancery Court District &middot; Place 1
-            </p>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[1.1] tracking-normal text-shadow-hero">
-              The Experience
-              <br />
-              Rankin County
-              <br />
-              Families <span className="text-gold italic">Deserve</span>
-            </h1>
-            {/* Gold accent divider */}
-            <div className="mt-10 w-20 h-[2px] bg-gold" />
-            <p className="mt-8 text-xl sm:text-2xl text-cream/90 font-normal italic leading-relaxed text-shadow">
-              21 years of family law. Ready on Day One.
-            </p>
-            <div className="mt-12 flex flex-wrap gap-5">
-              <Link
-                href="/get-involved"
-                className="inline-flex items-center px-10 py-5 bg-gold text-teal-dark font-semibold tracking-wide text-lg hover:bg-gold-light transition-colors shadow-xl"
-              >
-                Get Involved
-              </Link>
-              <Link
-                href="/about"
-                className="inline-flex items-center px-10 py-5 border-2 border-white text-white font-semibold tracking-wide text-lg hover:bg-white/10 transition-colors"
-              >
-                Meet Keri
-              </Link>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-32 w-full">
+          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center">
+            {/* Text column */}
+            <div>
+              <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-8 text-shadow">
+                20th Chancery Court District &middot; Place 1
+              </p>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-normal text-shadow-hero">
+                The Experience
+                <br />
+                Rankin County
+                <br />
+                Families{" "}
+                <span className="text-gold italic">Deserve</span>
+              </h1>
+              {/* Gold accent divider */}
+              <div className="mt-10 w-20 h-[2px] bg-gold" />
+              <p className="mt-8 text-xl sm:text-2xl text-cream/90 font-normal italic leading-relaxed text-shadow">
+                21 years of family law. Ready on Day One.
+              </p>
+              <div className="mt-12 flex flex-wrap gap-5">
+                <Link
+                  href="/get-involved"
+                  className="inline-flex items-center px-10 py-5 bg-gold text-teal-dark font-semibold tracking-wide text-lg hover:bg-gold-light transition-colors shadow-xl"
+                >
+                  Get Involved
+                </Link>
+                <Link
+                  href="/about"
+                  className="inline-flex items-center px-10 py-5 border-2 border-white text-white font-semibold tracking-wide text-lg hover:bg-white/10 transition-colors"
+                >
+                  Meet Keri
+                </Link>
+              </div>
+            </div>
+
+            {/* Portrait column */}
+            <div className="relative lg:justify-self-end w-full max-w-md mx-auto lg:mx-0">
+              <div className="relative aspect-[4/5] shadow-2xl border-2 border-gold/50 overflow-hidden">
+                <Image
+                  src="/images/headshot-main.jpg"
+                  alt="Keri H. Carroll — candidate for Chancery Court Judge"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 90vw, 450px"
+                  priority
+                />
+              </div>
+              {/* Gold corner accents */}
+              <div className="absolute -top-3 -left-3 w-14 h-14 border-t-2 border-l-2 border-gold pointer-events-none" />
+              <div className="absolute -bottom-3 -right-3 w-14 h-14 border-b-2 border-r-2 border-gold pointer-events-none" />
             </div>
           </div>
         </div>
