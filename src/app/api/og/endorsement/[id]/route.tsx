@@ -120,27 +120,24 @@ function Square({ headline, zinger, attribution }: LayoutProps) {
         width: "100%",
         height: "100%",
         background: CREAM,
-        padding: 72,
+        padding: 28,
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
         fontFamily: "Cormorant",
         color: INK,
       }}
     >
-      {/* Border frame */}
+      {/* Inner border frame */}
       <div
         style={{
-          position: "absolute",
-          top: 28,
-          left: 28,
-          right: 28,
-          bottom: 28,
+          width: "100%",
+          height: "100%",
           border: `2px solid ${GOLD}`,
+          padding: 54,
           display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
         }}
-      />
-
+      >
       {/* Top */}
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ fontSize: 120, color: GOLD, lineHeight: 1, fontWeight: 700, fontStyle: "italic" }}>
@@ -190,13 +187,16 @@ function Square({ headline, zinger, attribution }: LayoutProps) {
               CHANCERY COURT JUDGE
             </div>
           </div>
-          <div style={{ fontSize: 20, color: TEAL, fontWeight: 700, letterSpacing: "0.2em", textAlign: "right" }}>
-            VOTE NOVEMBER 3, 2026
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+            <div style={{ fontSize: 20, color: TEAL, fontWeight: 700, letterSpacing: "0.2em" }}>
+              VOTE NOVEMBER 3, 2026
+            </div>
             <div style={{ fontSize: 14, color: GOLD, marginTop: 6, letterSpacing: "0.2em" }}>
               CARROLLFORJUDGE.COM
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
@@ -218,7 +218,6 @@ function StoryTall({ headline, zinger, attribution }: LayoutProps) {
         justifyContent: "space-between",
         fontFamily: "Cormorant",
         color: CREAM,
-        position: "relative",
       }}
     >
       {/* Top band */}
