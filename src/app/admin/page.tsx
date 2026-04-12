@@ -1,44 +1,18 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { getBrowserSupabase } from "@/lib/supabase";
 import type { Endorsement, EndorsementStatus } from "@/lib/supabase";
-import type { Session } from "@supabase/supabase-js";
 
 type StatusFilter = "pending" | "approved" | "rejected" | "all";
 
 export default function AdminPage() {
-  const [session, setSession] = useState<Session | null>(null);
-  const [checking, setChecking] = useState(true);
-  const [email, setEmail] = useState("");
-  const [loginSent, setLoginSent] = useState(false);
-  const [loginError, setLoginError] = useState<string | null>(null);
-
   const [endorsements, setEndorsements] = useState<Endorsement[]>([]);
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState<StatusFilter>("pending");
 
-  const supabase = getBrowserSupabase();
-
-  // ─ Auth state ────────────────────────────────────────
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setChecking(false);
-    });
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
-      setSession(s);
-    });
-    return () => sub.subscription.unsubscribe();
-  }, [supabase]);
-
-  // ─ Data fetch ────────────────────────────────────────
   const loadEndorsements = useCallback(async () => {
-    if (!session) return;
     setLoading(true);
-    const res = await fetch(`/api/admin/endorsements?status=${filter}`, {
-      headers: { "x-admin-token": session.access_token },
-    });
+    const res = await fetch(`/api/admin/endorsements?status=${filter}`);
     if (res.ok) {
       const data = await res.json();
       setEndorsements(data.endorsements || []);
@@ -46,101 +20,21 @@ export default function AdminPage() {
       setEndorsements([]);
     }
     setLoading(false);
-  }, [session, filter]);
+  }, [filter]);
 
   useEffect(() => {
-    if (session) loadEndorsements();
-  }, [session, filter, loadEndorsements]);
-
-  // ─ Actions ───────────────────────────────────────────
-  async function sendMagicLink(e: React.FormEvent) {
-    e.preventDefault();
-    setLoginError(null);
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: `${window.location.origin}/admin` },
-    });
-    if (error) {
-      setLoginError(error.message);
-    } else {
-      setLoginSent(true);
-    }
-  }
-
-  async function signOut() {
-    await supabase.auth.signOut();
-  }
+    loadEndorsements();
+  }, [filter, loadEndorsements]);
 
   async function updateStatus(id: string, status: EndorsementStatus, zinger?: string) {
-    if (!session) return;
     await fetch(`/api/admin/endorsements`, {
       method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-        "x-admin-token": session.access_token,
-      },
+      headers: { "content-type": "application/json" },
       body: JSON.stringify({ id, status, zinger }),
     });
     await loadEndorsements();
   }
 
-  // ─ Render ────────────────────────────────────────────
-  if (checking) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-gold/30 border-t-gold animate-spin" />
-      </div>
-    );
-  }
-
-  if (!session) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="max-w-md w-full bg-white border-2 border-teal/20 p-8 sm:p-10">
-          <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs mb-3">
-            Campaign Admin
-          </p>
-          <h1 className="text-3xl font-bold text-teal-dark mb-2">Sign In</h1>
-          <div className="w-12 h-[2px] bg-gold mb-6" />
-
-          {loginSent ? (
-            <div className="border-l-2 border-gold bg-gold/10 px-4 py-4 text-sm text-teal-dark">
-              Check your inbox for a sign-in link.
-            </div>
-          ) : (
-            <form onSubmit={sendMagicLink} className="space-y-4">
-              <label className="block">
-                <span className="block text-sm font-semibold text-teal mb-1.5">Email</span>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 bg-cream border-2 border-teal/20 text-ink focus:border-gold focus:outline-none"
-                />
-              </label>
-              {loginError && (
-                <div className="border-l-2 border-red-600 bg-red-50 px-3 py-2 text-sm text-red-800">
-                  {loginError}
-                </div>
-              )}
-              <button
-                type="submit"
-                className="w-full bg-teal-dark text-cream px-6 py-3 font-semibold tracking-wide hover:bg-teal transition-colors"
-              >
-                Send Magic Link
-              </button>
-              <p className="text-xs text-ink-muted italic pt-2">
-                Only allowlisted campaign staff can access this page.
-              </p>
-            </form>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  // ─ Logged in ─
   return (
     <div className="min-h-screen">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -151,17 +45,6 @@ export default function AdminPage() {
               Campaign Admin
             </p>
             <h1 className="text-3xl font-bold text-teal-dark">Endorsements</h1>
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-ink-muted hidden sm:inline">
-              {session.user.email}
-            </span>
-            <button
-              onClick={signOut}
-              className="text-sm text-teal hover:text-gold font-semibold"
-            >
-              Sign out
-            </button>
           </div>
         </div>
 

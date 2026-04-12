@@ -1,20 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSupabase } from "@/lib/supabase";
-import { requireAdmin } from "@/lib/admin-auth";
+
+// Access to these routes is gated by middleware.ts (HTTP Basic Auth).
+// If a request reaches here, the caller has already authenticated.
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
-  let adminEmail: string;
-  try {
-    adminEmail = await requireAdmin(req);
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : "Unauthorized";
-    return NextResponse.json({ error: msg }, { status: 401 });
-  }
-  void adminEmail;
-
   const { searchParams } = new URL(req.url);
   const status = searchParams.get("status") || "pending";
 
@@ -36,14 +29,6 @@ export async function GET(req: NextRequest) {
 }
 
 export async function PATCH(req: NextRequest) {
-  let adminEmail: string;
-  try {
-    adminEmail = await requireAdmin(req);
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : "Unauthorized";
-    return NextResponse.json({ error: msg }, { status: 401 });
-  }
-
   const body = await req.json().catch(() => null);
   if (!body || typeof body.id !== "string" || typeof body.status !== "string") {
     return NextResponse.json({ error: "Bad request" }, { status: 400 });
@@ -58,7 +43,7 @@ export async function PATCH(req: NextRequest) {
   const update: Record<string, unknown> = {
     status,
     reviewed_at: new Date().toISOString(),
-    reviewed_by: adminEmail,
+    reviewed_by: "admin",
   };
   if (typeof zinger === "string" && zinger.trim()) {
     update.zinger = zinger.trim();
