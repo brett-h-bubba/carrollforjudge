@@ -66,32 +66,26 @@ export default function Header() {
 
       {/* ── Main nav bar ────────────────────────────── */}
       <nav
-        className={`bg-teal transition-shadow duration-300 ${
-          scrolled ? "shadow-lg shadow-black/20" : ""
+        className={`bg-cream border-b border-teal/10 transition-shadow duration-300 ${
+          scrolled ? "shadow-lg shadow-black/10" : ""
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20 lg:h-24">
-            {/* Logo + Name */}
-            <Link href="/" className="flex items-center gap-4 group">
-              <div className="w-12 h-12 lg:w-14 lg:h-14 overflow-hidden relative shrink-0">
-                <Image
-                  src="/images/logo.png"
-                  alt="Carroll for Judge logo"
-                  fill
-                  className="object-contain"
-                  sizes="56px"
-                  priority
-                />
-              </div>
-              <div className="leading-tight">
-                <span className="block text-white font-semibold text-2xl lg:text-[26px] tracking-wide">
-                  Keri H. Carroll
-                </span>
-                <span className="hidden sm:block text-xs text-gold tracking-[0.2em] uppercase font-medium mt-0.5">
-                  For Chancery Court Judge
-                </span>
-              </div>
+          <div className="flex items-center justify-between h-24 lg:h-32 py-2">
+            {/* Logo (full brand lockup — includes wordmark) */}
+            <Link
+              href="/"
+              className="block relative h-full aspect-[2/1] max-w-[280px] sm:max-w-[340px] lg:max-w-[420px]"
+              aria-label="Keri H. Carroll for Chancery Court Judge — Home"
+            >
+              <Image
+                src="/images/logo.png"
+                alt="Keri H. Carroll for Chancery Court Judge"
+                fill
+                className="object-contain object-left"
+                sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 420px"
+                priority
+              />
             </Link>
 
             {/* Desktop links */}
@@ -100,7 +94,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-2 text-sm font-semibold text-white uppercase tracking-[0.18em] hover:text-gold transition-colors"
+                  className="px-4 py-2 text-sm font-semibold text-teal uppercase tracking-[0.18em] hover:text-gold transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -110,7 +104,7 @@ export default function Header() {
             {/* Mobile hamburger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 text-white hover:text-gold transition-colors"
+              className="lg:hidden p-2 text-teal hover:text-gold transition-colors"
               aria-label="Toggle menu"
             >
               <svg
@@ -140,13 +134,13 @@ export default function Header() {
 
           {/* Mobile nav */}
           {mobileOpen && (
-            <div className="lg:hidden border-t border-white/10 pb-4 pt-2">
+            <div className="lg:hidden border-t border-teal/10 pb-4 pt-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-sm font-semibold text-white uppercase tracking-[0.18em] hover:text-gold hover:bg-white/5 transition-colors"
+                  className="block px-4 py-3 text-sm font-semibold text-teal uppercase tracking-[0.18em] hover:text-gold hover:bg-teal/5 transition-colors"
                 >
                   {link.label}
                 </Link>
