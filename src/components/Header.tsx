@@ -26,16 +26,16 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50">
       {/* ── Top bar ─────────────────────────────────── */}
-      <div className="bg-teal-dark text-cream/70 text-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-9">
+      <div className="bg-teal-dark text-cream/75 text-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-11">
           <span className="hidden sm:inline tracking-wide">
             Paid for by Committee to Elect Keri H. Carroll
           </span>
-          <span className="sm:hidden tracking-wide">
+          <span className="sm:hidden tracking-wide text-xs">
             Committee to Elect Keri H. Carroll
           </span>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             {/* Facebook */}
             <a
               href="https://www.facebook.com/kerihcarroll"
@@ -45,7 +45,7 @@ export default function Header() {
               aria-label="Facebook"
             >
               <svg
-                className="w-4 h-4"
+                className="w-5 h-5"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -56,7 +56,7 @@ export default function Header() {
             {/* Donate button */}
             <Link
               href="/donate"
-              className="bg-gold text-teal-dark font-semibold text-xs tracking-wide px-4 py-1 hover:bg-gold-light transition-colors"
+              className="bg-gold text-teal-dark font-semibold text-sm tracking-wide px-5 py-1.5 hover:bg-gold-light transition-colors"
             >
               Donate
             </Link>
@@ -71,36 +71,36 @@ export default function Header() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-[72px]">
+          <div className="flex items-center justify-between h-20 lg:h-24">
             {/* Logo + Name */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 overflow-hidden relative shrink-0">
+            <Link href="/" className="flex items-center gap-4 group">
+              <div className="w-12 h-12 lg:w-14 lg:h-14 overflow-hidden relative shrink-0">
                 <Image
                   src="/images/logo.png"
                   alt="Carroll for Judge logo"
                   fill
                   className="object-contain"
-                  sizes="40px"
+                  sizes="56px"
                   priority
                 />
               </div>
               <div className="leading-tight">
-                <span className="text-white font-semibold text-xl tracking-wide">
+                <span className="block text-white font-semibold text-2xl lg:text-[26px] tracking-wide">
                   Keri H. Carroll
                 </span>
-                <span className="hidden sm:block text-[10px] text-gold tracking-[0.2em] uppercase font-medium">
+                <span className="hidden sm:block text-xs text-gold tracking-[0.2em] uppercase font-medium mt-0.5">
                   For Chancery Court Judge
                 </span>
               </div>
             </Link>
 
             {/* Desktop links */}
-            <div className="hidden lg:flex items-center gap-0">
+            <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-2 text-[11px] font-semibold text-white uppercase tracking-[0.2em] hover:text-gold transition-colors"
+                  className="px-4 py-2 text-sm font-semibold text-white uppercase tracking-[0.18em] hover:text-gold transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -146,7 +146,7 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block px-4 py-3 text-[11px] font-semibold text-white uppercase tracking-[0.2em] hover:text-gold hover:bg-white/5 transition-colors"
+                  className="block px-4 py-3 text-sm font-semibold text-white uppercase tracking-[0.18em] hover:text-gold hover:bg-white/5 transition-colors"
                 >
                   {link.label}
                 </Link>
