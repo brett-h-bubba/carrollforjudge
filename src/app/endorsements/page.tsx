@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import EndorseCTA from "@/components/EndorseCTA";
 
 export const metadata: Metadata = {
   title: "Endorsements",
@@ -195,12 +196,10 @@ export default function EndorsementsPage() {
             Public endorsements may be featured on this page with your
             permission. Your support makes a difference.
           </p>
-          <Link
-            href="/get-involved"
-            className="inline-block px-10 py-4 bg-gold text-teal-dark font-semibold tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg"
-          >
-            Share Your Support
-          </Link>
+          <EndorseCTA label="Endorse Keri" />
+          <p className="mt-5 text-xs text-cream/50 italic">
+            Takes about a minute — we&rsquo;ll even make a shareable graphic for you.
+          </p>
         </div>
       </section>
 
