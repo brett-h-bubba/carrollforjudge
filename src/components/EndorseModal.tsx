@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Step = "form" | "loading" | "share" | "pending_review";
 
@@ -32,13 +32,34 @@ export default function EndorseModal({
   const [endorsement, setEndorsement] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<EndorseResponse | null>(null);
+  const backdropRef = useRef<HTMLDivElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
 
-  // Reset when modal opens
+  // Reset state, scroll to top, and lock body scroll when opened
   useEffect(() => {
     if (open) {
       setStep("form");
       setError(null);
       setResult(null);
+
+      // Reset modal scroll positions (outer overlay + inner panel)
+      requestAnimationFrame(() => {
+        backdropRef.current?.scrollTo({ top: 0 });
+        panelRef.current?.scrollTo({ top: 0 });
+      });
+
+      // Lock body scroll so the page behind doesn't move
+      const prevOverflow = document.body.style.overflow;
+      const prevPaddingRight = document.body.style.paddingRight;
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
+      return () => {
+        document.body.style.overflow = prevOverflow;
+        document.body.style.paddingRight = prevPaddingRight;
+      };
     }
   }, [open]);
 
@@ -101,16 +122,21 @@ export default function EndorseModal({
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-ink/60 backdrop-blur-sm animate-in fade-in"
+      ref={backdropRef}
+      className="fixed inset-0 z-[100] overflow-y-auto overscroll-contain bg-ink/60 backdrop-blur-sm animate-in fade-in"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="endorse-title"
     >
-      <div
-        className="relative bg-cream w-full max-w-2xl max-h-[90vh] overflow-y-auto border-2 border-gold/40 shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
+      {/* Flex wrapper centers the panel but lets it push to the top
+          if it's taller than the viewport (so nothing is cut off) */}
+      <div className="min-h-full flex items-center justify-center p-4 sm:p-8">
+        <div
+          ref={panelRef}
+          className="relative bg-cream w-full max-w-2xl border-2 border-gold/40 shadow-2xl my-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
         {/* Close button */}
         <button
           onClick={onClose}
@@ -268,6 +294,7 @@ export default function EndorseModal({
             </button>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
