@@ -14,7 +14,7 @@ export default function Page() {
             {/* Text column */}
             <div>
               <p className="text-gold font-semibold tracking-[0.3em] uppercase text-sm sm:text-base mb-10 text-shadow">
-                20th Chancery Court District &middot; Place 1
+                November 3, 2026 &middot; 20th Chancery Court District, Place 1
               </p>
               <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold text-white leading-[1.05] tracking-normal text-shadow-hero">
                 The Experience
@@ -98,9 +98,9 @@ export default function Page() {
                 Experienced
               </h3>
               <p className="text-slate-light text-lg leading-loose">
-                21 years practicing the exact law chancery court handles — divorce,
-                custody, adoption, guardianship, and probate. Not a generalist.
-                A specialist in the work of this court.
+                21 years practicing in the exact cases chancery court handles
+                every day &mdash; divorce, custody, adoption, guardianship,
+                probate, and domestic violence. Not general law. Family law.
               </p>
             </div>
 
@@ -110,9 +110,10 @@ export default function Page() {
                 Prepared
               </h3>
               <p className="text-slate-light text-lg leading-loose">
-                Mississippi Supreme Court clerkship. Solo practice owner.
-                Public defender. Adjunct law professor. A career built on
-                preparation, discipline, and service.
+                Supreme Court clerkship under Chief Justice Smith. Solo
+                practice owner. Public defender. Adjunct professor at MC
+                School of Law. A career built on preparation, service, and
+                the law.
               </p>
             </div>
 
@@ -122,9 +123,9 @@ export default function Page() {
                 Ready
               </h3>
               <p className="text-slate-light text-lg leading-loose">
-                Not learning on the job. Not figuring it out as she goes.
-                Keri H. Carroll is ready to serve Rankin County families
-                from Day One.
+                Other candidates will need time to learn the job. Keri has
+                spent 21 years doing it. Ready to serve Rankin County
+                families from Day One.
               </p>
             </div>
           </div>
@@ -218,6 +219,37 @@ export default function Page() {
         </div>
       </section>
 
+      {/* ===== WHAT IS CHANCERY COURT? (Voter Education Intro) ===== */}
+      <section className="bg-cream py-20 sm:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white border-l-4 border-gold shadow-md p-8 sm:p-12">
+            <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-5">
+              A Quick Explanation
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-teal-dark leading-tight mb-6">
+              Most people have never heard of chancery court &mdash; until they
+              need one.
+            </h2>
+            <p className="text-slate text-lg leading-loose mb-5">
+              Chancery court handles divorce, custody, adoption, guardianship,
+              probate, and domestic violence. There is no jury. One judge
+              &mdash; the chancellor &mdash; hears the evidence and makes the
+              decision alone.
+            </p>
+            <p className="text-slate text-lg leading-loose mb-8">
+              That is why who sits on this bench matters.
+            </p>
+            <Link
+              href="/chancery-court"
+              className="inline-flex items-center gap-2 text-teal-dark font-semibold tracking-wide hover:text-gold transition-colors"
+            >
+              Learn more about Chancery Court
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ===== WHY CHANCERY COURT ===== */}
       <section className="bg-white py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -226,15 +258,22 @@ export default function Page() {
               The Work of the Court
             </p>
             <h2 className="text-4xl sm:text-5xl font-bold text-teal-dark tracking-normal">
-              Why Your Chancellor Matters
+              Why Your Chancellor Matters More Than You Think
             </h2>
             <div className="mt-6 w-20 h-[2px] bg-gold mx-auto" />
-            <p className="mt-10 text-slate text-lg sm:text-xl max-w-3xl mx-auto leading-loose">
-              Your chancellor decides who gets custody of your children. Who
-              inherits your estate. Whether an adoption goes through. These are
-              the most personal, consequential decisions a court can make.
-              Experience is not optional.
-            </p>
+            <div className="mt-10 text-slate text-lg sm:text-xl max-w-3xl mx-auto leading-loose space-y-5">
+              <p>
+                Your chancellor decides who gets custody of your children. Who
+                inherits your parents&apos; estate. Whether an adoption goes
+                through. Whether a domestic violence protective order is
+                granted.
+              </p>
+              <p>
+                No other judge in Mississippi touches your family&apos;s life
+                more directly. That is why experience in these exact cases
+                matters.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">

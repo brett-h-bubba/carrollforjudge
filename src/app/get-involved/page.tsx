@@ -8,21 +8,35 @@ export const metadata: Metadata = {
     "Join the campaign for Keri H. Carroll for Chancery Court Judge in Rankin County, Mississippi. Volunteer, request a yard sign, host an event, or spread the word.",
 };
 
-const waysToHelp = [
-  {
-    title: "Volunteer",
-    description:
-      "Help with phone banking, door-to-door canvassing, and campaign events. Every hour you give makes a difference.",
-  },
+type Way = {
+  title: string;
+  description: string;
+  href?: string;
+  cta?: string;
+};
+
+const waysToHelp: Way[] = [
   {
     title: "Request a Yard Sign",
     description:
-      "Show your support in your neighborhood. We will deliver a yard sign right to your door.",
+      "Show your support across Rankin County. We will deliver a yard sign right to your door.",
+  },
+  {
+    title: "Donate",
+    description:
+      "Every dollar funds yard signs, direct mail, and the ground game that wins judicial races. Your support makes a direct impact.",
+    href: "/donate",
+    cta: "Donate Now",
   },
   {
     title: "Host a Meet & Greet",
     description:
       "Invite your neighbors to meet Keri. A living room conversation can change an election.",
+  },
+  {
+    title: "Volunteer",
+    description:
+      "Help with phone banking, door-to-door canvassing, and campaign events. Every hour you give makes a difference.",
   },
   {
     title: "Spread the Word",
@@ -59,18 +73,26 @@ export default function GetInvolvedPage() {
             <div className="w-20 h-[3px] bg-gold mx-auto" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {waysToHelp.map((item) => (
               <div
                 key={item.title}
-                className="bg-teal-dark border-t-4 border-gold p-7 shadow-md hover:shadow-xl transition-shadow"
+                className="bg-teal-dark border-t-4 border-gold p-7 shadow-md hover:shadow-xl transition-shadow flex flex-col"
               >
                 <h3 className="text-xl font-semibold text-white mb-3">
                   {item.title}
                 </h3>
-                <p className="text-sm text-cream/70 leading-relaxed">
+                <p className="text-sm text-cream/70 leading-relaxed flex-1">
                   {item.description}
                 </p>
+                {item.href && (
+                  <Link
+                    href={item.href}
+                    className="inline-flex items-center justify-center mt-5 px-5 py-2.5 bg-gold text-teal-dark font-semibold text-sm tracking-wide hover:bg-gold-light transition-colors"
+                  >
+                    {item.cta || "Learn More"}
+                  </Link>
+                )}
               </div>
             ))}
           </div>
