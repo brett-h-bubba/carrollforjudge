@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 type Step = "form" | "loading" | "share" | "pending_review";
 
@@ -32,8 +33,14 @@ export default function EndorseModal({
   const [endorsement, setEndorsement] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<EndorseResponse | null>(null);
+  const [mounted, setMounted] = useState(false);
   const backdropRef = useRef<HTMLDivElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
+
+  // Ensure createPortal only runs client-side
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Reset state, scroll to top, and lock body scroll when opened
   useEffect(() => {
@@ -71,7 +78,7 @@ export default function EndorseModal({
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -120,7 +127,7 @@ export default function EndorseModal({
     }
   }
 
-  return (
+  return createPortal(
     <div
       ref={backdropRef}
       className="fixed inset-0 z-[100] overflow-y-auto overscroll-contain bg-ink/60 backdrop-blur-sm animate-in fade-in"
@@ -296,7 +303,8 @@ export default function EndorseModal({
         )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
