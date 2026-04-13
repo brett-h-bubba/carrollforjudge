@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import EndorseCTA from "@/components/EndorseCTA";
 
 export const metadata: Metadata = {
   title: "About Keri H. Carroll",
@@ -356,6 +357,34 @@ export default function AboutPage() {
             They deserve a judge who has spent her career in these very matters
             and who will bring preparation, patience, and fairness to every
             case.
+          </p>
+        </div>
+      </section>
+
+      {/* ═══════ SECTION 6.5: ENDORSEMENT CTA ═══════ */}
+      <section className="py-20 sm:py-28 bg-cream">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gold font-semibold mb-4">
+            Know Keri?
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-teal-dark leading-tight">
+            Share your endorsement.
+          </h2>
+          <div className="mx-auto mt-6 w-16 h-[2px] bg-gold" />
+          <p className="mt-8 text-slate text-lg leading-loose">
+            If you have worked with Keri, been represented by her, or know her
+            in the community &mdash; your voice carries weight in this race.
+            Add your endorsement, and we will craft a shareable graphic for
+            your social feed so your whole network can see it.
+          </p>
+          <div className="mt-10">
+            <EndorseCTA
+              label="Endorse Keri"
+              className="inline-flex items-center justify-center px-10 py-4 bg-teal-dark text-white font-semibold tracking-wide text-lg hover:bg-teal transition-colors shadow-lg"
+            />
+          </div>
+          <p className="mt-6 text-sm text-slate-light italic">
+            Takes about a minute.
           </p>
         </div>
       </section>

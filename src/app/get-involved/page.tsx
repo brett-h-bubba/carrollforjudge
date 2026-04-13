@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GetInvolvedForm from "./GetInvolvedForm";
+import EndorseCTA from "@/components/EndorseCTA";
 
 export const metadata: Metadata = {
   title: "Get Involved",
@@ -13,6 +14,7 @@ type Way = {
   description: string;
   href?: string;
   cta?: string;
+  endorse?: boolean; // opens endorsement modal instead of navigating
 };
 
 const waysToHelp: Way[] = [
@@ -27,6 +29,13 @@ const waysToHelp: Way[] = [
       "Every dollar funds yard signs, direct mail, and the ground game that wins judicial races. Your support makes a direct impact.",
     href: "/donate",
     cta: "Donate Now",
+  },
+  {
+    title: "Endorse Keri",
+    description:
+      "Know Keri personally or professionally? Add your name. We will craft a shareable graphic so your whole network can see your support.",
+    endorse: true,
+    cta: "Endorse Now",
   },
   {
     title: "Host a Meet & Greet",
@@ -73,7 +82,7 @@ export default function GetInvolvedPage() {
             <div className="w-20 h-[3px] bg-gold mx-auto" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {waysToHelp.map((item) => (
               <div
                 key={item.title}
@@ -85,14 +94,21 @@ export default function GetInvolvedPage() {
                 <p className="text-sm text-cream/70 leading-relaxed flex-1">
                   {item.description}
                 </p>
-                {item.href && (
+                {item.endorse ? (
+                  <div className="mt-5">
+                    <EndorseCTA
+                      label={item.cta || "Endorse Now"}
+                      className="inline-flex items-center justify-center px-5 py-2.5 bg-gold text-teal-dark font-semibold text-sm tracking-wide hover:bg-gold-light transition-colors"
+                    />
+                  </div>
+                ) : item.href ? (
                   <Link
                     href={item.href}
                     className="inline-flex items-center justify-center mt-5 px-5 py-2.5 bg-gold text-teal-dark font-semibold text-sm tracking-wide hover:bg-gold-light transition-colors"
                   >
                     {item.cta || "Learn More"}
                   </Link>
-                )}
+                ) : null}
               </div>
             ))}
           </div>

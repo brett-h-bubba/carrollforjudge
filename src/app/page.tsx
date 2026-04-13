@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import EndorseCTA from "@/components/EndorseCTA";
 
 export default function Page() {
   return (
@@ -388,25 +389,22 @@ export default function Page() {
           </div>
 
           <div className="text-center mt-14">
-            <Link
-              href="/endorsements"
-              className="inline-flex items-center gap-3 text-teal-dark font-semibold tracking-wide text-lg hover:text-teal-light transition-colors"
-            >
-              View All Endorsements
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
+            <p className="text-slate text-lg italic mb-8">
+              Know Keri? Your name belongs here too.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <EndorseCTA
+                label="Endorse Keri"
+                className="inline-flex items-center justify-center px-10 py-4 bg-teal-dark text-white font-semibold tracking-wide text-lg hover:bg-teal transition-colors shadow-lg"
+              />
+              <Link
+                href="/endorsements"
+                className="inline-flex items-center gap-2 px-8 py-4 border-2 border-teal-dark text-teal-dark font-semibold tracking-wide text-lg hover:bg-teal-dark hover:text-white transition-colors"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </Link>
+                View All Endorsements
+                <span aria-hidden="true">&rarr;</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

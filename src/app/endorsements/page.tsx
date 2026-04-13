@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import EndorseCTA from "@/components/EndorseCTA";
+import FloatingEndorse from "@/components/FloatingEndorse";
 import { getServerSupabase } from "@/lib/supabase";
 import type { Endorsement, EndorsementCategory } from "@/lib/supabase";
 
@@ -127,6 +128,7 @@ export default async function EndorsementsPage() {
 
   return (
     <div>
+      <FloatingEndorse />
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="bg-teal-dark text-white py-24 sm:py-32">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
