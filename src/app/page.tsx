@@ -26,8 +26,18 @@ export default function Page() {
               </h1>
               {/* Gold accent divider */}
               <div className="mt-12 w-24 h-[3px] bg-gold" />
-              <p className="mt-10 text-2xl sm:text-3xl text-cream/90 font-normal italic leading-relaxed text-shadow">
-                21 years of family law. Ready on Day One.
+              {/* Mobile tagline — short and punchy */}
+              <p className="md:hidden mt-10 text-2xl text-cream/90 font-normal italic leading-snug text-shadow">
+                21 years in the cases chancery court hears every day.
+                <br />
+                Ready for the bench on Day One.
+              </p>
+
+              {/* Desktop tagline — fuller narrative */}
+              <p className="hidden md:block mt-10 text-2xl lg:text-[1.75rem] text-cream/90 font-normal italic leading-relaxed text-shadow max-w-2xl">
+                21 years protecting children, resolving custody disputes, and
+                guiding families through the hardest moments of their lives.
+                Ready for the bench on Day One.
               </p>
               <div className="mt-14 flex flex-wrap gap-5">
                 <Link
