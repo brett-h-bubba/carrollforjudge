@@ -44,7 +44,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.carrollforjudg
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const firstName = (searchParams.get("fn") || "").trim().slice(0, 40);
+  // Sanitize: letters/hyphens/apostrophes/spaces only, max 20 chars.
+  // Prevents URL-param abuse (slurs, fake names, etc.). Full anti-spoof
+  // requires tokenized shares via Anedot commitment UUID.
+  const rawFn = (searchParams.get("fn") || "").trim();
+  const firstName = rawFn.replace(/[^a-zA-Z\-' ]/g, "").trim().slice(0, 20);
   const displayName = firstName || "Friend";
 
   const sloganIdx = hashString(displayName.toLowerCase()) % SLOGANS.length;

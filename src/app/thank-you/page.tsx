@@ -15,30 +15,14 @@ interface PageProps {
   }>;
 }
 
-export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
-  const params = await searchParams;
-  const fn = (params.fn || "").slice(0, 40);
-  const ogUrl = `${SITE_URL}/api/og/thank-you${fn ? `?fn=${encodeURIComponent(fn)}` : ""}`;
-
-  const title = fn
-    ? `${fn} is supporting Keri H. Carroll for Chancery Court Judge`
-    : "Supporting Keri H. Carroll for Chancery Court Judge";
-
-  return {
-    title,
-    description:
-      "Thank you for supporting Keri H. Carroll for Chancery Court Judge — 20th District, Place 1. Vote November 3, 2026.",
-    openGraph: {
-      title,
-      images: [{ url: ogUrl, width: 1200, height: 630 }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      images: [ogUrl],
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: "Thank You — Carroll for Judge",
+  description: "Thank you for your contribution.",
+  // Don't let this page surface via search or social previews. The
+  // URL carries donor info that shouldn't propagate — the downloaded
+  // image is the share asset.
+  robots: { index: false, follow: false, nocache: true },
+};
 
 export default async function ThankYouPage({ searchParams }: PageProps) {
   const params = await searchParams;
@@ -48,15 +32,6 @@ export default async function ThankYouPage({ searchParams }: PageProps) {
 
   const ogQuery = fn ? `?fn=${encodeURIComponent(fn)}` : "";
   const ogImageUrl = `${SITE_URL}/api/og/thank-you${ogQuery}`;
-  const shareUrl = `${SITE_URL}/thank-you${ogQuery}`;
-  const shareText = fn
-    ? `I'm supporting Keri H. Carroll for Chancery Court Judge. Join me: carrollforjudge.com`
-    : `Supporting Keri H. Carroll for Chancery Court Judge. November 3, 2026.`;
-
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-  const smsBody = `${shareText} ${shareUrl}`;
-  const smsUrl = `sms:?&body=${encodeURIComponent(smsBody)}`;
 
   return (
     <div className="min-h-screen bg-cream">
@@ -113,16 +88,7 @@ export default async function ThankYouPage({ searchParams }: PageProps) {
             </p>
           </div>
 
-          <ShareActions
-            fn={fn}
-            amt={amt}
-            shareUrl={shareUrl}
-            shareText={shareText}
-            ogImageUrl={ogImageUrl}
-            twitterUrl={twitterUrl}
-            facebookUrl={facebookUrl}
-            smsUrl={smsUrl}
-          />
+          <ShareActions fn={fn} ogImageUrl={ogImageUrl} />
         </div>
 
         {/* Secondary CTAs */}
