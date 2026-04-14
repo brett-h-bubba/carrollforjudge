@@ -40,10 +40,7 @@ async function loadFont(filename: string): Promise<ArrayBuffer> {
   return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
 }
 
-async function loadPngDataUri(filename: string): Promise<string> {
-  const buf = await fs.readFile(path.join(process.cwd(), "public", "images", filename));
-  return `data:image/png;base64,${buf.toString("base64")}`;
-}
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.carrollforjudge.com";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -53,11 +50,11 @@ export async function GET(req: NextRequest) {
   const sloganIdx = hashString(displayName.toLowerCase()) % SLOGANS.length;
   const slogan = SLOGANS[sloganIdx];
 
-  const [cormorantBold, allura, logoDataUri] = await Promise.all([
+  const [cormorantBold, allura] = await Promise.all([
     loadFont("cormorant-700.ttf"),
     loadFont("allura-400.ttf"),
-    loadPngDataUri("logo.png"),
   ]);
+  const logoUrl = `${SITE_URL}/images/logo.png`;
 
   const teal = "#215b64";
   const gold = "#b08a49";
@@ -87,19 +84,19 @@ export async function GET(req: NextRequest) {
             padding: "48px 56px 0",
           }}
         >
-          {/* DONATED stamp — top-right, breaking slightly out of frame for pop */}
+          {/* DONATED stamp — inside the frame, top-right, angled */}
           <div
             style={{
               position: "absolute",
-              top: "-22px",
-              right: "48px",
-              transform: "rotate(6deg)",
+              top: "24px",
+              right: "28px",
+              transform: "rotate(8deg)",
               border: `3px solid ${gold}`,
-              padding: "6px 22px",
+              padding: "6px 20px",
               color: gold,
               fontFamily: "Cormorant",
               fontWeight: 700,
-              fontSize: "28px",
+              fontSize: "26px",
               letterSpacing: "10px",
               textTransform: "uppercase",
               display: "flex",
@@ -153,7 +150,7 @@ export async function GET(req: NextRequest) {
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={logoDataUri} alt="Carroll for Judge" width={240} />
+            <img src={logoUrl} alt="Carroll for Judge" width={240} height={115} />
             <div
               style={{
                 display: "flex",
