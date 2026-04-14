@@ -7,7 +7,7 @@ const quickLinks = [
   { href: "/chancery-court", label: "Why Chancery Court" },
   { href: "/endorsements", label: "Endorsements" },
   { href: "/get-involved", label: "Get Involved" },
-  { href: "/news", label: "News & Updates" },
+  // { href: "/news", label: "News & Updates" }, // hidden for now
 ];
 
 export default function Footer() {

@@ -11,7 +11,7 @@ const navLinks = [
   { href: "/chancery-court", label: "Why Chancery Court" },
   { href: "/endorsements", label: "Endorsements" },
   { href: "/get-involved", label: "Get Involved" },
-  { href: "/news", label: "News" },
+  // { href: "/news", label: "News" }, // hidden for now
 ];
 
 export default function Header() {
