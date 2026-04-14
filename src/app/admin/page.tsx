@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import type { Endorsement, EndorsementStatus } from "@/lib/supabase";
+import AdminTabs from "@/components/AdminTabs";
 
 const MAX_FEATURED = 3;
 
@@ -85,6 +86,8 @@ export default function AdminPage() {
             </div>
           )}
         </div>
+
+        <AdminTabs />
 
         {actionError && (
           <div className="mb-6 border-l-4 border-red-600 bg-red-50 px-4 py-3 text-sm text-red-800">

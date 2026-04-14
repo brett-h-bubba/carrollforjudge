@@ -60,3 +60,35 @@ export interface Endorsement {
 }
 
 export const MAX_FEATURED = 3;
+
+// ─── Signups ──────────────────────────────────────────────────────────
+export type SignupInterest =
+  | "volunteer"
+  | "yard_sign"
+  | "host_event"
+  | "updates";
+
+export type SignupStatus = "new" | "contacted" | "converted" | "archived";
+
+export interface Signup {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string | null;
+  address: string | null;
+  interests: SignupInterest[];
+  message: string | null;
+  status: SignupStatus;
+  admin_notes: string | null;
+  created_at: string;
+  reviewed_at: string | null;
+  reviewed_by: string | null;
+}
+
+export const INTEREST_LABELS: Record<SignupInterest, string> = {
+  volunteer: "Volunteer",
+  yard_sign: "Yard Sign",
+  host_event: "Host an Event",
+  updates: "Receive Updates",
+};

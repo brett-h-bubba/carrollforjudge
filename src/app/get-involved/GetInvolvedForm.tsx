@@ -3,14 +3,16 @@
 import { useState } from "react";
 
 const interestOptions = [
-  { id: "volunteering", label: "Volunteering" },
-  { id: "yard-sign", label: "Yard Sign" },
-  { id: "hosting", label: "Hosting an Event" },
-  { id: "updates", label: "Receiving Updates" },
+  { id: "volunteer",  label: "Volunteering" },
+  { id: "yard_sign",  label: "Yard Sign" },
+  { id: "host_event", label: "Hosting an Event" },
+  { id: "updates",    label: "Receiving Updates" },
 ];
 
 export default function GetInvolvedForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -38,9 +40,39 @@ export default function GetInvolvedForm() {
     }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
+    setError(null);
+    setSubmitting(true);
+
+    try {
+      const res = await fetch("/api/get-involved", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          firstName: formData.firstName.trim(),
+          lastName: formData.lastName.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim() || null,
+          address: formData.address.trim() || null,
+          interests: formData.interests,
+          message: formData.message.trim() || null,
+        }),
+      });
+
+      if (!res.ok) {
+        const { error: errMsg } = await res
+          .json()
+          .catch(() => ({ error: "Something went wrong." }));
+        throw new Error(errMsg || "Something went wrong.");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -227,12 +259,19 @@ export default function GetInvolvedForm() {
         />
       </div>
 
+      {error && (
+        <div className="border-l-4 border-red-600 bg-red-50 px-4 py-3 text-sm text-red-800">
+          {error}
+        </div>
+      )}
+
       {/* Submit */}
       <button
         type="submit"
-        className="w-full sm:w-auto px-10 py-4 bg-gold text-teal-dark font-semibold tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg"
+        disabled={submitting}
+        className="w-full sm:w-auto px-10 py-4 bg-gold text-teal-dark font-semibold tracking-wide hover:bg-gold-light transition-colors shadow-md text-lg disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Sign Up
+        {submitting ? "Submitting…" : "Sign Up"}
       </button>
     </form>
   );
