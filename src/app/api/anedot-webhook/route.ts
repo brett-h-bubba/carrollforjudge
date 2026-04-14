@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "node:crypto";
 import { Resend } from "resend";
+import { getServerSupabase } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -92,10 +93,39 @@ export async function POST(req: NextRequest) {
 
   const donorName = p.name || [p.first_name, p.last_name].filter(Boolean).join(" ") || "Unknown donor";
   const amount = p.amount_in_dollars ?? "?";
-  const recurring = p.recurring === "true" ? " (recurring)" : "";
+  const isRecurring = p.recurring === "true";
+  const recurring = isRecurring ? " (recurring)" : "";
   const actionPage = p.action_page_name ? ` via ${p.action_page_name}` : "";
   const donationId = p.id ?? "(no id)";
   const date = p.date_iso8601 ?? p.date ?? new Date().toISOString();
+
+  // ─ Persist to Supabase (idempotent via anedot_id unique constraint) ─
+  try {
+    const supabase = getServerSupabase();
+    const amountNum = p.amount_in_dollars ? Number(p.amount_in_dollars) : null;
+    const netNum = p.net_amount ? Number(p.net_amount) : null;
+    const { error: dbError } = await supabase.from("donations").upsert(
+      {
+        anedot_id: p.id ?? null,
+        event,
+        donor_name: donorName,
+        donor_email: p.email ?? null,
+        amount_dollars: Number.isFinite(amountNum) ? amountNum : null,
+        net_dollars: Number.isFinite(netNum) ? netNum : null,
+        recurring: isRecurring,
+        action_page_name: p.action_page_name ?? null,
+        action_page_id: p.action_page_id ?? null,
+        raw_payload: body,
+        donated_at: p.date_iso8601 ?? null,
+      },
+      { onConflict: "anedot_id" },
+    );
+    if (dbError) {
+      console.error("[anedot-webhook] Supabase insert failed:", dbError);
+    }
+  } catch (err) {
+    console.error("[anedot-webhook] Supabase insert threw:", err);
+  }
 
   // Fire admin notification
   const adminEmails = (process.env.ADMIN_EMAILS || "")

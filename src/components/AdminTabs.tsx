@@ -4,8 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const tabs = [
-  { href: "/admin",         label: "Endorsements" },
-  { href: "/admin/signups", label: "Signups" },
+  { href: "/admin",           label: "Endorsements" },
+  { href: "/admin/signups",   label: "Signups" },
+  { href: "/admin/donations", label: "Donations" },
 ];
 
 export default function AdminTabs() {

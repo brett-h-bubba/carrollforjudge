@@ -92,3 +92,26 @@ export const INTEREST_LABELS: Record<SignupInterest, string> = {
   host_event: "Host an Event",
   updates: "Receive Updates",
 };
+
+// ─── Donations ────────────────────────────────────────────────────────
+export type DonationStatus = "new" | "acknowledged" | "flagged" | "archived";
+
+export interface Donation {
+  id: string;
+  anedot_id: string | null;
+  event: string;
+  donor_name: string | null;
+  donor_email: string | null;
+  amount_dollars: number | null;
+  net_dollars: number | null;
+  recurring: boolean;
+  action_page_name: string | null;
+  action_page_id: string | null;
+  status: DonationStatus;
+  admin_notes: string | null;
+  raw_payload: unknown;
+  donated_at: string | null;
+  created_at: string;
+  reviewed_at: string | null;
+  reviewed_by: string | null;
+}
