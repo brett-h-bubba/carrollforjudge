@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
     try {
       const resend = new Resend(resendKey);
       await resend.emails.send({
-        from: "Carroll for Judge <endorsements@carrollforjudge.com>",
+        from: process.env.EMAIL_FROM_ENDORSEMENTS || "Carroll for Judge <endorsements@carrollforjudge.com>",
         to: adminEmails,
         subject: `New endorsement from ${name}${location ? ` (${location})` : ""}`,
         text: [

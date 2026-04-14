@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
     try {
       const resend = new Resend(resendKey);
       await resend.emails.send({
-        from: "Carroll for Judge <donations@carrollforjudge.com>",
+        from: process.env.EMAIL_FROM_DONATIONS || "Carroll for Judge <donations@carrollforjudge.com>",
         to: adminEmails,
         subject: `New $${amount} donation from ${donorName}${recurring}`,
         text: [

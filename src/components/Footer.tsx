@@ -120,7 +120,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Keri H. Carroll for Chancery Court
             Judge. All rights reserved.
           </p>
-          <p>Paid for by the Committee to Elect Keri H. Carroll</p>
+          <p>Paid for by the Friends of Keri H. Carroll. Approved by Keri H. Carroll.</p>
         </div>
       </div>
     </footer>

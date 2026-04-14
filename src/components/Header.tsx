@@ -30,10 +30,10 @@ export default function Header() {
       <div className="bg-teal-dark text-cream/75 text-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-11">
           <span className="hidden sm:inline tracking-wide">
-            Paid for by Committee to Elect Keri H. Carroll
+            Paid for by the Friends of Keri H. Carroll. Approved by Keri H. Carroll.
           </span>
-          <span className="sm:hidden tracking-wide text-xs">
-            Committee to Elect Keri H. Carroll
+          <span className="sm:hidden tracking-wide text-[11px]">
+            Paid for by Friends of Keri H. Carroll &middot; Approved by Keri H. Carroll
           </span>
 
           <div className="flex items-center gap-5">

@@ -31,6 +31,8 @@ export default function EndorseModal({
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
   const [endorsement, setEndorsement] = useState("");
+  // Honeypot: real users never fill this; bots do.
+  const [website, setWebsite] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<EndorseResponse | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -104,6 +106,7 @@ export default function EndorseModal({
           email: email.trim(),
           location: location.trim() || null,
           endorsement: endorsement.trim(),
+          website, // honeypot — always empty for real users
         }),
       });
 
@@ -174,6 +177,20 @@ export default function EndorseModal({
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Honeypot: hidden from real users, irresistible to bots */}
+              <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}>
+                <label>
+                  Website (leave empty)
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                  />
+                </label>
+              </div>
               <div className="grid sm:grid-cols-2 gap-5">
                 <Field label="Your Name" required>
                   <input

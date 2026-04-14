@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
           ? interests.map((i) => INTEREST_LABELS[i]).join(", ")
           : "(none specified)";
       await resend.emails.send({
-        from: "Carroll for Judge <signups@carrollforjudge.com>",
+        from: process.env.EMAIL_FROM_SIGNUPS || "Carroll for Judge <signups@carrollforjudge.com>",
         to: adminEmails,
         subject: `New signup: ${firstName} ${lastName}`,
         text: [

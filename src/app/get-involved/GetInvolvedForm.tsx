@@ -13,6 +13,8 @@ export default function GetInvolvedForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Honeypot: real users never fill this; bots do.
+  const [website, setWebsite] = useState("");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -50,6 +52,7 @@ export default function GetInvolvedForm() {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
+          website, // honeypot — always empty for real users
           firstName: formData.firstName.trim(),
           lastName: formData.lastName.trim(),
           email: formData.email.trim(),
@@ -109,6 +112,20 @@ export default function GetInvolvedForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Honeypot: hidden from real users, irresistible to bots */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}>
+        <label>
+          Website (leave empty)
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+        </label>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* First Name */}
         <div>

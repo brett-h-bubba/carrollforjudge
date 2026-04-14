@@ -129,8 +129,8 @@ export default function DonatePage() {
           </div>
 
           <p className="mt-10 text-xs text-cream/60 italic leading-relaxed text-center max-w-2xl mx-auto">
-            Contributions to the Committee to Elect Keri H. Carroll are not
-            tax deductible. Federal law prohibits contributions from foreign
+            Contributions to Friends of Keri H. Carroll are not tax
+            deductible. Federal law prohibits contributions from foreign
             nationals. By contributing, you certify you are a U.S. citizen
             or lawfully admitted permanent resident contributing with your
             own personal funds.
@@ -152,7 +152,7 @@ export default function DonatePage() {
                 Mail a Check
               </p>
               <p className="text-slate leading-relaxed text-sm">
-                Make payable to <em>Committee to Elect Keri H. Carroll</em> and
+                Make payable to <em>Friends of Keri H. Carroll</em> and
                 include your employer and occupation.
               </p>
             </div>
