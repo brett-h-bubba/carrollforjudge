@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 const interestOptions = [
   { id: "volunteer",  label: "Volunteering" },
@@ -71,6 +72,13 @@ export default function GetInvolvedForm() {
       }
 
       setSubmitted(true);
+      trackEvent("volunteer_submitted", {
+        interests: formData.interests.join(","),
+        interest_count: formData.interests.length,
+      });
+      if (formData.interests.includes("yard_sign")) {
+        trackEvent("yard_sign_requested");
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {

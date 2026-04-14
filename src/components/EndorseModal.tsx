@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { createPortal } from "react-dom";
 
 type Step = "form" | "loading" | "share" | "pending_review";
@@ -117,6 +118,9 @@ export default function EndorseModal({
 
       const data: EndorseResponse = await res.json();
       setResult(data);
+      trackEvent("endorsement_submitted", {
+        safe_to_publish: data.safe_to_publish,
+      });
 
       if (!data.safe_to_publish) {
         setStep("pending_review");

@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Allura } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -68,6 +69,7 @@ export default function RootLayout({
       className={`${cormorant.variable} ${allura.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <GoogleAnalytics />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

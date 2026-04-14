@@ -68,6 +68,29 @@ function personJsonLd() {
   };
 }
 
+function reviewsJsonLd(endorsements: Endorsement[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: endorsements.map((e, i) => ({
+      "@type": "Review",
+      position: i + 1,
+      itemReviewed: {
+        "@type": "Person",
+        name: "Keri H. Carroll",
+        url: "https://carrollforjudge.com",
+      },
+      author: {
+        "@type": "Person",
+        name: e.name,
+        ...(e.location ? { address: e.location } : {}),
+      },
+      reviewBody: e.endorsement,
+      datePublished: e.created_at,
+    })),
+  };
+}
+
 export default async function EndorsementsPage() {
   const approved = await fetchApproved();
   const count = approved.length;
@@ -81,6 +104,12 @@ export default async function EndorsementsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()) }}
       />
+      {count > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsJsonLd(approved)) }}
+        />
+      )}
 
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="bg-teal-dark text-white py-24 sm:py-32">

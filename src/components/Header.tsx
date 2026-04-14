@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { DONATE_URL } from "@/lib/donate";
+import { trackEvent } from "@/lib/analytics";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -57,6 +58,7 @@ export default function Header() {
             {/* Donate button */}
             <a
               href={DONATE_URL}
+              onClick={() => trackEvent("donate_click", { location: "header_desktop" })}
               className="bg-gold text-teal-dark font-semibold text-sm tracking-wide px-5 py-1.5 hover:bg-gold-light transition-colors"
             >
               Donate
@@ -148,7 +150,10 @@ export default function Header() {
               ))}
               <a
                 href={DONATE_URL}
-                onClick={() => setMobileOpen(false)}
+                onClick={() => {
+                  trackEvent("donate_click", { location: "header_mobile" });
+                  setMobileOpen(false);
+                }}
                 className="block mx-4 mt-3 px-5 py-3 bg-gold text-teal-dark text-sm font-semibold tracking-wide text-center hover:bg-gold-light transition-colors"
               >
                 Donate
