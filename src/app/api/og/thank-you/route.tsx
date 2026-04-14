@@ -123,18 +123,19 @@ export async function GET(req: NextRequest) {
               marginTop: "8px",
             }}
           >
-            &ldquo;{slogan}&rdquo;
+            {slogan}
           </div>
 
-          {/* Affirm line */}
+          {/* Affirm line — centered, larger */}
           <div
             style={{
-              marginTop: "24px",
+              marginTop: "32px",
               color: gold,
               fontFamily: "Cormorant",
               fontWeight: 700,
-              fontSize: "36px",
+              fontSize: "54px",
               display: "flex",
+              alignSelf: "center",
             }}
           >
             Keri&apos;s got my vote.
