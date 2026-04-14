@@ -60,11 +60,19 @@ export default async function ThankYouPage({ searchParams }: PageProps) {
           </p>
         </div>
 
-        {/* Cue right above the card */}
+        {/* Cue right above the card — also a download trigger */}
         <div className="text-center mb-4">
-          <p className="inline-block bg-gold text-teal-dark font-bold tracking-[0.2em] uppercase text-sm sm:text-base px-5 py-2">
+          <a
+            href={ogImageUrl}
+            download={
+              fn
+                ? `keri-carroll-${fn.toLowerCase().replace(/[^a-z0-9]/g, "-")}.png`
+                : "keri-carroll.png"
+            }
+            className="inline-block bg-gold text-teal-dark font-bold tracking-[0.2em] uppercase text-sm sm:text-base px-5 py-2 hover:opacity-90 transition-opacity cursor-pointer"
+          >
             ↓ Download your custom shareable image ↓
-          </p>
+          </a>
         </div>
 
         {/* Share card hero */}
