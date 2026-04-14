@@ -18,8 +18,10 @@ const allura = Allura({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://carrollforjudge.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://carrollforjudge.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Keri H. Carroll | Chancery Court Judge — Rankin County, Mississippi",
     template: "%s | Keri H. Carroll for Chancery Court Judge",
@@ -40,7 +42,7 @@ export const metadata: Metadata = {
     title: "Keri H. Carroll for Chancery Court Judge",
     description:
       "The experience Rankin County families deserve. 21 years of family law practice. Vote November 3, 2026.",
-    url: "https://carrollforjudge.com",
+    url: SITE_URL,
     siteName: "Carroll for Judge",
     locale: "en_US",
     type: "website",

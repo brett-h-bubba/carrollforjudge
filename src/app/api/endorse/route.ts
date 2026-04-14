@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { analyzeEndorsement } from "@/lib/ai";
 import { getServerSupabase } from "@/lib/supabase";
 import { Resend } from "resend";
+import { honeypotTriggered, rateLimit, clientIp } from "@/lib/spam-protection";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -18,12 +19,21 @@ function bad(status: number, error: string) {
 }
 
 export async function POST(req: NextRequest) {
-  let body: SubmitBody;
+  let body: SubmitBody & Record<string, unknown>;
   try {
     body = await req.json();
   } catch {
     return bad(400, "Invalid JSON body.");
   }
+
+  // Honeypot: silently accept to avoid tipping off bots.
+  if (honeypotTriggered(body)) {
+    return NextResponse.json({ id: "ok" });
+  }
+
+  // Rate limit: 5 submissions / 10 min per IP.
+  const rl = rateLimit(`endorse:${clientIp(req)}`);
+  if (!rl.ok) return bad(429, "Too many submissions. Please try again later.");
 
   const name = (body.name || "").trim();
   const email = (body.email || "").trim();
