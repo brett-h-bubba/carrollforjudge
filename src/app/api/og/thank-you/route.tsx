@@ -126,30 +126,35 @@ export async function GET(req: NextRequest) {
             {slogan}
           </div>
 
-          {/* Affirm line — centered, larger */}
+          {/* Affirm line — vertically centered in the space between slogan and logo */}
           <div
             style={{
-              marginTop: "32px",
-              color: gold,
-              fontFamily: "Cormorant",
-              fontWeight: 700,
-              fontSize: "54px",
+              flex: 1,
               display: "flex",
-              alignSelf: "center",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            Keri&apos;s got my vote.
+            <div
+              style={{
+                color: gold,
+                fontFamily: "Cormorant",
+                fontWeight: 700,
+                fontSize: "54px",
+                display: "flex",
+              }}
+            >
+              Keri&apos;s got my vote.
+            </div>
           </div>
 
           {/* Logo (left) + signature (right) — asymmetric balance */}
           <div
             style={{
               display: "flex",
-              flex: 1,
               alignItems: "flex-end",
               justifyContent: "space-between",
               paddingBottom: "28px",
-              marginTop: "auto",
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
