@@ -29,16 +29,18 @@ export default function Page() {
               <div className="mt-12 w-24 h-[3px] bg-gold" />
               {/* Mobile tagline — short and punchy */}
               <p className="md:hidden mt-10 text-2xl text-cream/90 font-normal italic leading-snug text-shadow">
-                21 years in the cases chancery court hears every day.
+                4 years on the bench as Family Master.
                 <br />
-                Ready for the bench on Day One.
+                21 years of family law.
+                <br />
+                Ready to lead as Chancellor.
               </p>
 
               {/* Desktop tagline — fuller narrative */}
               <p className="hidden md:block mt-10 text-2xl lg:text-[1.75rem] text-cream/90 font-normal italic leading-relaxed text-shadow max-w-2xl">
-                21 years protecting children, resolving custody disputes, and
-                guiding families through the hardest moments of their lives.
-                Ready for the bench on Day One.
+                Four years serving Rankin County families from the bench as a
+                Family Master. 21 years practicing the cases chancery court
+                hears every day. Ready to lead as Chancellor on Day One.
               </p>
               <div className="mt-14 flex flex-wrap gap-5">
                 <Link
@@ -56,21 +58,25 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Portrait column */}
-            <div className="relative lg:justify-self-end w-full max-w-md mx-auto lg:mx-0">
-              <div className="relative aspect-[4/5] shadow-2xl border-2 border-gold/50 overflow-hidden">
+            {/* Portrait column — on the bench as Family Master */}
+            <div className="relative lg:justify-self-end w-full max-w-xl mx-auto lg:mx-0">
+              <div className="relative aspect-[3/2] shadow-2xl border-2 border-gold/50 overflow-hidden">
                 <Image
-                  src="/images/headshot-main.jpg"
-                  alt="Keri H. Carroll — candidate for Chancery Court Judge"
+                  src="/images/bench.jpg"
+                  alt="Keri H. Carroll, serving as Family Master on the bench"
                   fill
                   className="object-cover object-center"
-                  sizes="(max-width: 1024px) 90vw, 450px"
+                  sizes="(max-width: 1024px) 95vw, 560px"
                   priority
                 />
               </div>
               {/* Gold corner accents */}
               <div className="absolute -top-3 -left-3 w-14 h-14 border-t-2 border-l-2 border-gold pointer-events-none" />
               <div className="absolute -bottom-3 -right-3 w-14 h-14 border-b-2 border-r-2 border-gold pointer-events-none" />
+              {/* Caption */}
+              <p className="mt-4 text-center text-xs sm:text-sm text-cream/70 italic tracking-wide">
+                Serving Rankin County as Family Master, 20th Chancery Court District.
+              </p>
             </div>
           </div>
         </div>
@@ -137,11 +143,11 @@ export default function Page() {
       <section className="bg-teal-dark py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Photo with gold border frame */}
+            {/* Photo with gold border frame — warm "meet the candidate" close-up */}
             <div className="relative">
               <div className="relative aspect-[3/4] max-w-lg mx-auto lg:mx-0 shadow-2xl border-2 border-gold/40 overflow-hidden">
                 <Image
-                  src="/images/headshot-2.jpg"
+                  src="/images/headshot-main.jpg"
                   alt="Keri H. Carroll — candidate for Chancery Court Judge"
                   fill
                   className="object-cover"

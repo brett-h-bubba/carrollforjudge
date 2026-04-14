@@ -331,26 +331,48 @@ export default function AboutPage() {
 
       {/* ═══════ SECTION 6: WHY I'M RUNNING ═══════ */}
       <section className="py-24 sm:py-32 bg-teal-dark">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gold mb-6">
-            Why I&apos;m Running
-          </p>
-          {/* Large gold quotation marks */}
-          <div className="text-gold text-8xl sm:text-9xl font-serif leading-none select-none" aria-hidden="true">
-            &ldquo;
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center">
+            {/* Portrait — adds a visual anchor to the quote */}
+            <div className="relative mx-auto lg:mx-0">
+              <div className="relative w-64 sm:w-72 aspect-[3/4] shadow-2xl border-2 border-gold/40 overflow-hidden">
+                <Image
+                  src="/images/headshot-3.jpg"
+                  alt="Keri H. Carroll"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 18rem, 18rem"
+                />
+              </div>
+              {/* Gold corner accents */}
+              <div className="absolute -top-2 -left-2 w-12 h-12 border-t-2 border-l-2 border-gold pointer-events-none" />
+              <div className="absolute -bottom-2 -right-2 w-12 h-12 border-b-2 border-r-2 border-gold pointer-events-none" />
+            </div>
+
+            {/* Quote content */}
+            <div className="text-center lg:text-left">
+              <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gold mb-6">
+                Why I&apos;m Running
+              </p>
+              {/* Large gold quotation marks */}
+              <div className="text-gold text-8xl sm:text-9xl font-serif leading-none select-none" aria-hidden="true">
+                &ldquo;
+              </div>
+              <blockquote className="text-2xl sm:text-3xl lg:text-4xl leading-snug text-cream italic -mt-8 sm:-mt-12">
+                Rankin County deserves a chancellor with meaningful experience
+                in the kinds of matters chancery court hears every day.
+              </blockquote>
+              <div className="mt-10 w-12 h-px bg-gold mx-auto lg:mx-0" />
+              <p className="mt-4 font-script text-gold text-5xl sm:text-6xl leading-none">
+                Keri
+              </p>
+              <p className="mt-2 text-gold/90 text-xs uppercase tracking-[0.3em]">
+                Keri H. Carroll
+              </p>
+            </div>
           </div>
-          <blockquote className="text-2xl sm:text-3xl lg:text-4xl leading-snug text-cream italic -mt-8 sm:-mt-12">
-            Rankin County deserves a chancellor with meaningful experience in
-            the kinds of matters chancery court hears every day.
-          </blockquote>
-          <div className="mx-auto mt-10 w-12 h-px bg-gold" />
-          <p className="mt-4 font-script text-gold text-5xl sm:text-6xl leading-none">
-            Keri
-          </p>
-          <p className="mt-2 text-gold/90 text-xs uppercase tracking-[0.3em]">
-            Keri H. Carroll
-          </p>
-          <p className="mt-12 text-cream/80 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed italic">
+
+          <p className="mt-16 text-cream/80 text-lg sm:text-xl max-w-3xl mx-auto text-center leading-relaxed italic">
             Families who come before the chancery court are facing some of the
             most important moments of their lives — a child&apos;s future, a
             loved one&apos;s care, the division of everything they have built.
