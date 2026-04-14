@@ -40,7 +40,10 @@ async function loadFont(filename: string): Promise<ArrayBuffer> {
   return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
 }
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.carrollforjudge.com";
+async function loadPngDataUri(filename: string): Promise<string> {
+  const buf = await fs.readFile(path.join(process.cwd(), "public", "images", filename));
+  return `data:image/png;base64,${buf.toString("base64")}`;
+}
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -50,11 +53,11 @@ export async function GET(req: NextRequest) {
   const sloganIdx = hashString(displayName.toLowerCase()) % SLOGANS.length;
   const slogan = SLOGANS[sloganIdx];
 
-  const [cormorantBold, allura] = await Promise.all([
+  const [cormorantBold, allura, logoDataUri] = await Promise.all([
     loadFont("cormorant-700.ttf"),
     loadFont("allura-400.ttf"),
+    loadPngDataUri("logo-og.png"), // Downsized 480px wide, ~35KB — small enough for Satori
   ]);
-  const logoUrl = `${SITE_URL}/images/logo.png`;
 
   const teal = "#215b64";
   const gold = "#b08a49";
@@ -84,12 +87,12 @@ export async function GET(req: NextRequest) {
             padding: "48px 56px 0",
           }}
         >
-          {/* DONATED stamp — inside the frame, top-right, angled */}
+          {/* DONATED stamp — tucked into top-right corner */}
           <div
             style={{
               position: "absolute",
-              top: "24px",
-              right: "28px",
+              top: "10px",
+              right: "14px",
               transform: "rotate(8deg)",
               border: `3px solid ${gold}`,
               padding: "6px 20px",
@@ -150,7 +153,7 @@ export async function GET(req: NextRequest) {
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={logoUrl} alt="Carroll for Judge" width={240} height={115} />
+            <img src={logoDataUri} alt="Carroll for Judge" width={240} height={115} />
             <div
               style={{
                 display: "flex",
