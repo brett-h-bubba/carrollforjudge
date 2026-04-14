@@ -60,6 +60,13 @@ export default async function ThankYouPage({ searchParams }: PageProps) {
           </p>
         </div>
 
+        {/* Cue right above the card */}
+        <div className="text-center mb-4">
+          <p className="inline-block bg-gold text-teal-dark font-bold tracking-[0.2em] uppercase text-sm sm:text-base px-5 py-2">
+            ↓ Download your custom shareable image ↓
+          </p>
+        </div>
+
         {/* Share card hero */}
         <div className="border border-teal/10 bg-white shadow-lg overflow-hidden mb-8">
           {/* eslint-disable-next-line @next/next/no-img-element */}
