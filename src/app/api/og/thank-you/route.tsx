@@ -7,17 +7,15 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Dynamic OG image for donor thank-you sharing.
+ * Dynamic donor thank-you OG card.
  *
- * Layout (hero = rotating slogan):
- *   {BIG rotating slogan}
- *   CHANCERY COURT JUDGE · NOV 3, 2026
- *   Keri's got my vote.
+ * Visual brief: share-worthy civic keepsake. Cream canvas with an inset
+ * teal frame (old-design callback), rotating slogan as the hero, Keri's
+ * logo on the left, Allura-script signature on the right, gold "DONATED"
+ * stamp angled top-right, and a teal footer strip with office + date.
  *
- *   [logo]                              — {FirstName}
- *
- * Rotation is hash-based on first name so a given donor always sees the
- * same slogan (no flicker between reloads or shares).
+ * Rotation is hash-deterministic on donor first name so the same person
+ * always sees the same slogan.
  */
 
 const SLOGANS = [
@@ -67,115 +65,151 @@ export async function GET(req: NextRequest) {
 
   return new ImageResponse(
     (
+      // Outer cream canvas with subtle gold edge
       <div
         style={{
           width: "1200px",
           height: "630px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
           background: cream,
+          display: "flex",
+          padding: "28px",
           position: "relative",
-          padding: "64px 80px 48px",
         }}
       >
-        {/* DONATED stamp — top right, angled */}
+        {/* Inset teal frame */}
         <div
           style={{
-            position: "absolute",
-            top: "40px",
-            right: "56px",
-            transform: "rotate(8deg)",
-            border: `4px solid ${gold}`,
-            padding: "6px 20px",
-            color: gold,
-            fontFamily: "Cormorant",
-            fontWeight: 700,
-            fontSize: "30px",
-            letterSpacing: "8px",
-            textTransform: "uppercase",
+            flex: 1,
+            border: `2px solid ${teal}`,
             display: "flex",
-            background: "rgba(247, 241, 232, 0.9)",
+            flexDirection: "column",
+            position: "relative",
+            padding: "48px 56px 0",
           }}
         >
-          Donated
-        </div>
+          {/* DONATED stamp — top-right, breaking slightly out of frame for pop */}
+          <div
+            style={{
+              position: "absolute",
+              top: "-22px",
+              right: "48px",
+              transform: "rotate(6deg)",
+              border: `3px solid ${gold}`,
+              padding: "6px 22px",
+              color: gold,
+              fontFamily: "Cormorant",
+              fontWeight: 700,
+              fontSize: "28px",
+              letterSpacing: "10px",
+              textTransform: "uppercase",
+              display: "flex",
+              background: cream,
+            }}
+          >
+            Donated
+          </div>
 
-        {/* Top content block */}
-        <div style={{ display: "flex", flexDirection: "column", maxWidth: "1040px" }}>
-          {/* Hero: rotating slogan */}
+          {/* Hero slogan — the thing that makes this shareable */}
           <div
             style={{
               color: teal,
               fontFamily: "Cormorant",
               fontWeight: 700,
-              fontSize: "86px",
-              lineHeight: 1.02,
-              display: "flex",
+              fontStyle: "italic",
+              fontSize: "78px",
+              lineHeight: 1.05,
               letterSpacing: "-1px",
+              display: "flex",
+              maxWidth: "1000px",
+              marginTop: "8px",
             }}
           >
             &ldquo;{slogan}&rdquo;
           </div>
 
-          {/* Sub-line: office + date, different color */}
-          <div
-            style={{
-              marginTop: "28px",
-              color: gold,
-              fontFamily: "Cormorant",
-              fontWeight: 700,
-              fontSize: "30px",
-              letterSpacing: "8px",
-              textTransform: "uppercase",
-              display: "flex",
-            }}
-          >
-            Chancery Court Judge · Nov 3, 2026
-          </div>
-
           {/* Affirm line */}
           <div
             style={{
-              marginTop: "20px",
-              color: teal,
+              marginTop: "24px",
+              color: gold,
               fontFamily: "Cormorant",
               fontWeight: 700,
-              fontSize: "44px",
-              fontStyle: "italic",
+              fontSize: "36px",
               display: "flex",
             }}
           >
             Keri&apos;s got my vote.
           </div>
-        </div>
 
-        {/* Bottom row: logo left, signature right */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            width: "100%",
-          }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={logoDataUri}
-            alt="Carroll for Judge"
-            width={220}
-          />
+          {/* Logo (left) + signature (right) — asymmetric balance */}
           <div
             style={{
-              color: gold,
-              fontFamily: "Allura",
-              fontSize: "96px",
-              lineHeight: 1,
               display: "flex",
-              paddingBottom: "12px",
+              flex: 1,
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              paddingBottom: "28px",
+              marginTop: "auto",
             }}
           >
-            — {displayName}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={logoDataUri} alt="Carroll for Judge" width={240} />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                paddingBottom: "6px",
+              }}
+            >
+              <div
+                style={{
+                  color: gold,
+                  fontFamily: "Allura",
+                  fontSize: "96px",
+                  lineHeight: 1,
+                  display: "flex",
+                }}
+              >
+                — {displayName}
+              </div>
+              <div
+                style={{
+                  color: teal,
+                  fontFamily: "Cormorant",
+                  fontWeight: 700,
+                  fontSize: "16px",
+                  letterSpacing: "6px",
+                  textTransform: "uppercase",
+                  marginTop: "4px",
+                  display: "flex",
+                }}
+              >
+                Proud Supporter
+              </div>
+            </div>
+          </div>
+
+          {/* Teal footer strip */}
+          <div
+            style={{
+              marginLeft: "-56px",
+              marginRight: "-56px",
+              background: teal,
+              color: cream,
+              padding: "14px 56px",
+              fontFamily: "Cormorant",
+              fontWeight: 700,
+              fontSize: "20px",
+              letterSpacing: "8px",
+              textTransform: "uppercase",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <span>Chancery Court Judge</span>
+            <span style={{ color: gold }}>November 3, 2026</span>
           </div>
         </div>
       </div>
