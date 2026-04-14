@@ -93,6 +93,52 @@ export const INTEREST_LABELS: Record<SignupInterest, string> = {
   updates: "Receive Updates",
 };
 
+// ─── Email campaigns (broadcast) ──────────────────────────────────────
+export type CampaignStatus = "draft" | "sending" | "sent" | "failed" | "cancelled";
+export type SendStatus =
+  | "queued"
+  | "sent"
+  | "delivered"
+  | "bounced"
+  | "complained"
+  | "failed"
+  | "suppressed";
+export type SuppressionReason = "unsubscribed" | "bounced" | "complained" | "manual";
+
+export interface EmailCampaign {
+  id: string;
+  subject: string;
+  body_html: string;
+  body_text: string;
+  from_name: string;
+  from_address: string;
+  reply_to: string | null;
+  recipient_filter: Record<string, unknown>;
+  recipient_count: number;
+  sent_count: number;
+  failed_count: number;
+  status: CampaignStatus;
+  reviewed_by: string | null;
+  created_by: string | null;
+  created_at: string;
+  sending_started_at: string | null;
+  sent_at: string | null;
+}
+
+export interface EmailSend {
+  id: string;
+  campaign_id: string;
+  signup_id: string | null;
+  email: string;
+  resend_id: string | null;
+  status: SendStatus;
+  error: string | null;
+  created_at: string;
+  sent_at: string | null;
+  delivered_at: string | null;
+  updated_at: string;
+}
+
 // ─── Inbound Emails ──────────────────────────────────────────────────
 export type InboundStatus = "new" | "read" | "replied" | "archived" | "spam";
 
