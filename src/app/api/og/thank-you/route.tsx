@@ -40,10 +40,7 @@ async function loadFont(filename: string): Promise<ArrayBuffer> {
   return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
 }
 
-async function loadPngDataUri(filename: string): Promise<string> {
-  const buf = await fs.readFile(path.join(process.cwd(), "public", "images", filename));
-  return `data:image/png;base64,${buf.toString("base64")}`;
-}
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.carrollforjudge.com";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -53,11 +50,13 @@ export async function GET(req: NextRequest) {
   const sloganIdx = hashString(displayName.toLowerCase()) % SLOGANS.length;
   const slogan = SLOGANS[sloganIdx];
 
-  const [cormorantBold, allura, logoDataUri] = await Promise.all([
+  const [cormorantBold, allura] = await Promise.all([
     loadFont("cormorant-700.ttf"),
     loadFont("allura-400.ttf"),
-    loadPngDataUri("logo-og.png"), // Downsized 480px wide, ~35KB — small enough for Satori
   ]);
+  // Fetch the 35KB OG logo via HTTPS — Satori decodes URL-fetched images
+  // more reliably than large base64 data URIs.
+  const logoUrl = `${SITE_URL}/images/logo-og.png`;
 
   const teal = "#215b64";
   const gold = "#b08a49";
@@ -153,7 +152,7 @@ export async function GET(req: NextRequest) {
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={logoDataUri} alt="Carroll for Judge" width={240} height={115} />
+            <img src={logoUrl} alt="Carroll for Judge" width={240} height={115} />
             <div
               style={{
                 display: "flex",
