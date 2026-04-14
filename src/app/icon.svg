@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Teal-dark background fills the entire square (visible on light or dark browser chrome) -->
+  <rect width="64" height="64" fill="#17434a" rx="6"/>
+
+  <!-- Scales of justice, gold -->
+  <g fill="#b08a49">
+    <!-- Top finial -->
+    <circle cx="32" cy="14" r="2.75"/>
+
+    <!-- Central post -->
+    <rect x="30.5" y="15" width="3" height="37"/>
+
+    <!-- Horizontal beam -->
+    <rect x="8" y="19" width="48" height="3"/>
+
+    <!-- Beam end caps -->
+    <circle cx="8" cy="20.5" r="1.75"/>
+    <circle cx="56" cy="20.5" r="1.75"/>
+
+    <!-- Left V chain (triangle pointing down) -->
+    <polygon points="8,23 12,32 4,32"/>
+
+    <!-- Right V chain -->
+    <polygon points="56,23 60,32 52,32"/>
+
+    <!-- Left pan (half bowl — flat top, rounded bottom) -->
+    <path d="M 1 31.5 L 15 31.5 A 7 7 0 0 1 1 31.5 Z"/>
+
+    <!-- Right pan -->
+    <path d="M 49 31.5 L 63 31.5 A 7 7 0 0 1 49 31.5 Z"/>
+
+    <!-- Base platform -->
+    <rect x="21" y="51" width="22" height="3.5"/>
+    <rect x="17" y="54.5" width="30" height="3.5" rx="0.5"/>
+  </g>
+</svg>
