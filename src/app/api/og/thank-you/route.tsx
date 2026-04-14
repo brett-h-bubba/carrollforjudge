@@ -208,7 +208,7 @@ export async function GET(req: NextRequest) {
               alignItems: "center",
             }}
           >
-            <span>Chancery Court Judge</span>
+            <span>carrollforjudge.com</span>
             <span style={{ color: gold }}>November 3, 2026</span>
           </div>
         </div>
