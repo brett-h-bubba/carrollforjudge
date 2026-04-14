@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { DONATE_URL } from "@/lib/donate";
 
 const quickLinks = [
   { href: "/about", label: "About Keri" },
@@ -73,12 +74,12 @@ export default function Footer() {
                 </li>
               ))}
               <li className="pt-2">
-                <Link
-                  href="/donate"
+                <a
+                  href={DONATE_URL}
                   className="inline-flex items-center justify-center px-5 py-2 bg-gold text-teal-dark font-semibold text-sm tracking-wide hover:bg-gold-light transition-colors"
                 >
                   Donate
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

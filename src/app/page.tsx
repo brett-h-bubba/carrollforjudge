@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import EndorseCTA from "@/components/EndorseCTA";
+import { DONATE_URL } from "@/lib/donate";
 
 export default function Page() {
   return (
@@ -450,12 +451,12 @@ export default function Page() {
               >
                 Host Event
               </Link>
-              <Link
-                href="/donate"
+              <a
+                href={DONATE_URL}
                 className="inline-flex items-center px-8 py-4 bg-teal-dark text-white font-semibold tracking-wide text-lg hover:bg-teal transition-colors shadow-lg"
               >
                 Donate
-              </Link>
+              </a>
             </div>
           </div>
         </div>

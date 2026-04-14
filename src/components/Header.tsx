@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { DONATE_URL } from "@/lib/donate";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -54,12 +55,12 @@ export default function Header() {
             </a>
 
             {/* Donate button */}
-            <Link
-              href="/donate"
+            <a
+              href={DONATE_URL}
               className="bg-gold text-teal-dark font-semibold text-sm tracking-wide px-5 py-1.5 hover:bg-gold-light transition-colors"
             >
               Donate
-            </Link>
+            </a>
           </div>
         </div>
       </div>
@@ -145,13 +146,13 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/donate"
+              <a
+                href={DONATE_URL}
                 onClick={() => setMobileOpen(false)}
                 className="block mx-4 mt-3 px-5 py-3 bg-gold text-teal-dark text-sm font-semibold tracking-wide text-center hover:bg-gold-light transition-colors"
               >
                 Donate
-              </Link>
+              </a>
             </div>
           )}
         </div>

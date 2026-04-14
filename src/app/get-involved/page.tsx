@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GetInvolvedForm from "./GetInvolvedForm";
 import EndorseCTA from "@/components/EndorseCTA";
+import { DONATE_URL } from "@/lib/donate";
 
 export const metadata: Metadata = {
   title: "Get Involved",
@@ -27,7 +28,7 @@ const waysToHelp: Way[] = [
     title: "Donate",
     description:
       "Every dollar funds yard signs, direct mail, and the ground game that wins judicial races. Your support makes a direct impact.",
-    href: "/donate",
+    href: DONATE_URL,
     cta: "Donate Now",
   },
   {
@@ -102,12 +103,21 @@ export default function GetInvolvedPage() {
                     />
                   </div>
                 ) : item.href ? (
-                  <Link
-                    href={item.href}
-                    className="inline-flex items-center justify-center mt-5 px-5 py-2.5 bg-gold text-teal-dark font-semibold text-sm tracking-wide hover:bg-gold-light transition-colors"
-                  >
-                    {item.cta || "Learn More"}
-                  </Link>
+                  item.href.startsWith("http") ? (
+                    <a
+                      href={item.href}
+                      className="inline-flex items-center justify-center mt-5 px-5 py-2.5 bg-gold text-teal-dark font-semibold text-sm tracking-wide hover:bg-gold-light transition-colors"
+                    >
+                      {item.cta || "Learn More"}
+                    </a>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="inline-flex items-center justify-center mt-5 px-5 py-2.5 bg-gold text-teal-dark font-semibold text-sm tracking-wide hover:bg-gold-light transition-colors"
+                    >
+                      {item.cta || "Learn More"}
+                    </Link>
+                  )
                 ) : null}
               </div>
             ))}

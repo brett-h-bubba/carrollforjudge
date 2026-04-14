@@ -4,6 +4,7 @@ import EndorseCTA from "@/components/EndorseCTA";
 import FloatingEndorse from "@/components/FloatingEndorse";
 import { getServerSupabase } from "@/lib/supabase";
 import type { Endorsement, EndorsementCategory } from "@/lib/supabase";
+import { DONATE_URL } from "@/lib/donate";
 
 // Pull fresh each request so newly-approved endorsements appear immediately
 export const dynamic = "force-dynamic";
@@ -334,12 +335,12 @@ export default async function EndorsementsPage() {
             >
               Get Involved
             </Link>
-            <Link
-              href="/donate"
+            <a
+              href={DONATE_URL}
               className="w-full sm:w-auto px-10 py-4 bg-white text-teal-dark font-semibold tracking-wide hover:bg-cream transition-colors shadow-md text-center text-lg"
             >
               Donate
-            </Link>
+            </a>
           </div>
         </div>
       </section>

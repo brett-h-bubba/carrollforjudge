@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import EndorseCTA from "@/components/EndorseCTA";
+import { DONATE_URL } from "@/lib/donate";
 
 export const metadata: Metadata = {
   title: "About Keri H. Carroll",
@@ -432,12 +433,12 @@ export default function AboutPage() {
             >
               Get Involved
             </Link>
-            <Link
-              href="/donate"
+            <a
+              href={DONATE_URL}
               className="inline-flex items-center justify-center px-10 py-4 text-base font-semibold bg-white text-teal-dark hover:bg-cream transition-colors shadow-lg"
             >
               Donate
-            </Link>
+            </a>
           </div>
         </div>
       </section>
