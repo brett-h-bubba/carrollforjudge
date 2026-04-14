@@ -93,6 +93,46 @@ export const INTEREST_LABELS: Record<SignupInterest, string> = {
   updates: "Receive Updates",
 };
 
+// ─── Inbound Emails ──────────────────────────────────────────────────
+export type InboundStatus = "new" | "read" | "replied" | "archived" | "spam";
+
+export interface InboundEmail {
+  id: string;
+  resend_email_id: string | null;
+  message_id: string | null;
+  in_reply_to: string | null;
+  references: string | null;
+  from_addr: string | null;
+  from_name: string | null;
+  to_addrs: string[];
+  cc_addrs: string[];
+  bcc_addrs: string[];
+  subject: string | null;
+  html: string | null;
+  text: string | null;
+  headers: Record<string, string> | null;
+  body_fetched: boolean;
+  status: InboundStatus;
+  admin_notes: string | null;
+  raw_payload: unknown;
+  received_at: string;
+  read_at: string | null;
+  reviewed_at: string | null;
+  reviewed_by: string | null;
+}
+
+export interface InboundAttachment {
+  id: string;
+  inbound_email_id: string;
+  resend_attachment_id: string | null;
+  filename: string | null;
+  content_type: string | null;
+  content_id: string | null;
+  size_bytes: number | null;
+  storage_path: string | null;
+  created_at: string;
+}
+
 // ─── Donations ────────────────────────────────────────────────────────
 export type DonationStatus = "new" | "acknowledged" | "flagged" | "archived";
 
