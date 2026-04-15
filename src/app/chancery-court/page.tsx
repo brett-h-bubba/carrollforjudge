@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Why Chancery Court Matters",
   description:
     "Learn what Mississippi's Chancery Court handles — divorce, custody, adoption, guardianship, estates, and more — and why your vote for chancellor directly affects Rankin County families.",
+  alternates: { canonical: "/chancery-court" },
 };
 
 const caseTypes = [

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Contribute",
   description:
     "Support Keri H. Carroll's campaign for Chancery Court Judge in Mississippi's 20th District. Contributions are processed securely through Anedot.",
+  alternates: { canonical: "/donate" },
 };
 
 const suggestedAmounts = [25, 50, 100, 250, 500, 1000];

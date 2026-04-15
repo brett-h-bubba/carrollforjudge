@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import EndorseCTA from "@/components/EndorseCTA";
 import { DONATE_URL } from "@/lib/donate";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Page() {
   return (

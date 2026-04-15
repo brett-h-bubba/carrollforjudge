@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Get Involved",
   description:
     "Join the campaign for Keri H. Carroll for Chancery Court Judge in Rankin County, Mississippi. Volunteer, request a yard sign, host an event, or spread the word.",
+  alternates: { canonical: "/get-involved" },
 };
 
 type Way = {
@@ -61,8 +62,11 @@ export default function GetInvolvedPage() {
       {/* ── Hero ─────────────────────────────────────────────── */}
       <section className="bg-teal-dark text-white py-24 sm:py-32">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-shadow-hero mb-6">
+          <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-4">
             Every Conversation Matters
+          </p>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-shadow-hero mb-6">
+            Support Keri Carroll for Chancery Court Judge
           </h1>
           <div className="w-20 h-[3px] bg-gold mx-auto mb-8" />
           <p className="text-lg sm:text-xl text-cream/80 max-w-2xl mx-auto leading-relaxed">

@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "Endorsements",
   description:
     "See who supports Keri H. Carroll for Chancery Court Judge in Mississippi's 20th District. Endorsements from legal professionals, community leaders, and neighbors across Rankin County.",
+  alternates: { canonical: "/endorsements" },
 };
 
 function categoryLabel(category: EndorsementCategory | null): string {
@@ -118,7 +119,7 @@ export default async function EndorsementsPage() {
             Voices for Keri
           </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-shadow-hero mb-6">
-            Endorsements
+            Community Endorsements for Keri H. Carroll
           </h1>
           <div className="w-20 h-[3px] bg-gold mx-auto mb-8" />
           <p className="text-lg sm:text-xl text-cream/85 max-w-2xl mx-auto leading-relaxed">

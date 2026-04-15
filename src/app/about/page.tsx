@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "About Keri H. Carroll",
   description:
     "Keri H. Carroll has spent 21 years practicing family law in the matters chancery court hears every day — adoption, custody, divorce, guardianship, probate, and more. Learn why she is the most qualified candidate for Chancery Court Judge in Mississippi's 20th District.",
+  alternates: { canonical: "/about" },
 };
 
 const timelineEvents = [

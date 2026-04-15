@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "News & Updates",
   description:
     "Stay up to date with Keri H. Carroll's campaign for Chancery Court Judge in Mississippi's 20th District. Read the latest news, event announcements, and updates from the campaign trail across Rankin County.",
+  alternates: { canonical: "/news" },
 };
 
 const blogPosts = [
