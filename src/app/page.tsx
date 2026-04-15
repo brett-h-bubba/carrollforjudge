@@ -3,12 +3,62 @@ import Link from "next/link";
 import Image from "next/image";
 import EndorseCTA from "@/components/EndorseCTA";
 import { DONATE_URL } from "@/lib/donate";
+import { getServerSupabase } from "@/lib/supabase";
+import type { Endorsement, EndorsementCategory } from "@/lib/supabase";
+
+// Re-render within a minute of a new endorsement being approved so the
+// home page stays fresh without hammering Supabase on every request.
+export const revalidate = 60;
+
+function categoryLabel(category: EndorsementCategory | null): string {
+  switch (category) {
+    case "former_client":          return "Former Client";
+    case "professional_reference": return "Professional Reference";
+    case "community_leader":       return "Community Leader";
+    case "fellow_attorney":        return "Fellow Attorney";
+    case "friend_family":          return "Friend of the Campaign";
+    default:                       return "Supporter";
+  }
+}
+
+async function fetchLatestEndorsements(): Promise<Endorsement[]> {
+  try {
+    const supabase = getServerSupabase();
+    const { data, error } = await supabase
+      .from("endorsements")
+      .select("*")
+      .eq("status", "approved")
+      .eq("safe_to_publish", true)
+      .order("featured", { ascending: false })
+      .order("created_at", { ascending: false })
+      .limit(3);
+    if (error) return [];
+    return (data as Endorsement[]) || [];
+  } catch {
+    return [];
+  }
+}
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export default function Page() {
+export default async function Page() {
+  const approved = await fetchLatestEndorsements();
+
+  const endorsementsForHero =
+    approved.length > 0
+      ? approved.map((e) => ({
+          quote: e.zinger || e.endorsement.slice(0, 180),
+          name: e.name,
+          title: [categoryLabel(e.category), e.location].filter(Boolean).join(" · "),
+        }))
+      : [
+          { quote: "Endorsement coming soon.", name: "Name", title: "Title" },
+          { quote: "Endorsement coming soon.", name: "Name", title: "Title" },
+          { quote: "Endorsement coming soon.", name: "Name", title: "Title" },
+        ];
+
   return (
     <>
       {/* ===== HERO SECTION ===== */}
@@ -360,23 +410,7 @@ export default function Page() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
-            {[
-              {
-                quote: "Endorsement coming soon.",
-                name: "Name",
-                title: "Title",
-              },
-              {
-                quote: "Endorsement coming soon.",
-                name: "Name",
-                title: "Title",
-              },
-              {
-                quote: "Endorsement coming soon.",
-                name: "Name",
-                title: "Title",
-              },
-            ].map((endorsement, i) => (
+            {endorsementsForHero.map((endorsement, i) => (
               <div
                 key={i}
                 className="bg-white border-t-2 border-gold p-10 shadow-md"
@@ -393,8 +427,23 @@ export default function Page() {
                   &ldquo;{endorsement.quote}&rdquo;
                 </p>
                 <div className="mt-8 pt-6 border-t border-cream-dark">
-                  <div className="h-4 w-32 bg-slate/10" />
-                  <div className="h-3 w-24 bg-slate/5 mt-2" />
+                  {approved.length > 0 ? (
+                    <>
+                      <p className="font-semibold text-teal-dark">
+                        {endorsement.name}
+                      </p>
+                      {endorsement.title && (
+                        <p className="text-xs text-slate tracking-[0.2em] uppercase mt-1">
+                          {endorsement.title}
+                        </p>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <div className="h-4 w-32 bg-slate/10" />
+                      <div className="h-3 w-24 bg-slate/5 mt-2" />
+                    </>
+                  )}
                 </div>
               </div>
             ))}
