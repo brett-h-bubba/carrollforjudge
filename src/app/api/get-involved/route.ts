@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSupabase } from "@/lib/supabase";
 import type { SignupInterest } from "@/lib/supabase";
-import { Resend } from "resend";
+import { sendAdminMail, getAdminEmails } from "@/lib/mailer";
 import { honeypotTriggered, rateLimit, clientIp } from "@/lib/spam-protection";
 
 export const runtime = "nodejs";
@@ -90,22 +90,16 @@ export async function POST(req: NextRequest) {
     return bad(500, "Could not save your signup. Please try again.");
   }
 
-  // Admin email alert (non-blocking)
-  const adminEmails = (process.env.ADMIN_EMAILS || "")
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  const resendKey = process.env.RESEND_API_KEY;
-  if (adminEmails.length > 0 && resendKey) {
-    try {
-      const resend = new Resend(resendKey);
-      const interestList =
-        interests.length > 0
-          ? interests.map((i) => INTEREST_LABELS[i]).join(", ")
-          : "(none specified)";
-      const reviewUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.carrollforjudge.com"}/admin/signups`;
-      const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      const fullName = `${firstName} ${lastName}`;
+  // Admin email alert (non-blocking, via Gmail SMTP)
+  const adminEmails = getAdminEmails();
+  if (adminEmails.length > 0) {
+    const interestList =
+      interests.length > 0
+        ? interests.map((i) => INTEREST_LABELS[i]).join(", ")
+        : "(none specified)";
+    const reviewUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.carrollforjudge.com"}/admin/signups`;
+    const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const fullName = `${firstName} ${lastName}`;
 
       const plainText = [
         `Name: ${fullName}`,
@@ -162,21 +156,16 @@ export async function POST(req: NextRequest) {
   </p>
 </body></html>`;
 
-      await resend.emails.send({
-        from: process.env.EMAIL_FROM_SIGNUPS || "Carroll for Judge <signups@carrollforjudge.com>",
-        to: adminEmails,
-        replyTo: email,
-        subject: `New signup: ${fullName}`,
-        text: plainText,
-        html,
-        headers: {
-          "X-Entity-Ref-ID": `signup-${data?.id || "unknown"}`,
-          "X-Auto-Response-Suppress": "OOF, AutoReply",
-        },
-      });
-    } catch (err) {
-      console.error("[get-involved] Admin email failed (non-fatal):", err);
-    }
+    await sendAdminMail({
+      to: adminEmails,
+      replyTo: email,
+      subject: `New signup: ${fullName}`,
+      text: plainText,
+      html,
+      headers: {
+        "X-Entity-Ref-ID": `signup-${data?.id || "unknown"}`,
+      },
+    });
   }
 
   return NextResponse.json({ ok: true, id: data.id });

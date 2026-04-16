@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { analyzeEndorsement } from "@/lib/ai";
 import { getServerSupabase } from "@/lib/supabase";
-import { Resend } from "resend";
+import { sendAdminMail, getAdminEmails } from "@/lib/mailer";
 import { honeypotTriggered, rateLimit, clientIp } from "@/lib/spam-protection";
 
 export const runtime = "nodejs";
@@ -84,34 +84,31 @@ export async function POST(req: NextRequest) {
     return bad(500, "Could not save your endorsement. Please try again.");
   }
 
-  // ─ Email admins (non-blocking) ────────────────────────
-  const adminEmails = (process.env.ADMIN_EMAILS || "").split(",").map(s => s.trim()).filter(Boolean);
-  const resendKey = process.env.RESEND_API_KEY;
-  if (adminEmails.length > 0 && resendKey) {
-    try {
-      const resend = new Resend(resendKey);
-      const reviewUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.carrollforjudge.com"}/admin`;
-      const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  // ─ Email admins (non-blocking, via Gmail SMTP) ─────────
+  const adminEmails = getAdminEmails();
+  if (adminEmails.length > 0) {
+    const reviewUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.carrollforjudge.com"}/admin`;
+    const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-      const plainText = [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        location ? `Location: ${location}` : null,
-        `Category: ${analysis.category}`,
-        `Zinger: ${analysis.zinger}`,
-        `Safe to publish: ${analysis.safe_to_publish ? "yes" : "NO — review carefully"}`,
-        ``,
-        `--- Full endorsement ---`,
-        endorsement,
-        ``,
-        `Review: ${reviewUrl}`,
-        ``,
-        `Reply to this email to respond directly to ${name} (${email}).`,
-        `--`,
-        `Friends of Keri H. Carroll · carrollforjudge.com`,
-      ].filter(Boolean).join("\n");
+    const plainText = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      location ? `Location: ${location}` : null,
+      `Category: ${analysis.category}`,
+      `Zinger: ${analysis.zinger}`,
+      `Safe to publish: ${analysis.safe_to_publish ? "yes" : "NO — review carefully"}`,
+      ``,
+      `--- Full endorsement ---`,
+      endorsement,
+      ``,
+      `Review: ${reviewUrl}`,
+      ``,
+      `Reply to this email to respond directly to ${name} (${email}).`,
+      `--`,
+      `Friends of Keri H. Carroll · carrollforjudge.com`,
+    ].filter(Boolean).join("\n");
 
-      const html = `<!doctype html>
+    const html = `<!doctype html>
 <html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#1a1a1a;background:#ffffff;">
   <div style="border-bottom:2px solid #b08a49;padding-bottom:12px;margin-bottom:20px;">
     <p style="margin:0;font-size:11px;color:#b08a49;text-transform:uppercase;letter-spacing:2px;font-weight:600;">Carroll for Judge · Admin Notification</p>
@@ -138,21 +135,16 @@ export async function POST(req: NextRequest) {
   </p>
 </body></html>`;
 
-      await resend.emails.send({
-        from: process.env.EMAIL_FROM_ENDORSEMENTS || "Carroll for Judge <endorsements@carrollforjudge.com>",
-        to: adminEmails,
-        replyTo: email,
-        subject: `New endorsement from ${name}${location ? ` (${location})` : ""}`,
-        text: plainText,
-        html,
-        headers: {
-          "X-Entity-Ref-ID": `endorsement-${data.id}`,
-          "X-Auto-Response-Suppress": "OOF, AutoReply",
-        },
-      });
-    } catch (err) {
-      console.error("[endorse] Admin email failed (non-fatal):", err);
-    }
+    await sendAdminMail({
+      to: adminEmails,
+      replyTo: email,
+      subject: `New endorsement from ${name}${location ? ` (${location})` : ""}`,
+      text: plainText,
+      html,
+      headers: {
+        "X-Entity-Ref-ID": `endorsement-${data.id}`,
+      },
+    });
   }
 
   return NextResponse.json(data);

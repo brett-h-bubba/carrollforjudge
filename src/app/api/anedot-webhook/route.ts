@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "node:crypto";
-import { Resend } from "resend";
+import { sendAdminMail, getAdminEmails } from "@/lib/mailer";
 import { getServerSupabase } from "@/lib/supabase";
 
 export const runtime = "nodejs";
@@ -127,40 +127,58 @@ export async function POST(req: NextRequest) {
     console.error("[anedot-webhook] Supabase insert threw:", err);
   }
 
-  // Fire admin notification
-  const adminEmails = (process.env.ADMIN_EMAILS || "")
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  const resendKey = process.env.RESEND_API_KEY;
+  // Fire admin notification (Gmail SMTP)
+  const adminEmails = getAdminEmails();
+  if (adminEmails.length > 0) {
+    const esc = (s: string) =>
+      s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-  if (adminEmails.length > 0 && resendKey) {
-    try {
-      const resend = new Resend(resendKey);
-      await resend.emails.send({
-        from: process.env.EMAIL_FROM_DONATIONS || "Carroll for Judge <donations@carrollforjudge.com>",
-        to: adminEmails,
-        subject: `New $${amount} donation from ${donorName}${recurring}`,
-        text: [
-          `New donation received!`,
-          ``,
-          `Donor:     ${donorName}`,
-          `Email:     ${p.email || "(not provided)"}`,
-          `Amount:    $${amount}${recurring}`,
-          p.net_amount ? `Net:       $${p.net_amount}` : null,
-          `Source:    ${actionPage || "(direct)"}`,
-          `Date:      ${date}`,
-          `Event:     ${event}`,
-          `Anedot ID: ${donationId}`,
-        ]
-          .filter(Boolean)
-          .join("\n"),
-      });
-    } catch (err) {
-      console.error("[anedot-webhook] Resend email failed (non-fatal):", err);
-    }
+    const plainText = [
+      `New donation received!`,
+      ``,
+      `Donor:     ${donorName}`,
+      `Email:     ${p.email || "(not provided)"}`,
+      `Amount:    $${amount}${recurring}`,
+      p.net_amount ? `Net:       $${p.net_amount}` : null,
+      `Source:    ${actionPage || "(direct)"}`,
+      `Date:      ${date}`,
+      `Event:     ${event}`,
+      `Anedot ID: ${donationId}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    const html = `<!doctype html>
+<html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#1a1a1a;background:#ffffff;">
+  <div style="border-bottom:2px solid #b08a49;padding-bottom:12px;margin-bottom:20px;">
+    <p style="margin:0;font-size:11px;color:#b08a49;text-transform:uppercase;letter-spacing:2px;font-weight:600;">Carroll for Judge · Admin Notification</p>
+    <h1 style="margin:6px 0 0;font-size:22px;color:#215b64;font-weight:600;">New $${esc(amount)} donation${recurring ? ' (recurring)' : ''}</h1>
+  </div>
+  <table style="width:100%;border-collapse:collapse;font-size:14px;">
+    <tr><td style="padding:6px 0;color:#6b7280;width:110px;">Donor</td><td style="padding:6px 0;"><strong>${esc(donorName)}</strong></td></tr>
+    <tr><td style="padding:6px 0;color:#6b7280;">Email</td><td style="padding:6px 0;">${p.email ? `<a href="mailto:${esc(p.email)}" style="color:#215b64;">${esc(p.email)}</a>` : '<em style="color:#9ca3af;">(not provided)</em>'}</td></tr>
+    <tr><td style="padding:6px 0;color:#6b7280;">Amount</td><td style="padding:6px 0;"><strong style="color:#059669;">$${esc(amount)}</strong>${recurring ? ` <span style="color:#6b7280;">(${esc(recurring.trim())})</span>` : ''}</td></tr>
+    ${p.net_amount ? `<tr><td style="padding:6px 0;color:#6b7280;">Net</td><td style="padding:6px 0;">$${esc(String(p.net_amount))}</td></tr>` : ''}
+    <tr><td style="padding:6px 0;color:#6b7280;">Source</td><td style="padding:6px 0;">${esc(actionPage || "(direct)")}</td></tr>
+    <tr><td style="padding:6px 0;color:#6b7280;">Date</td><td style="padding:6px 0;">${esc(date)}</td></tr>
+    <tr><td style="padding:6px 0;color:#6b7280;">Anedot ID</td><td style="padding:6px 0;font-family:monospace;font-size:12px;color:#6b7280;">${esc(donationId)}</td></tr>
+  </table>
+  <p style="margin-top:28px;font-size:11px;color:#9ca3af;line-height:1.5;">
+    Friends of Keri H. Carroll &middot; <a href="https://www.carrollforjudge.com" style="color:#9ca3af;">carrollforjudge.com</a>
+  </p>
+</body></html>`;
+
+    await sendAdminMail({
+      to: adminEmails,
+      subject: `New $${amount} donation from ${donorName}${recurring}`,
+      text: plainText,
+      html,
+      headers: {
+        "X-Entity-Ref-ID": `donation-${donationId}`,
+      },
+    });
   } else {
-    console.warn("[anedot-webhook] ADMIN_EMAILS or RESEND_API_KEY missing; skipping notification");
+    console.warn("[anedot-webhook] ADMIN_EMAILS missing; skipping notification");
   }
 
   return NextResponse.json({ received: true, event, id: donationId });

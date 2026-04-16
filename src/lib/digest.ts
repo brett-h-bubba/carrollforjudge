@@ -8,7 +8,7 @@
  * 7-day and 30-day are rolling windows ending at run time.
  */
 
-import { Resend } from "resend";
+import { sendAdminMail } from "@/lib/mailer";
 import { getServerSupabase } from "@/lib/supabase";
 
 type Window = "yesterday" | "7day" | "30day";
@@ -288,25 +288,21 @@ export async function sendDigest(recipients: string[]): Promise<{
   if (recipients.length === 0) {
     return { sent: false, recipient_count: 0, error: "No recipients" };
   }
-  const resendKey = process.env.RESEND_API_KEY;
-  if (!resendKey) {
-    return { sent: false, recipient_count: 0, error: "RESEND_API_KEY not set" };
-  }
 
   const metrics = await buildMetrics();
   const { subject, html, text } = renderDigest(metrics);
 
   try {
-    const resend = new Resend(resendKey);
-    await resend.emails.send({
-      from:
-        process.env.EMAIL_FROM_DIGEST ||
-        "Carroll for Judge <digest@carrollforjudge.com>",
+    const ok = await sendAdminMail({
       to: recipients,
       subject,
       html,
       text,
+      headers: { "X-Entity-Ref-ID": `digest-${Date.now()}` },
     });
+    if (!ok) {
+      return { sent: false, recipient_count: recipients.length, error: "sendAdminMail returned false" };
+    }
     return { sent: true, recipient_count: recipients.length };
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Send failed";
