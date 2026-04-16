@@ -37,6 +37,12 @@ const timelineEvents = [
       "Licensed as an attorney in the State of Mississippi, beginning a career that would focus exclusively on chancery court matters.",
   },
   {
+    year: "2005",
+    label: "Adjunct Professor - Mississippi College",
+    description:
+      "Returned to her alma mater to teach the next generation of Mississippi lawyers, investing in the profession she loves.",
+  },
+  {
     year: "2006–2023",
     label: "Solo Practice - Brandon, Mississippi",
     description:
@@ -47,12 +53,6 @@ const timelineEvents = [
     label: "Public Defender - Pearl Municipal & Youth Court",
     description:
       "Served as a public defender in Pearl, ensuring every person received competent legal representation regardless of financial circumstances.",
-  },
-  {
-    year: "2005",
-    label: "Adjunct Professor - Mississippi College",
-    description:
-      "Returned to her alma mater to teach the next generation of Mississippi lawyers, investing in the profession she loves.",
   },
   {
     year: "2021–2025",
