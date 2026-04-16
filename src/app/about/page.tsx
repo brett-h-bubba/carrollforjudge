@@ -7,7 +7,7 @@ import { DONATE_URL } from "@/lib/donate";
 export const metadata: Metadata = {
   title: "About Keri H. Carroll",
   description:
-    "Keri H. Carroll has spent 21 years practicing family law in the matters chancery court hears every day — adoption, custody, divorce, guardianship, probate, and more. Learn why she is the most qualified candidate for Chancery Court Judge in Mississippi's 20th District.",
+    "Keri H. Carroll has spent 21 years practicing family law in the matters chancery court hears every day - adoption, custody, divorce, guardianship, probate, and more. Learn why she is the most qualified candidate for Chancery Court Judge in Mississippi's 20th District.",
   alternates: { canonical: "/about" },
 };
 
@@ -16,7 +16,7 @@ const timelineEvents = [
     year: "MC",
     label: "Mississippi College",
     description:
-      "Earned her undergraduate degree at Mississippi College in Clinton, Mississippi — laying the foundation for a career dedicated to Mississippi families.",
+      "Earned her undergraduate degree at Mississippi College in Clinton, Mississippi - laying the foundation for a career dedicated to Mississippi families.",
   },
   {
     year: "MC LAW",
@@ -28,7 +28,7 @@ const timelineEvents = [
     year: "2004–2005",
     label: "Supreme Court Clerkship",
     description:
-      "Clerked for Chief Justice James W. Smith Jr. at the Mississippi Supreme Court — gaining firsthand insight into how appellate courts evaluate trial court decisions.",
+      "Clerked for Chief Justice James W. Smith Jr. at the Mississippi Supreme Court - gaining firsthand insight into how appellate courts evaluate trial court decisions.",
   },
   {
     year: "2005",
@@ -38,37 +38,37 @@ const timelineEvents = [
   },
   {
     year: "2006–2023",
-    label: "Solo Practice — Brandon, Mississippi",
+    label: "Solo Practice - Brandon, Mississippi",
     description:
       "Founded Keri Haralson Carroll, PLLC, in Brandon, Mississippi, dedicating her practice to family law and chancery matters from day one. For seventeen years, Keri built her firm one client at a time, always maintaining her law office in Rankin County.",
   },
   {
     year: "—",
-    label: "Public Defender — Pearl Municipal & Youth Court",
+    label: "Public Defender - Pearl Municipal & Youth Court",
     description:
       "Served as a public defender in Pearl, ensuring every person received competent legal representation regardless of financial circumstances.",
   },
   {
     year: "—",
-    label: "Adjunct Professor — Mississippi College",
+    label: "Adjunct Professor - Mississippi College",
     description:
       "Returned to her alma mater to teach the next generation of Mississippi lawyers, investing in the profession she loves.",
   },
   {
     year: "2021–2025",
-    label: "Appointed Family Master — 20th Chancery District",
+    label: "Appointed Family Master - 20th Chancery District",
     description:
       "Appointed as Family Master, serving as a special judge for the 20th Chancery District (Rankin County, Mississippi). In this role, Keri presided over family law matters, gaining direct judicial experience on the very bench she seeks to serve.",
   },
   {
     year: "2023–2025",
-    label: "Associate Attorney — Connie Smith & Associates, Flowood, MS",
+    label: "Associate Attorney - Connie Smith & Associates, Flowood, MS",
     description:
       "Joined Connie Smith & Associates in Flowood, Mississippi, continuing to represent Rankin County families in adoption, custody, divorce, and other chancery matters.",
   },
   {
     year: "2025–PRESENT",
-    label: "Staff Attorney — Hon. John C. McLaurin, Jr.",
+    label: "Staff Attorney - Hon. John C. McLaurin, Jr.",
     description:
       "Staff Attorney for the Honorable John C. McLaurin, Jr., Senior Chancellor for the 20th Chancery District (Rankin County, Mississippi).",
   },
@@ -76,7 +76,7 @@ const timelineEvents = [
     year: "2026",
     label: "Candidate for Chancery Court Judge",
     description:
-      "Announced her candidacy for Chancery Court Judge, 20th District, Place 1 — bringing two decades of directly relevant experience to the bench.",
+      "Announced her candidacy for Chancery Court Judge, 20th District, Place 1 - bringing two decades of directly relevant experience to the bench.",
   },
 ];
 
@@ -84,7 +84,7 @@ const practiceAreas = [
   {
     title: "Adoption",
     description:
-      "Guiding families through every step of the adoption process — from termination of parental rights to final decrees.",
+      "Guiding families through every step of the adoption process - from termination of parental rights to final decrees.",
   },
   {
     title: "Child Custody & Support",
@@ -99,7 +99,7 @@ const practiceAreas = [
   {
     title: "Alimony & Property Division",
     description:
-      "Ensuring fair outcomes in the division of marital assets and alimony determinations — protecting the financial future of both parties.",
+      "Ensuring fair outcomes in the division of marital assets and alimony determinations - protecting the financial future of both parties.",
   },
   {
     title: "Guardianship & Conservatorship",
@@ -109,12 +109,12 @@ const practiceAreas = [
   {
     title: "Grandparent's Visitation",
     description:
-      "Advocating for grandparents seeking visitation rights — because the bond between grandparent and grandchild matters to the court and to the family.",
+      "Advocating for grandparents seeking visitation rights - because the bond between grandparent and grandchild matters to the court and to the family.",
   },
   {
     title: "Alcohol & Drug Commitments",
     description:
-      "Representing families seeking involuntary commitment for a loved one suffering from substance abuse — a process handled exclusively in chancery court.",
+      "Representing families seeking involuntary commitment for a loved one suffering from substance abuse - a process handled exclusively in chancery court.",
   },
   {
     title: "Mental Health Commitments",
@@ -129,7 +129,7 @@ const practiceAreas = [
   {
     title: "Domestic Violence",
     description:
-      "Securing protective orders and safety for victims of domestic abuse — matters of urgent importance.",
+      "Securing protective orders and safety for victims of domestic abuse - matters of urgent importance.",
   },
 ];
 
@@ -181,7 +181,7 @@ export default function AboutPage() {
                   K
                 </span>
                 eri is the first attorney in her family. Keri comes from a family
-                of like-minded servants — preachers, teachers, and healthcare
+                of like-minded servants - preachers, teachers, and healthcare
                 providers. Like them, Keri has always had a passion for helping
                 others. Throughout her career, Keri has served the Rankin
                 Chancery Court, as well as other chancery courts in this state,
@@ -191,7 +191,7 @@ export default function AboutPage() {
                 and conveyed to the Court.
               </p>
               <p>
-                Chancery Court is oftentimes a court of heartbreak — marriages
+                Chancery Court is oftentimes a court of heartbreak - marriages
                 are ending, a loved one has died, property is in dispute,
                 custody of children is at issue, an aging family member is
                 incapable of caring for themselves or their finances, or a
@@ -364,7 +364,7 @@ export default function AboutPage() {
       <section className="py-24 sm:py-32 bg-teal-dark">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center">
-            {/* Portrait — adds a visual anchor to the quote */}
+            {/* Portrait - adds a visual anchor to the quote */}
             <div className="relative mx-auto lg:mx-0">
               <div className="relative w-64 sm:w-72 aspect-[3/4] shadow-2xl border-2 border-gold/40 overflow-hidden">
                 <Image
@@ -405,7 +405,7 @@ export default function AboutPage() {
 
           <p className="mt-16 text-cream/80 text-lg sm:text-xl max-w-3xl mx-auto text-center leading-relaxed italic">
             Families who come before the chancery court are facing some of the
-            most important moments of their lives — a child&apos;s future, a
+            most important moments of their lives - a child&apos;s future, a
             loved one&apos;s care, the division of everything they have built.
             They deserve a judge who has spent her career in these very matters
             and who will bring preparation, patience, and fairness to every

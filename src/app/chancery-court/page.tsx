@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Why Chancery Court Matters",
   description:
-    "Learn what Mississippi's Chancery Court handles — divorce, custody, adoption, guardianship, estates, and more — and why your vote for chancellor directly affects Rankin County families.",
+    "Learn what Mississippi's Chancery Court handles - divorce, custody, adoption, guardianship, estates, and more - and why your vote for chancellor directly affects Rankin County families.",
   alternates: { canonical: "/chancery-court" },
 };
 
@@ -17,7 +17,7 @@ const caseTypes = [
   {
     title: "Child Custody",
     description:
-      "Who a child lives with, how much time they spend with each parent, and how their needs are supported — the chancellor decides all of it.",
+      "Who a child lives with, how much time they spend with each parent, and how their needs are supported - the chancellor decides all of it.",
   },
   {
     title: "Adoption",
@@ -32,7 +32,7 @@ const caseTypes = [
   {
     title: "Probate & Estate",
     description:
-      "After a loved one passes, the chancellor oversees how their estate is handled — ensuring wills are honored and heirs receive what they are owed.",
+      "After a loved one passes, the chancellor oversees how their estate is handled - ensuring wills are honored and heirs receive what they are owed.",
   },
   {
     title: "Property Disputes",
@@ -42,7 +42,7 @@ const caseTypes = [
   {
     title: "Alcohol & Drug Commitments",
     description:
-      "When a loved one is suffering from substance abuse, the chancellor can order involuntary commitment for treatment — a decision that can save a life.",
+      "When a loved one is suffering from substance abuse, the chancellor can order involuntary commitment for treatment - a decision that can save a life.",
   },
   {
     title: "Mental Health Commitments",
@@ -83,7 +83,7 @@ const faqs = [
   {
     question: "Is this a partisan election?",
     answer:
-      "No. Judicial elections in Mississippi are nonpartisan. Candidates do not run under a party label. The focus is on qualifications, experience, and judicial temperament — not party affiliation.",
+      "No. Judicial elections in Mississippi are nonpartisan. Candidates do not run under a party label. The focus is on qualifications, experience, and judicial temperament - not party affiliation.",
   },
   {
     question: "When is the election?",
@@ -94,7 +94,7 @@ const faqs = [
     question:
       "Do I vote for chancellor even if I don't have a pending case?",
     answer:
-      "Yes. The chancellor handles matters that could affect any family at any time — divorce, custody, guardianship of an aging parent, probate after a death. You may not need chancery court today, but when you do, the judge on the bench will make decisions that reshape your family's life.",
+      "Yes. The chancellor handles matters that could affect any family at any time - divorce, custody, guardianship of an aging parent, probate after a death. You may not need chancery court today, but when you do, the judge on the bench will make decisions that reshape your family's life.",
   },
   {
     question: "What district am I in?",
@@ -130,10 +130,10 @@ export default function ChanceryCourtPage() {
           <div className="w-20 h-[3px] bg-gold mb-12" />
 
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left — Text */}
+            {/* Left - Text */}
             <div className="space-y-5 text-lg leading-relaxed text-slate">
               <p>
-                Mississippi&apos;s chancery courts are courts of equity — not
+                Mississippi&apos;s chancery courts are courts of equity - not
                 criminal courts. There are no juries, no prosecutors, and no
                 criminal defendants. Instead, a single judge called the{" "}
                 <strong className="text-teal">chancellor</strong> hears cases
@@ -153,7 +153,7 @@ export default function ChanceryCourtPage() {
               </p>
             </div>
 
-            {/* Right — Dramatic stat */}
+            {/* Right - Dramatic stat */}
             <div className="flex flex-col items-center justify-center text-center p-12 bg-cream rounded-sm">
               <span className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gold leading-none">
                 Every Family
@@ -162,7 +162,7 @@ export default function ChanceryCourtPage() {
                 could face chancery court
               </span>
               <span className="mt-2 text-sm text-slate-light max-w-xs">
-                Divorce, custody, guardianship, probate — these cases touch
+                Divorce, custody, guardianship, probate - these cases touch
                 every stage of life
               </span>
             </div>
@@ -180,7 +180,7 @@ export default function ChanceryCourtPage() {
             <div className="w-20 h-[3px] bg-gold mx-auto mb-6" />
             <p className="text-slate-light text-lg max-w-2xl mx-auto">
               The chancellor presides over cases that touch every stage of
-              family life — from bringing a child home through adoption to
+              family life - from bringing a child home through adoption to
               settling an estate after a loss.
             </p>
           </div>
@@ -216,7 +216,7 @@ export default function ChanceryCourtPage() {
               In chancery court, there is no jury. The chancellor alone hears
               the evidence, weighs the arguments, and makes the decision. That
               means the person sitting on the bench has an enormous amount of
-              power — and an equally enormous responsibility.
+              power - and an equally enormous responsibility.
             </p>
             <p>
               The chancellor decides where a child will live after a divorce.
