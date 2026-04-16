@@ -43,13 +43,13 @@ const timelineEvents = [
       "Founded Keri Haralson Carroll, PLLC, in Brandon, Mississippi, dedicating her practice to family law and chancery matters from day one. For seventeen years, Keri built her firm one client at a time, always maintaining her law office in Rankin County.",
   },
   {
-    year: "—",
+    year: "2007–2009",
     label: "Public Defender - Pearl Municipal & Youth Court",
     description:
       "Served as a public defender in Pearl, ensuring every person received competent legal representation regardless of financial circumstances.",
   },
   {
-    year: "—",
+    year: "2005",
     label: "Adjunct Professor - Mississippi College",
     description:
       "Returned to her alma mater to teach the next generation of Mississippi lawyers, investing in the profession she loves.",
