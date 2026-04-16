@@ -25,22 +25,22 @@ const timelineEvents = [
       "Graduated from MC School of Law, building a rigorous foundation in Mississippi jurisprudence and family law.",
   },
   {
+    year: "2004–2005",
+    label: "Supreme Court Clerkship",
+    description:
+      "Clerked for Chief Justice James W. Smith Jr. at the Mississippi Supreme Court — gaining firsthand insight into how appellate courts evaluate trial court decisions.",
+  },
+  {
     year: "2005",
     label: "Admitted to the Mississippi Bar",
     description:
       "Licensed as an attorney in the State of Mississippi, beginning a career that would focus exclusively on chancery court matters.",
   },
   {
-    year: "2005",
-    label: "Supreme Court Clerkship",
+    year: "2006–2023",
+    label: "Solo Practice — Brandon, Mississippi",
     description:
-      "Clerked for Chief Justice James W. Smith Jr. at the Mississippi Supreme Court — gaining firsthand insight into how appellate courts evaluate trial court decisions.",
-  },
-  {
-    year: "2006",
-    label: "Launched Solo Practice",
-    description:
-      "Founded Keri Haralson Carroll, PLLC, dedicating her practice to family law and chancery matters from day one.",
+      "Founded Keri Haralson Carroll, PLLC, in Brandon, Mississippi, dedicating her practice to family law and chancery matters from day one. For seventeen years, Keri built her firm one client at a time, always maintaining her law office in Rankin County.",
   },
   {
     year: "—",
@@ -55,16 +55,22 @@ const timelineEvents = [
       "Returned to her alma mater to teach the next generation of Mississippi lawyers, investing in the profession she loves.",
   },
   {
-    year: "—",
-    label: "Connie Smith & Associates",
+    year: "2021–2025",
+    label: "Appointed Family Master — 20th Chancery District",
     description:
-      "Joined the Flowood firm, continuing to represent Rankin County families in adoption, custody, divorce, and other chancery matters.",
+      "Appointed as Family Master, serving as a special judge for the 20th Chancery District (Rankin County, Mississippi). In this role, Keri presided over family law matters, gaining direct judicial experience on the very bench she seeks to serve.",
   },
   {
-    year: "2025",
-    label: "Supreme Court Appellate Work",
+    year: "2023–2025",
+    label: "Associate Attorney — Connie Smith & Associates, Flowood, MS",
     description:
-      "Handled appellate briefing before the Mississippi Supreme Court in a custody and adoption case originating in Rankin County Chancery Court.",
+      "Joined Connie Smith & Associates in Flowood, Mississippi, continuing to represent Rankin County families in adoption, custody, divorce, and other chancery matters.",
+  },
+  {
+    year: "2025–PRESENT",
+    label: "Staff Attorney — Hon. John C. McLaurin, Jr.",
+    description:
+      "Staff Attorney for the Honorable John C. McLaurin, Jr., Senior Chancellor for the 20th Chancery District (Rankin County, Mississippi).",
   },
   {
     year: "2026",
@@ -91,14 +97,29 @@ const practiceAreas = [
       "Representing clients through contested and uncontested divorces, including equitable distribution and alimony.",
   },
   {
+    title: "Alimony & Property Division",
+    description:
+      "Ensuring fair outcomes in the division of marital assets and alimony determinations — protecting the financial future of both parties.",
+  },
+  {
     title: "Guardianship & Conservatorship",
     description:
       "Protecting vulnerable adults and minors by establishing legal guardianships and conservatorships.",
   },
   {
-    title: "Juvenile Matters",
+    title: "Grandparent's Visitation",
     description:
-      "Handling cases involving minors in the youth court system, including abuse, neglect, and delinquency proceedings.",
+      "Advocating for grandparents seeking visitation rights — because the bond between grandparent and grandchild matters to the court and to the family.",
+  },
+  {
+    title: "Alcohol & Drug Commitments",
+    description:
+      "Representing families seeking involuntary commitment for a loved one suffering from substance abuse — a process handled exclusively in chancery court.",
+  },
+  {
+    title: "Mental Health Commitments",
+    description:
+      "Guiding families through the difficult process of seeking commitment for a loved one facing a mental health crisis.",
   },
   {
     title: "Probate & Estate",
@@ -109,11 +130,6 @@ const practiceAreas = [
     title: "Domestic Violence",
     description:
       "Securing protective orders and safety for victims of domestic abuse — matters of urgent importance.",
-  },
-  {
-    title: "Appellate Work",
-    description:
-      "Briefing and arguing appeals before the Mississippi Supreme Court and Court of Appeals in family law cases.",
   },
 ];
 
@@ -162,53 +178,66 @@ export default function AboutPage() {
             <div className="md:col-span-3 text-slate text-lg lg:text-xl leading-relaxed space-y-6">
               <p className="relative text-xl lg:text-2xl text-teal-dark leading-relaxed">
                 <span className="font-script text-gold text-6xl leading-none float-left mr-3 -mt-2">
-                  F
+                  K
                 </span>
-                or twenty-one years, Keri Haralson Carroll has done one thing:
-                practice the law that chancellors apply every single day. She is
-                not pivoting to family law for a campaign. She has lived it for
-                her entire career.
+                eri is the first attorney in her family. Keri comes from a family
+                of like-minded servants — preachers, teachers, and healthcare
+                providers. Like them, Keri has always had a passion for helping
+                others. Throughout her career, Keri has served the Rankin
+                Chancery Court, as well as other chancery courts in this state,
+                as Guardian Ad Litem. As Guardian Ad Litem, Keri served the
+                children of Rankin County as their voice and advocate, ensuring
+                their protection and that their best interests were safeguarded
+                and conveyed to the Court.
+              </p>
+              <p>
+                Chancery Court is oftentimes a court of heartbreak — marriages
+                are ending, a loved one has died, property is in dispute,
+                custody of children is at issue, an aging family member is
+                incapable of caring for themselves or their finances, or a
+                spouse or loved one is suffering from drug and alcohol issues
+                and/or crippling mental health issues. Litigants are distraught,
+                vulnerable, and in the midst of a raging battle. Because of her
+                compassion and continuous desire to help others, Keri found her
+                niche in family law.
               </p>
               <p>
                 After earning both her undergraduate degree and law degree from
                 Mississippi College, Keri began her career with a clerkship at
                 the Mississippi Supreme Court under Chief Justice James W. Smith
-                Jr. That experience gave her a rare vantage point — watching how
-                the state&apos;s highest court evaluates trial court decisions, what
-                distinguishes a well-reasoned ruling from one that falls apart on
-                appeal, and what it takes to get the law right when families are
-                counting on the outcome.
+                Jr. Keri purchased her first home in Rankin County, Mississippi,
+                and has lived in Rankin County ever since. In 2006, Keri opened
+                her own practice in Brandon, Mississippi, and always maintained
+                her law office in Rankin County.
               </p>
               <p>
-                In 2006, just one year after being admitted to the bar, Keri
-                opened her own practice. From the start, she focused exclusively
-                on family law and chancery matters: adoptions, custody disputes,
-                divorces, guardianships, conservatorships, juvenile proceedings,
-                and probate. She built her firm one client at a time, earning a
-                reputation for thorough preparation, honest counsel, and genuine
-                care for the families she served across Rankin County and beyond.
+                After much prayer and deliberation, Keri is running for
+                Chancellor so that she can continue to serve the residents of
+                Rankin County, ensuring their matters are handled with patience,
+                integrity, discernment, and fairness. Keri believes that serving
+                as Rankin County&apos;s next Chancellor is a calling on her life
+                and is pursuing this position in obedience to the Lord.
               </p>
               <p>
-                Keri has also answered calls to serve beyond her own practice.
-                She served as a public defender in Pearl Municipal and Youth
-                Court, ensuring that every person who appeared before the court
-                received competent, dedicated representation — regardless of
-                their financial circumstances. She returned to Mississippi
-                College as an adjunct professor, teaching the next generation of
-                Mississippi attorneys and investing in the profession she loves.
+                Keri is happily married to Luke Carroll, and they live in
+                Flowood, Mississippi with their four children, Sadie (16), Jaxon
+                (13), Easton (9) and Corbin (5). They attend church in Rankin
+                County, Mississippi, each of their children attend school in
+                Rankin County, Mississippi, and they own a youth baseball
+                organization in Rankin County, Mississippi. As a mom and
+                stepmom, Keri fully understands and appreciates the different
+                dynamics in blended families. This insight adds a unique
+                perspective to the Rankin County Chancery bench. Keri is fully
+                invested in Rankin County and is ready to serve as its next
+                Chancellor.
               </p>
-              <p>
-                Today, Keri practices at Connie Smith &amp; Associates in Flowood,
-                continuing to represent Rankin County families in chancery
-                matters. In 2025, she handled appellate work before the
-                Mississippi Supreme Court in a custody and adoption case that
-                originated right here in Rankin County Chancery Court — the very
-                court she is asking voters to let her serve.
-              </p>
-              <p className="text-teal italic">
-                With twenty-one years of experience in the law that chancellors
-                apply every day, Keri is not running to learn on the job. She is
-                running because she is ready.
+              <blockquote className="border-l-4 border-gold pl-6 text-xl text-teal-dark italic">
+                &ldquo;What began as an effort to help others has, over time,
+                become one of the greatest blessings in my own life.&rdquo;
+              </blockquote>
+              <p className="text-teal italic text-xl">
+                Keri offers the experience you can trust, the heart you can
+                feel, and the commitment our community deserves.
               </p>
             </div>
           </div>
@@ -229,7 +258,7 @@ export default function AboutPage() {
                 desc: "clerkship experience",
               },
               {
-                stat: "8 PRACTICE AREAS",
+                stat: "10 PRACTICE AREAS",
                 desc: "matching chancery jurisdiction",
               },
               {

@@ -40,9 +40,14 @@ const caseTypes = [
       "Boundary disagreements, easement conflicts, and land ownership disputes come before the chancellor for resolution based on equity and fairness.",
   },
   {
-    title: "Juvenile",
+    title: "Alcohol & Drug Commitments",
     description:
-      "Cases involving minors in need of supervision or protection are heard in chancery court. The chancellor's priority is the safety of the child.",
+      "When a loved one is suffering from substance abuse, the chancellor can order involuntary commitment for treatment — a decision that can save a life.",
+  },
+  {
+    title: "Mental Health Commitments",
+    description:
+      "Families facing a mental health crisis can petition the chancellor for commitment to ensure their loved one receives the care and protection they need.",
   },
   {
     title: "Domestic Violence",
