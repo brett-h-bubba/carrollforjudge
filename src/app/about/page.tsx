@@ -176,7 +176,7 @@ export default function AboutPage() {
 
             {/* Narrative bio */}
             <div className="md:col-span-3 text-slate text-lg lg:text-xl leading-relaxed space-y-6">
-              <p className="relative text-xl lg:text-2xl text-teal-dark leading-relaxed">
+              <p className="relative leading-relaxed">
                 <span className="font-script text-gold text-6xl leading-none float-left mr-3 -mt-2">
                   K
                 </span>
