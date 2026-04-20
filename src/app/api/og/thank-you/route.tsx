@@ -130,13 +130,15 @@ export async function GET(req: NextRequest) {
             {slogan}
           </div>
 
-          {/* Affirm line - vertically centered in the space between slogan and logo */}
+          {/* Affirm line + three-pillar lockup - vertically centered in the space between slogan and logo */}
           <div
             style={{
               flex: 1,
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
+              gap: "20px",
             }}
           >
             <div
@@ -149,6 +151,27 @@ export async function GET(req: NextRequest) {
               }}
             >
               Keri&apos;s got my vote.
+            </div>
+            {/* Three-pillar lockup — Experience · Fairness · Family */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "18px",
+                color: teal,
+                fontFamily: "Cormorant",
+                fontWeight: 700,
+                fontSize: "20px",
+                letterSpacing: "8px",
+                textTransform: "uppercase",
+              }}
+            >
+              <span>Experience</span>
+              <span style={{ color: gold }}>·</span>
+              <span>Fairness</span>
+              <span style={{ color: gold }}>·</span>
+              <span>Family</span>
             </div>
           </div>
 

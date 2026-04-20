@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 import { getServerSupabase } from "@/lib/supabase";
-import type { EndorsementCategory } from "@/lib/supabase";
+import type { EndorsementCategory, EndorsementPillar } from "@/lib/supabase";
 
 export const runtime = "edge";
 
@@ -13,6 +13,21 @@ function headlineForCategory(category: EndorsementCategory): string {
     case "fellow_attorney":        return "Keri Belongs on the Bench";
     case "friend_family":          return "I'm With Keri";
     default:                       return "I'm With Keri";
+  }
+}
+
+/**
+ * Returns the eyebrow stamp for a pillar, or empty string for null/other.
+ * Shown in gold above the headline so the share graphic visually reinforces
+ * which of the three pillars (Experience · Fairness · Family) this voice
+ * is testifying to.
+ */
+function stampForPillar(pillar: EndorsementPillar | null): string {
+  switch (pillar) {
+    case "experience": return "ON HER EXPERIENCE";
+    case "fairness":   return "ON HER FAIRNESS";
+    case "family":     return "ON HER FAMILY";
+    default:           return "";
   }
 }
 
@@ -55,7 +70,7 @@ export async function GET(
   const supabase = getServerSupabase();
   const { data, error } = await supabase
     .from("endorsements")
-    .select("name, location, zinger, category")
+    .select("name, location, zinger, category, pillar")
     .eq("id", id)
     .single();
 
@@ -64,6 +79,7 @@ export async function GET(
   }
 
   const headline = headlineForCategory((data.category || "other") as EndorsementCategory);
+  const pillarStamp = stampForPillar((data.pillar || null) as EndorsementPillar | null);
   const zinger = data.zinger || "I'm with Keri.";
   const attribution = data.location ? `${data.name} · ${data.location}` : data.name;
 
@@ -83,11 +99,11 @@ export async function GET(
   // Choose layout by format
   let body: React.ReactElement;
   if (format === "linkedin") {
-    body = <LinkedinBanner headline={headline} zinger={zinger} attribution={attribution} />;
+    body = <LinkedinBanner headline={headline} zinger={zinger} attribution={attribution} pillarStamp={pillarStamp} />;
   } else if (format === "story") {
-    body = <StoryTall headline={headline} zinger={zinger} attribution={attribution} />;
+    body = <StoryTall headline={headline} zinger={zinger} attribution={attribution} pillarStamp={pillarStamp} />;
   } else {
-    body = <Square headline={headline} zinger={zinger} attribution={attribution} />;
+    body = <Square headline={headline} zinger={zinger} attribution={attribution} pillarStamp={pillarStamp} />;
   }
 
   try {
@@ -113,7 +129,7 @@ export async function GET(
 // ───────────────────────────────────────────────────────────────
 // Layout: 1080 × 1080 square (Instagram / FB post)
 // ───────────────────────────────────────────────────────────────
-function Square({ headline, zinger, attribution }: LayoutProps) {
+function Square({ headline, zinger, attribution, pillarStamp }: LayoutProps) {
   return (
     <div
       style={{
@@ -137,8 +153,22 @@ function Square({ headline, zinger, attribution }: LayoutProps) {
           justifyContent: "space-between",
         }}
       >
-        {/* Top: headline */}
+        {/* Top: pillar eyebrow + headline */}
         <div style={{ display: "flex", flexDirection: "column" }}>
+          {pillarStamp && (
+            <div
+              style={{
+                display: "flex",
+                fontSize: 22,
+                color: GOLD,
+                fontWeight: 700,
+                letterSpacing: "0.4em",
+                marginBottom: 18,
+              }}
+            >
+              {pillarStamp}
+            </div>
+          )}
           <div
             style={{
               display: "flex",
@@ -269,7 +299,7 @@ function Square({ headline, zinger, attribution }: LayoutProps) {
 // ───────────────────────────────────────────────────────────────
 // Layout: 1080 × 1920 story (IG / FB story)
 // ───────────────────────────────────────────────────────────────
-function StoryTall({ headline, zinger, attribution }: LayoutProps) {
+function StoryTall({ headline, zinger, attribution, pillarStamp }: LayoutProps) {
   return (
     <div
       style={{
@@ -297,6 +327,20 @@ function StoryTall({ headline, zinger, attribution }: LayoutProps) {
         >
           ENDORSEMENT
         </div>
+        {pillarStamp && (
+          <div
+            style={{
+              display: "flex",
+              fontSize: 24,
+              color: CREAM,
+              fontWeight: 700,
+              letterSpacing: "0.35em",
+              marginTop: 16,
+            }}
+          >
+            {pillarStamp}
+          </div>
+        )}
         <div
           style={{
             display: "flex",
@@ -426,7 +470,7 @@ function StoryTall({ headline, zinger, attribution }: LayoutProps) {
 // ───────────────────────────────────────────────────────────────
 // Layout: 1584 × 396 LinkedIn banner
 // ───────────────────────────────────────────────────────────────
-function LinkedinBanner({ headline, zinger, attribution }: LayoutProps) {
+function LinkedinBanner({ headline, zinger, attribution, pillarStamp }: LayoutProps) {
   return (
     <div
       style={{
@@ -464,6 +508,20 @@ function LinkedinBanner({ headline, zinger, attribution }: LayoutProps) {
         >
           ENDORSEMENT
         </div>
+        {pillarStamp && (
+          <div
+            style={{
+              display: "flex",
+              fontSize: 13,
+              color: CREAM,
+              fontWeight: 700,
+              letterSpacing: "0.35em",
+              marginTop: 8,
+            }}
+          >
+            {pillarStamp}
+          </div>
+        )}
         <div
           style={{
             display: "flex",
@@ -574,4 +632,5 @@ interface LayoutProps {
   headline: string;
   zinger: string;
   attribution: string;
+  pillarStamp: string;
 }
