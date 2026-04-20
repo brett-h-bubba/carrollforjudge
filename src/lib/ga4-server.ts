@@ -27,6 +27,7 @@ type RunReportRow = google.analytics.data.v1beta.IRow;
 export interface GA4Metrics {
   yesterday: { users: number; sessions: number; pageViews: number };
   sevenDay: { users: number; sessions: number; pageViews: number };
+  thirtyDay: { users: number; sessions: number; pageViews: number };
   topPages: Array<{ path: string; views: number }>;
   topReferrers: Array<{ source: string; users: number }>;
 }
@@ -63,34 +64,40 @@ export async function getGA4Metrics(): Promise<GA4Metrics | null> {
 
   const property = `properties/${propertyId}`;
   try {
-    const [yesterdayRes, sevenDayRes, topPagesRes, topReferrersRes] = await Promise.all([
-      client.runReport({
-        property,
-        dateRanges: [{ startDate: "yesterday", endDate: "yesterday" }],
-        metrics: [{ name: "totalUsers" }, { name: "sessions" }, { name: "screenPageViews" }],
-      }),
-      client.runReport({
-        property,
-        dateRanges: [{ startDate: "7daysAgo", endDate: "yesterday" }],
-        metrics: [{ name: "totalUsers" }, { name: "sessions" }, { name: "screenPageViews" }],
-      }),
-      client.runReport({
-        property,
-        dateRanges: [{ startDate: "7daysAgo", endDate: "yesterday" }],
-        dimensions: [{ name: "pagePath" }],
-        metrics: [{ name: "screenPageViews" }],
-        orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
-        limit: 5,
-      }),
-      client.runReport({
-        property,
-        dateRanges: [{ startDate: "7daysAgo", endDate: "yesterday" }],
-        dimensions: [{ name: "sessionSource" }],
-        metrics: [{ name: "totalUsers" }],
-        orderBys: [{ metric: { metricName: "totalUsers" }, desc: true }],
-        limit: 5,
-      }),
-    ]);
+    const [yesterdayRes, sevenDayRes, thirtyDayRes, topPagesRes, topReferrersRes] =
+      await Promise.all([
+        client.runReport({
+          property,
+          dateRanges: [{ startDate: "yesterday", endDate: "yesterday" }],
+          metrics: [{ name: "totalUsers" }, { name: "sessions" }, { name: "screenPageViews" }],
+        }),
+        client.runReport({
+          property,
+          dateRanges: [{ startDate: "7daysAgo", endDate: "yesterday" }],
+          metrics: [{ name: "totalUsers" }, { name: "sessions" }, { name: "screenPageViews" }],
+        }),
+        client.runReport({
+          property,
+          dateRanges: [{ startDate: "30daysAgo", endDate: "yesterday" }],
+          metrics: [{ name: "totalUsers" }, { name: "sessions" }, { name: "screenPageViews" }],
+        }),
+        client.runReport({
+          property,
+          dateRanges: [{ startDate: "30daysAgo", endDate: "yesterday" }],
+          dimensions: [{ name: "pagePath" }],
+          metrics: [{ name: "screenPageViews" }],
+          orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
+          limit: 5,
+        }),
+        client.runReport({
+          property,
+          dateRanges: [{ startDate: "30daysAgo", endDate: "yesterday" }],
+          dimensions: [{ name: "sessionSource" }],
+          metrics: [{ name: "totalUsers" }],
+          orderBys: [{ metric: { metricName: "totalUsers" }, desc: true }],
+          limit: 5,
+        }),
+      ]);
 
     const readSingle = (rows: RunReportRow[] | null | undefined) => ({
       users: Number(rows?.[0]?.metricValues?.[0]?.value ?? 0),
@@ -101,6 +108,7 @@ export async function getGA4Metrics(): Promise<GA4Metrics | null> {
     return {
       yesterday: readSingle(yesterdayRes[0].rows),
       sevenDay: readSingle(sevenDayRes[0].rows),
+      thirtyDay: readSingle(thirtyDayRes[0].rows),
       topPages: (topPagesRes[0].rows || []).map((r) => ({
         path: r.dimensionValues?.[0]?.value || "/",
         views: Number(r.metricValues?.[0]?.value ?? 0),

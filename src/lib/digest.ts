@@ -248,19 +248,27 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
     ? `Carroll for Judge — ${pendingTotal} pending · ${today}`
     : `Carroll for Judge — Morning Digest, ${today}`;
 
+  // Brand palette — DO NOT invent additional colors. See site/brand/BRAND.md.
   const teal = "#215b64";
   const gold = "#b08a49";
   const cream = "#f7f1e8";
+  const card = "#fdfaf3"; // warm off-cream for card fill; white was too stark for the brand
+  const rule = "#e5dfd3"; // cream-adjacent divider
+  const ink = "#2b2b2b"; // near-black for body copy legibility (explicitly allowed by brand)
+  const inkMuted = "#6b6b6b";
+  // Email-safe serif stack — Cormorant Garamond is the brand face; Times New Roman
+  // is the brand's explicit print/email fallback (see BRAND.md § Typography).
+  const serif = "'Cormorant Garamond', 'Times New Roman', Times, serif";
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.carrollforjudge.com";
   const vercelAnalyticsUrl = process.env.DIGEST_VERCEL_ANALYTICS_URL ?? "";
   const ga4DashboardUrl = process.env.DIGEST_GA4_DASHBOARD_URL ?? "";
 
   const row = (label: string, yesterday: string, seven: string, thirty: string, bold = false) => `
     <tr>
-      <td style="padding:10px 16px;border-bottom:1px solid #e5dfd3;${bold ? "font-weight:700;" : ""}color:${teal};">${label}</td>
-      <td style="padding:10px 16px;border-bottom:1px solid #e5dfd3;text-align:right;${bold ? "font-weight:700;" : ""}color:${teal};">${yesterday}</td>
-      <td style="padding:10px 16px;border-bottom:1px solid #e5dfd3;text-align:right;${bold ? "font-weight:700;" : ""}color:${teal};">${seven}</td>
-      <td style="padding:10px 16px;border-bottom:1px solid #e5dfd3;text-align:right;${bold ? "font-weight:700;" : ""}color:${teal};">${thirty}</td>
+      <td style="padding:10px 16px;border-bottom:1px solid ${rule};${bold ? "font-weight:700;" : ""}color:${teal};">${label}</td>
+      <td style="padding:10px 16px;border-bottom:1px solid ${rule};text-align:right;${bold ? "font-weight:700;" : ""}color:${teal};">${yesterday}</td>
+      <td style="padding:10px 16px;border-bottom:1px solid ${rule};text-align:right;${bold ? "font-weight:700;" : ""}color:${teal};">${seven}</td>
+      <td style="padding:10px 16px;border-bottom:1px solid ${rule};text-align:right;${bold ? "font-weight:700;" : ""}color:${teal};">${thirty}</td>
     </tr>
   `;
 
@@ -268,10 +276,10 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
     if (count === 0) return "";
     return `
       <tr>
-        <td style="padding:12px 20px;border-bottom:1px solid #e5dfd3;color:${teal};font-weight:600;">${label}</td>
-        <td style="padding:12px 20px;border-bottom:1px solid #e5dfd3;text-align:right;color:${gold};font-weight:700;font-size:18px;">${count}</td>
-        <td style="padding:12px 20px;border-bottom:1px solid #e5dfd3;text-align:right;">
-          <a href="${href}" style="color:${teal};text-decoration:underline;font-size:13px;">Review →</a>
+        <td style="padding:12px 20px;border-bottom:1px solid ${rule};color:${teal};font-weight:700;">${label}</td>
+        <td style="padding:12px 20px;border-bottom:1px solid ${rule};text-align:right;color:${gold};font-weight:700;font-size:20px;">${count}</td>
+        <td style="padding:12px 20px;border-bottom:1px solid ${rule};text-align:right;">
+          <a href="${href}" style="color:${teal};text-decoration:underline;font-size:13px;letter-spacing:0.5px;">Review →</a>
         </td>
       </tr>
     `;
@@ -280,10 +288,10 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
   const pendingSection = pendingTotal > 0
     ? `
       <tr>
-        <td style="padding:24px 24px 8px;">
-          <p style="margin:0;color:${gold};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Needs your attention</p>
-          <h2 style="margin:4px 0 12px;font-size:18px;color:${teal};">${pendingTotal} pending review</h2>
-          <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;">
+        <td style="padding:28px 28px 12px;">
+          <p style="margin:0;color:${gold};font-family:${serif};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Needs your attention</p>
+          <h2 style="margin:6px 0 16px;font-family:${serif};font-size:22px;font-weight:700;color:${teal};">${pendingTotal} pending review</h2>
+          <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;font-family:${serif};">
             ${pendingRow("Pending endorsements", metrics.pending.endorsements, `${siteUrl}/admin`)}
             ${pendingRow("New signups", metrics.pending.signups, `${siteUrl}/admin/signups`)}
             ${pendingRow("New donations", metrics.pending.donations, `${siteUrl}/admin/donations`)}
@@ -294,9 +302,9 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
     `
     : `
       <tr>
-        <td style="padding:24px 24px 8px;">
-          <p style="margin:0;color:${gold};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Needs your attention</p>
-          <p style="margin:8px 0 0;color:${teal};font-size:15px;">✓ Inbox zero — no items pending review.</p>
+        <td style="padding:28px 28px 12px;">
+          <p style="margin:0;color:${gold};font-family:${serif};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Needs your attention</p>
+          <p style="margin:10px 0 0;color:${teal};font-family:${serif};font-size:16px;font-style:italic;">Inbox zero — nothing pending review.</p>
         </td>
       </tr>
     `;
@@ -307,45 +315,46 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
         const topPages = g.topPages
           .map(
             (p) =>
-              `<tr><td style="padding:6px 0;color:${teal};font-size:13px;">${p.path}</td><td style="padding:6px 0;text-align:right;color:#6b6b6b;font-size:13px;">${p.views}</td></tr>`,
+              `<tr><td style="padding:6px 0;color:${teal};font-family:${serif};font-size:13px;">${p.path}</td><td style="padding:6px 0;text-align:right;color:${inkMuted};font-family:${serif};font-size:13px;font-weight:700;">${p.views}</td></tr>`,
           )
           .join("");
         const topRefs = g.topReferrers
           .map(
             (r) =>
-              `<tr><td style="padding:6px 0;color:${teal};font-size:13px;">${r.source}</td><td style="padding:6px 0;text-align:right;color:#6b6b6b;font-size:13px;">${r.users}</td></tr>`,
+              `<tr><td style="padding:6px 0;color:${teal};font-family:${serif};font-size:13px;">${r.source}</td><td style="padding:6px 0;text-align:right;color:${inkMuted};font-family:${serif};font-size:13px;font-weight:700;">${r.users}</td></tr>`,
           )
           .join("");
         return `
           <tr>
-            <td style="padding:24px 24px 8px;">
-              <p style="margin:0;color:${gold};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Site traffic</p>
-              <h2 style="margin:4px 0 12px;font-size:18px;color:${teal};">Google Analytics</h2>
-              <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;font-size:14px;">
+            <td style="padding:28px 28px 12px;">
+              <p style="margin:0;color:${gold};font-family:${serif};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Site traffic</p>
+              <h2 style="margin:6px 0 12px;font-family:${serif};font-size:22px;font-weight:700;color:${teal};">Google Analytics</h2>
+              <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;font-family:${serif};font-size:14px;">
                 <thead>
                   <tr style="background:${teal};color:${cream};">
-                    <th style="padding:8px 16px;text-align:left;font-size:11px;letter-spacing:2px;text-transform:uppercase;"></th>
-                    <th style="padding:8px 16px;text-align:right;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Visitors</th>
-                    <th style="padding:8px 16px;text-align:right;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Sessions</th>
-                    <th style="padding:8px 16px;text-align:right;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Pageviews</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;"></th>
+                    <th style="padding:10px 16px;text-align:right;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">Visitors</th>
+                    <th style="padding:10px 16px;text-align:right;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">Sessions</th>
+                    <th style="padding:10px 16px;text-align:right;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">Pageviews</th>
                   </tr>
                 </thead>
                 <tbody>
                   ${row("Yesterday", String(g.yesterday.users), String(g.yesterday.sessions), String(g.yesterday.pageViews), true)}
                   ${row("7 days", String(g.sevenDay.users), String(g.sevenDay.sessions), String(g.sevenDay.pageViews))}
+                  ${row("30 days", String(g.thirtyDay.users), String(g.thirtyDay.sessions), String(g.thirtyDay.pageViews))}
                 </tbody>
               </table>
               ${
                 topPages || topRefs
                   ? `
-                <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;margin-top:16px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;margin-top:20px;">
                   <tr>
                     <td style="width:50%;vertical-align:top;padding-right:12px;">
-                      <p style="margin:0 0 6px;color:${gold};font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">Top pages (7d)</p>
+                      <p style="margin:0 0 8px;color:${gold};font-family:${serif};font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">Top pages (30d)</p>
                       <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;">${topPages}</table>
                     </td>
                     <td style="width:50%;vertical-align:top;padding-left:12px;">
-                      <p style="margin:0 0 6px;color:${gold};font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">Top referrers (7d)</p>
+                      <p style="margin:0 0 8px;color:${gold};font-family:${serif};font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">Top referrers (30d)</p>
                       <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;">${topRefs}</table>
                     </td>
                   </tr>
@@ -359,9 +368,9 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
       })()
     : `
       <tr>
-        <td style="padding:24px 24px 8px;">
-          <p style="margin:0;color:${gold};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Site traffic</p>
-          <p style="margin:8px 0 0;color:#6b6b6b;font-size:13px;">Google Analytics not configured yet. Set <code>GA4_PROPERTY_ID</code> and <code>GA4_SERVICE_ACCOUNT_JSON</code> in Vercel to see visitor stats here.</p>
+        <td style="padding:28px 28px 12px;">
+          <p style="margin:0;color:${gold};font-family:${serif};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Site traffic</p>
+          <p style="margin:10px 0 0;color:${inkMuted};font-family:${serif};font-size:14px;">Google Analytics not configured yet. Set <code>GA4_PROPERTY_ID</code> and <code>GA4_SERVICE_ACCOUNT_JSON</code> in Vercel to see visitor stats here.</p>
         </td>
       </tr>
     `;
@@ -381,30 +390,30 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
   const html = `
 <!doctype html>
 <html>
-<body style="margin:0;padding:24px;background:${cream};font-family:Georgia,serif;color:${teal};">
-  <table role="presentation" cellspacing="0" cellpadding="0" style="max-width:640px;margin:0 auto;background:#fff;border:1px solid #e5dfd3;">
+<body style="margin:0;padding:28px 16px;background:${cream};font-family:${serif};color:${ink};">
+  <table role="presentation" cellspacing="0" cellpadding="0" style="max-width:640px;margin:0 auto;background:${card};border:1px solid ${rule};">
     <tr>
-      <td style="padding:20px 24px;border-bottom:3px solid ${gold};">
-        <p style="margin:0;color:${gold};font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:700;">Carroll for Judge</p>
-        <h1 style="margin:4px 0 0;font-size:22px;color:${teal};">Morning Digest</h1>
-        <p style="margin:4px 0 0;color:#6b6b6b;font-size:14px;">${today}</p>
+      <td style="padding:28px 28px 22px;border-bottom:3px solid ${gold};">
+        <p style="margin:0;color:${gold};font-family:${serif};font-size:12px;letter-spacing:4px;text-transform:uppercase;font-weight:700;">Carroll for Judge</p>
+        <h1 style="margin:6px 0 0;font-family:${serif};font-size:28px;font-weight:700;color:${teal};letter-spacing:0.5px;">Morning Digest</h1>
+        <p style="margin:6px 0 0;color:${inkMuted};font-family:${serif};font-size:14px;font-style:italic;">${today}</p>
       </td>
     </tr>
     ${pendingSection}
     <tr>
-      <td style="padding:24px 24px 8px;">
-        <p style="margin:0;color:${gold};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Campaign metrics</p>
+      <td style="padding:28px 28px 12px;">
+        <p style="margin:0;color:${gold};font-family:${serif};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Campaign metrics</p>
       </td>
     </tr>
     <tr>
-      <td style="padding:0 0 16px;">
-        <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;font-size:14px;">
+      <td style="padding:0 0 20px;">
+        <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;font-family:${serif};font-size:14px;">
           <thead>
             <tr style="background:${teal};color:${cream};">
-              <th style="padding:10px 16px;text-align:left;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:11px;"></th>
-              <th style="padding:10px 16px;text-align:right;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:11px;">Yesterday</th>
-              <th style="padding:10px 16px;text-align:right;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:11px;">7 days</th>
-              <th style="padding:10px 16px;text-align:right;font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:11px;">30 days</th>
+              <th style="padding:10px 16px;text-align:left;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;"></th>
+              <th style="padding:10px 16px;text-align:right;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;">Yesterday</th>
+              <th style="padding:10px 16px;text-align:right;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;">7 days</th>
+              <th style="padding:10px 16px;text-align:right;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:11px;">30 days</th>
             </tr>
           </thead>
           <tbody>
@@ -420,7 +429,7 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
     </tr>
     ${ga4Section}
     <tr>
-      <td style="padding:20px 24px;color:#6b6b6b;font-size:12px;border-top:1px solid #e5dfd3;">
+      <td style="padding:22px 28px;color:${inkMuted};font-family:${serif};font-size:12px;border-top:1px solid ${rule};">
         ${footerLinks}
       </td>
     </tr>
@@ -465,13 +474,14 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
       `SITE TRAFFIC (Google Analytics)`,
       `  Yesterday: ${g.yesterday.users} visitors, ${g.yesterday.sessions} sessions, ${g.yesterday.pageViews} pageviews`,
       `  7 days:    ${g.sevenDay.users} visitors, ${g.sevenDay.sessions} sessions, ${g.sevenDay.pageViews} pageviews`,
+      `  30 days:   ${g.thirtyDay.users} visitors, ${g.thirtyDay.sessions} sessions, ${g.thirtyDay.pageViews} pageviews`,
     );
     if (g.topPages.length > 0) {
-      textLines.push(`  Top pages (7d):`);
+      textLines.push(`  Top pages (30d):`);
       for (const p of g.topPages) textLines.push(`    ${p.path}  —  ${p.views}`);
     }
     if (g.topReferrers.length > 0) {
-      textLines.push(`  Top referrers (7d):`);
+      textLines.push(`  Top referrers (30d):`);
       for (const r of g.topReferrers) textLines.push(`    ${r.source}  —  ${r.users}`);
     }
     textLines.push(``);
