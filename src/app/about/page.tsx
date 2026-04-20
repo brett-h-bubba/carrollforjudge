@@ -426,7 +426,7 @@ export default function AboutPage() {
           <div className="mx-auto mt-6 w-16 h-[2px] bg-gold" />
           <p className="mt-8 text-slate text-lg leading-loose">
             If you have worked with Keri, been represented by her, or know her
-            in the community &mdash; your voice carries weight in this race.
+            in the community - your voice carries weight in this race.
             Add your endorsement, and we will craft a shareable graphic for
             your social feed so your whole network can see it.
           </p>

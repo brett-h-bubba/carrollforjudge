@@ -13,7 +13,7 @@ interface Totals {
 }
 
 function formatCurrency(n: number | null): string {
-  if (n == null) return "—";
+  if (n == null) return "-";
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -21,7 +21,7 @@ function formatCurrency(n: number | null): string {
 }
 
 function formatDate(iso: string | null): string {
-  if (!iso) return "—";
+  if (!iso) return "-";
   return new Date(iso).toLocaleString("en-US", {
     year: "numeric",
     month: "short",

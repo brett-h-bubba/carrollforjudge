@@ -226,7 +226,7 @@ function EndorsementCard({
                 title="What pillar this endorsement testifies to"
               >
                 <option value="" disabled>
-                  {endorsement.pillar ? labelForPillar(endorsement.pillar) : "— set pillar —"}
+                  {endorsement.pillar ? labelForPillar(endorsement.pillar) : "- set pillar -"}
                 </option>
                 {ENDORSEMENT_PILLARS.map((p) => (
                   <option key={p} value={p}>
@@ -301,7 +301,7 @@ function EndorsementCard({
           </button>
         )}
 
-        {/* Feature toggle — only on approved */}
+        {/* Feature toggle - only on approved */}
         {isApproved && (
           endorsement.featured ? (
             <button
@@ -315,7 +315,7 @@ function EndorsementCard({
             <button
               disabled={busy || !canFeature}
               onClick={() => doFeature(true)}
-              title={canFeature ? "Mark as featured on the public page" : `Max ${MAX_FEATURED} featured — unfeature one first`}
+              title={canFeature ? "Mark as featured on the public page" : `Max ${MAX_FEATURED} featured - unfeature one first`}
               className="px-4 py-2 text-sm font-semibold border-2 border-gold text-gold-dark hover:bg-gold/10 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               ☆ Feature

@@ -107,7 +107,7 @@ export default function EndorseModal({
           email: email.trim(),
           location: location.trim() || null,
           endorsement: endorsement.trim(),
-          website, // honeypot — always empty for real users
+          website, // honeypot - always empty for real users
         }),
       });
 

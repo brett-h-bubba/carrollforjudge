@@ -61,13 +61,13 @@ export default function DonatePage() {
               Contribute through our secure payment processor.
             </h2>
             <p className="text-slate leading-relaxed mb-10">
-              Contributions are processed by Anedot &mdash; used by campaigns
+              Contributions are processed by Anedot - used by campaigns
               across the country for compliance, security, and Apple Pay
               support. You&rsquo;ll be redirected to a secure page to
               complete your contribution.
             </p>
 
-            {/* Suggested amounts — visual anchor only, donor picks on Anedot */}
+            {/* Suggested amounts - visual anchor only, donor picks on Anedot */}
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-10">
               {suggestedAmounts.map((amt) => (
                 <div

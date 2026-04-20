@@ -24,7 +24,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://carrollforjudge.co
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Keri H. Carroll | Chancery Court Judge — Rankin County, Mississippi",
+    default: "Keri H. Carroll | Chancery Court Judge - Rankin County, Mississippi",
     template: "%s | Keri H. Carroll for Chancery Court Judge",
   },
   description:

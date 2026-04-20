@@ -29,7 +29,7 @@ export default function ShareActions({ fn, ogImageUrl }: Props) {
         Download image
       </a>
       <p className="mt-4 text-xs text-ink-muted text-center">
-        Post the image to Instagram, Facebook, X — anywhere. The campaign URL is baked
+        Post the image to Instagram, Facebook, X - anywhere. The campaign URL is baked
         into the design.
       </p>
     </div>

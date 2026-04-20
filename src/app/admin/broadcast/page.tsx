@@ -10,7 +10,7 @@ interface Preview {
 }
 
 function formatDate(iso: string | null): string {
-  if (!iso) return "—";
+  if (!iso) return "-";
   return new Date(iso).toLocaleString("en-US", {
     month: "short",
     day: "numeric",
@@ -23,10 +23,10 @@ export default function AdminBroadcastPage() {
   const [campaigns, setCampaigns] = useState<EmailCampaign[]>([]);
   const [subject, setSubject] = useState("");
   const [bodyHtml, setBodyHtml] = useState(
-    "<p>Hi {{first_name}},</p>\n<p>Write your message here. Use plain HTML — paragraphs, links, lists.</p>\n<p>— Keri</p>",
+    "<p>Hi {{first_name}},</p>\n<p>Write your message here. Use plain HTML - paragraphs, links, lists.</p>\n<p>- Keri</p>",
   );
   const [bodyText, setBodyText] = useState(
-    "Hi {{first_name}},\n\nWrite your message here. Paragraphs work, links too.\n\n— Keri",
+    "Hi {{first_name}},\n\nWrite your message here. Paragraphs work, links too.\n\n- Keri",
   );
   const [fromName, setFromName] = useState("Keri Carroll for Judge");
   const [fromAddress, setFromAddress] = useState("campaign@carrollforjudge.com");
@@ -202,7 +202,7 @@ export default function AdminBroadcastPage() {
               />
             </Field>
 
-            <Field label="Reviewed by (name of person who approved this send — required)">
+            <Field label="Reviewed by (name of person who approved this send - required)">
               <input
                 type="text"
                 value={reviewedBy}
@@ -291,7 +291,7 @@ export default function AdminBroadcastPage() {
                 </div>
                 <p className="text-xs text-ink-muted mt-1">
                   Status: {c.status} · Sent {c.sent_count}/{c.recipient_count} · Failed{" "}
-                  {c.failed_count} · Reviewed by {c.reviewed_by || "—"}
+                  {c.failed_count} · Reviewed by {c.reviewed_by || "-"}
                 </p>
               </li>
             ))}

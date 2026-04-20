@@ -99,7 +99,7 @@ export async function POST(req: NextRequest) {
       `Category: ${analysis.category}`,
       `Pillar: ${analysis.pillar}`,
       `Zinger: ${analysis.zinger}`,
-      `Safe to publish: ${analysis.safe_to_publish ? "yes" : "NO — review carefully"}`,
+      `Safe to publish: ${analysis.safe_to_publish ? "yes" : "NO - review carefully"}`,
       ``,
       `--- Full endorsement ---`,
       endorsement,

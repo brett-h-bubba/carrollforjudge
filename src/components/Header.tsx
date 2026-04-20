@@ -75,11 +75,11 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-24 lg:h-32 py-2">
-            {/* Logo (full brand lockup — includes wordmark) */}
+            {/* Logo (full brand lockup - includes wordmark) */}
             <Link
               href="/"
               className="block relative h-full aspect-[2/1] max-w-[280px] sm:max-w-[340px] lg:max-w-[420px]"
-              aria-label="Keri H. Carroll for Chancery Court Judge — Home"
+              aria-label="Keri H. Carroll for Chancery Court Judge - Home"
             >
               <Image
                 src="/images/logo.png"

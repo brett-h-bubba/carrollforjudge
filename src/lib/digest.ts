@@ -285,8 +285,8 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
     metrics.pending.donations +
     metrics.pending.inbound_emails;
   const subject = pendingTotal > 0
-    ? `Carroll for Judge — ${pendingTotal} pending · ${today}`
-    : `Carroll for Judge — Morning Digest, ${today}`;
+    ? `Carroll for Judge - ${pendingTotal} pending · ${today}`
+    : `Carroll for Judge - Morning Digest, ${today}`;
 
   // Brand palette — DO NOT invent additional colors. See site/brand/BRAND.md.
   const teal = "#215b64";
@@ -344,7 +344,7 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
       <tr>
         <td style="padding:28px 28px 12px;">
           <p style="margin:0;color:${gold};font-family:${serif};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Needs your attention</p>
-          <p style="margin:10px 0 0;color:${teal};font-family:${serif};font-size:16px;font-style:italic;">Inbox zero — nothing pending review.</p>
+          <p style="margin:10px 0 0;color:${teal};font-family:${serif};font-size:16px;font-style:italic;">Inbox zero - nothing pending review.</p>
         </td>
       </tr>
     `;
@@ -529,13 +529,13 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
   `.trim();
 
   const textLines: string[] = [
-    `Carroll for Judge — Morning Digest`,
+    `Carroll for Judge - Morning Digest`,
     today,
     ``,
     `NEEDS YOUR ATTENTION`,
   ];
   if (pendingTotal === 0) {
-    textLines.push(`  Inbox zero — no items pending review.`);
+    textLines.push(`  Inbox zero - no items pending review.`);
   } else {
     if (metrics.pending.endorsements > 0)
       textLines.push(`  ${metrics.pending.endorsements} pending endorsements → ${siteUrl}/admin`);
@@ -578,11 +578,11 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
     );
     if (g.topPages.length > 0) {
       textLines.push(`  Top pages (30d):`);
-      for (const p of g.topPages) textLines.push(`    ${p.path}  —  ${p.views}`);
+      for (const p of g.topPages) textLines.push(`    ${p.path}  -  ${p.views}`);
     }
     if (g.topReferrers.length > 0) {
       textLines.push(`  Top referrers (30d):`);
-      for (const r of g.topReferrers) textLines.push(`    ${r.source}  —  ${r.users}`);
+      for (const r of g.topReferrers) textLines.push(`    ${r.source}  -  ${r.users}`);
     }
     textLines.push(``);
   } else {

@@ -14,7 +14,7 @@ const blogPosts = [
     title: "Why Chancery Court Matters to Your Family",
     date: "March 2026",
     preview:
-      "Chancery Court touches the most personal areas of your life — from divorce and custody to guardianships and estate disputes. Learn how this court directly impacts Rankin County families every day.",
+      "Chancery Court touches the most personal areas of your life - from divorce and custody to guardianships and estate disputes. Learn how this court directly impacts Rankin County families every day.",
   },
   {
     title: "Meet Keri at Upcoming Community Events",

@@ -58,7 +58,7 @@ export async function GET(req: NextRequest) {
     loadFont("cormorant-700.ttf"),
     loadFont("allura-400.ttf"),
   ]);
-  // Fetch the 35KB OG logo via HTTPS — Satori decodes URL-fetched images
+  // Fetch the 35KB OG logo via HTTPS - Satori decodes URL-fetched images
   // more reliably than large base64 data URIs.
   const logoUrl = `${SITE_URL}/images/logo-og.png`;
 
@@ -90,7 +90,7 @@ export async function GET(req: NextRequest) {
             padding: "48px 56px 0",
           }}
         >
-          {/* DONATED stamp — tucked into top-right corner */}
+          {/* DONATED stamp - tucked into top-right corner */}
           <div
             style={{
               position: "absolute",
@@ -112,7 +112,7 @@ export async function GET(req: NextRequest) {
             Donated
           </div>
 
-          {/* Hero slogan — the thing that makes this shareable */}
+          {/* Hero slogan - the thing that makes this shareable */}
           <div
             style={{
               color: teal,
@@ -130,7 +130,7 @@ export async function GET(req: NextRequest) {
             {slogan}
           </div>
 
-          {/* Affirm line — vertically centered in the space between slogan and logo */}
+          {/* Affirm line - vertically centered in the space between slogan and logo */}
           <div
             style={{
               flex: 1,
@@ -152,7 +152,7 @@ export async function GET(req: NextRequest) {
             </div>
           </div>
 
-          {/* Logo (left) + signature (right) — asymmetric balance */}
+          {/* Logo (left) + signature (right) - asymmetric balance */}
           <div
             style={{
               display: "flex",
@@ -180,7 +180,7 @@ export async function GET(req: NextRequest) {
                   display: "flex",
                 }}
               >
-                — {displayName}
+                - {displayName}
               </div>
               <div
                 style={{

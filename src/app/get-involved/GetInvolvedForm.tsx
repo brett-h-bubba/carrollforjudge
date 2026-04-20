@@ -53,7 +53,7 @@ export default function GetInvolvedForm() {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          website, // honeypot — always empty for real users
+          website, // honeypot - always empty for real users
           firstName: formData.firstName.trim(),
           lastName: formData.lastName.trim(),
           email: formData.email.trim(),
@@ -222,7 +222,7 @@ export default function GetInvolvedForm() {
         >
           Address{" "}
           <span className="text-slate-light text-xs font-normal normal-case">
-            (optional — for yard sign delivery)
+            (optional - for yard sign delivery)
           </span>
         </label>
         <input

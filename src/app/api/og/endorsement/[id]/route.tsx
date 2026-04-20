@@ -16,7 +16,7 @@ function headlineForCategory(category: EndorsementCategory): string {
   }
 }
 
-// Fonts are served from public/fonts/* — fetched at request time from the
+// Fonts are served from public/fonts/* - fetched at request time from the
 // same origin. Reliable on Vercel's serverless runtime where fs-relative
 // imports from outside the function bundle are unreliable.
 async function loadFont(origin: string, filename: string): Promise<ArrayBuffer> {
@@ -185,7 +185,7 @@ function Square({ headline, zinger, attribution }: LayoutProps) {
               fontWeight: 700,
             }}
           >
-            — {attribution}
+            - {attribution}
           </div>
           <div
             style={{
@@ -352,7 +352,7 @@ function StoryTall({ headline, zinger, attribution }: LayoutProps) {
             marginTop: 48,
           }}
         >
-          — {attribution}
+          - {attribution}
         </div>
       </div>
 
@@ -530,7 +530,7 @@ function LinkedinBanner({ headline, zinger, attribution }: LayoutProps) {
                 fontWeight: 700,
               }}
             >
-              — {attribution}
+              - {attribution}
             </div>
           </div>
           <div

@@ -83,7 +83,7 @@ export default async function Page() {
               </h1>
               {/* Gold accent divider */}
               <div className="mt-12 w-24 h-[3px] bg-gold" />
-              {/* Mobile tagline — short and punchy */}
+              {/* Mobile tagline - short and punchy */}
               <p className="md:hidden mt-10 text-2xl text-cream/90 font-normal italic leading-snug text-shadow">
                 4 years on the bench as Family Master.
                 <br />
@@ -92,7 +92,7 @@ export default async function Page() {
                 Ready to lead as Chancellor.
               </p>
 
-              {/* Desktop tagline — fuller narrative */}
+              {/* Desktop tagline - fuller narrative */}
               <p className="hidden md:block mt-10 text-2xl lg:text-[1.75rem] text-cream/90 font-normal italic leading-relaxed text-shadow max-w-2xl">
                 Four years serving Rankin County families from the bench as a
                 Family Master. 21 years practicing the cases chancery court
@@ -114,7 +114,7 @@ export default async function Page() {
               </div>
             </div>
 
-            {/* Portrait column — on the bench as Family Master */}
+            {/* Portrait column - on the bench as Family Master */}
             <div className="relative lg:justify-self-end w-full max-w-xl mx-auto lg:mx-0">
               <div className="relative aspect-[3/2] shadow-2xl border-2 border-gold/50 overflow-hidden">
                 <Image
@@ -162,7 +162,7 @@ export default async function Page() {
               </h3>
               <p className="text-slate-light text-lg leading-loose">
                 21 years practicing in the exact cases chancery court handles
-                every day &mdash; divorce, custody, adoption, guardianship,
+                every day - divorce, custody, adoption, guardianship,
                 probate, and domestic violence. Not general law. Family law.
               </p>
             </div>
@@ -173,7 +173,7 @@ export default async function Page() {
                 Fairness
               </h3>
               <p className="text-slate-light text-lg leading-loose">
-                Four years on the bench as Family Master &mdash; actually
+                Four years on the bench as Family Master - actually
                 making the decisions this court makes every day. Listen
                 carefully. Follow the law. Treat every family with respect,
                 regardless of means or circumstance.
@@ -187,7 +187,7 @@ export default async function Page() {
               </h3>
               <p className="text-slate-light text-lg leading-loose">
                 Chancery court touches families at their most vulnerable
-                moments &mdash; in adoption, custody, divorce, and
+                moments - in adoption, custody, divorce, and
                 guardianship. Keri has spent her entire career standing with
                 Rankin County families through those moments. That&apos;s the
                 work.
@@ -201,12 +201,12 @@ export default async function Page() {
       <section className="bg-teal-dark py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Photo with gold border frame — warm "meet the candidate" close-up */}
+            {/* Photo with gold border frame - warm "meet the candidate" close-up */}
             <div className="relative">
               <div className="relative aspect-[3/4] max-w-lg mx-auto lg:mx-0 shadow-2xl border-2 border-gold/40 overflow-hidden">
                 <Image
                   src="/images/headshot-main.jpg"
-                  alt="Keri H. Carroll — candidate for Chancery Court Judge"
+                  alt="Keri H. Carroll - candidate for Chancery Court Judge"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -292,13 +292,13 @@ export default async function Page() {
               A Quick Explanation
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold text-teal-dark leading-tight mb-6">
-              Most people have never heard of chancery court &mdash; until they
+              Most people have never heard of chancery court - until they
               need one.
             </h2>
             <p className="text-slate text-lg leading-loose mb-5">
               Chancery court handles divorce, custody, adoption, guardianship,
               probate, and domestic violence. There is no jury. One judge
-              &mdash; the chancellor &mdash; hears the evidence and makes the
+              - the chancellor - hears the evidence and makes the
               decision alone.
             </p>
             <p className="text-slate text-lg leading-loose mb-8">

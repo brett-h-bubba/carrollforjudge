@@ -11,7 +11,7 @@ const PILLAR_SECTIONS: Array<{ pillar: EndorsementPillar; title: string; blurb: 
     pillar: "experience",
     title: "On her Experience",
     blurb:
-      "21 years practicing the exact cases chancery court hears — attorneys, peers, and former clients speaking to the depth of her preparation.",
+      "21 years practicing the exact cases chancery court hears - attorneys, peers, and former clients speaking to the depth of her preparation.",
   },
   {
     pillar: "fairness",
@@ -79,7 +79,7 @@ function personJsonLd() {
     alternateName: "Keri Haralson Carroll",
     jobTitle: "Candidate for Chancery Court Judge",
     description:
-      "Candidate for Chancery Court Judge, Mississippi's 20th Chancery Court District, Place 1 — Rankin County, Mississippi.",
+      "Candidate for Chancery Court Judge, Mississippi's 20th Chancery Court District, Place 1 - Rankin County, Mississippi.",
     url: "https://carrollforjudge.com",
     alumniOf: [
       { "@type": "CollegeOrUniversity", name: "Mississippi College" },
@@ -173,7 +173,7 @@ export default async function EndorsementsPage() {
             voice be heard.
           </p>
           <p className="text-sm text-cream/60 mb-10 italic">
-            Takes about a minute — we&rsquo;ll craft a shareable graphic for you too.
+            Takes about a minute - we&rsquo;ll craft a shareable graphic for you too.
           </p>
           <EndorseCTA label="Endorse Keri" />
         </div>
@@ -265,7 +265,7 @@ function EndorsementCard({ endorsement: e }: { endorsement: Endorsement }) {
 
         {/* Attribution */}
         <cite className="mt-6 pt-4 border-t border-cream-dark not-italic flex items-baseline gap-2">
-          <span className="text-slate-light" aria-hidden="true">—</span>
+          <span className="text-slate-light" aria-hidden="true">-</span>
           <span className="font-semibold text-teal-dark">{e.name}</span>
         </cite>
       </div>
@@ -281,7 +281,7 @@ function PillarGroups({ approved }: { approved: Endorsement[] }) {
   const unclassified = approved.filter((e) => !e.pillar || e.pillar === "other");
   const classified = approved.filter((e) => e.pillar && e.pillar !== "other");
 
-  // Legacy / pre-pillar fallback — all rows unclassified → original single grid
+  // Legacy / pre-pillar fallback - all rows unclassified → original single grid
   if (classified.length === 0) {
     return (
       <section className="bg-cream py-20 sm:py-28">
@@ -299,7 +299,7 @@ function PillarGroups({ approved }: { approved: Endorsement[] }) {
   return (
     <section className="bg-cream py-16 sm:py-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Jump-nav — shows pillars with at least 1 endorsement */}
+        {/* Jump-nav - shows pillars with at least 1 endorsement */}
         <nav
           aria-label="Jump to pillar"
           className="flex flex-wrap items-center justify-center gap-3 mb-14 pb-8 border-b border-cream-dark"
@@ -368,7 +368,7 @@ function PillarGroups({ approved }: { approved: Endorsement[] }) {
 }
 
 // ───────────────────────────────────────────────────────────────
-// Empty state — warm, not desperate
+// Empty state - warm, not desperate
 // ───────────────────────────────────────────────────────────────
 function EmptyState() {
   return (

@@ -28,7 +28,7 @@ const colors = [
     hex: "#f7f1e8",
     cssVar: "--color-cream",
     tailwind: "bg-cream / text-cream",
-    usage: "Primary background. Warm off-white — never stark white.",
+    usage: "Primary background. Warm off-white - never stark white.",
   },
 ];
 
@@ -80,7 +80,7 @@ export default function BrandGuidelinesPage() {
           </h1>
           <p className="mt-6 text-lg text-ink-muted max-w-2xl leading-relaxed">
             Official brand kit for the Carroll for Chancery Court Judge campaign.
-            Everything here — colors, typography, logos, voice — is binding for
+            Everything here - colors, typography, logos, voice - is binding for
             any website, print piece, mailer, sign, or social asset carrying
             the campaign&apos;s name.
           </p>
@@ -110,7 +110,7 @@ export default function BrandGuidelinesPage() {
           <h2 className="font-display text-4xl font-bold text-teal-dark mb-4">Colors</h2>
           <p className="text-ink-muted max-w-2xl mb-12 leading-relaxed">
             Three brand colors. That&apos;s it. Teal is <em>this</em> teal
-            (<code className="text-sm px-1.5 py-0.5 bg-cream-dark rounded">#215b64</code>) —
+            (<code className="text-sm px-1.5 py-0.5 bg-cream-dark rounded">#215b64</code>) -
             not forest green (<code className="text-sm px-1.5 py-0.5 bg-cream-dark rounded">#1B4332</code>).
             Do not introduce additional accents.
           </p>
@@ -141,7 +141,7 @@ export default function BrandGuidelinesPage() {
           </h3>
           <p className="text-ink-muted text-sm mb-6 max-w-2xl">
             Tonal variants for hover states, depth, and legibility. Never use
-            them as primary accents — they support the three brand colors.
+            them as primary accents - they support the three brand colors.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
             {supportingShades.map((s) => (
@@ -173,7 +173,7 @@ export default function BrandGuidelinesPage() {
           <p className="text-ink-muted max-w-2xl mb-12 leading-relaxed">
             Serifs only. Cormorant Garamond is the workhorse; Allura is for
             single-letter flourishes; Times New Roman Bold is the print/email
-            fallback. No sans-serif anywhere — no Inter, Poppins, Geist, or Helvetica substitutes.
+            fallback. No sans-serif anywhere - no Inter, Poppins, Geist, or Helvetica substitutes.
           </p>
 
           <div className="space-y-12">
@@ -199,7 +199,7 @@ export default function BrandGuidelinesPage() {
                 Abcdefghijklmnopqrstuvwxyz
               </p>
               <p className="font-display text-2xl text-ink mt-2">
-                0123456789 — The quick brown fox jumps over the lazy dog.
+                0123456789 - The quick brown fox jumps over the lazy dog.
               </p>
             </div>
 
@@ -259,7 +259,7 @@ export default function BrandGuidelinesPage() {
               Loading the brand fonts
             </p>
             <pre className="whitespace-pre">
-{`/* Google Fonts — include in <head> or layout.tsx */
+{`/* Google Fonts - include in <head> or layout.tsx */
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Allura&display=swap" rel="stylesheet" />
 
 /* Or self-host from public/fonts/ (already in this repo):
@@ -330,7 +330,7 @@ export default function BrandGuidelinesPage() {
             </p>
             <p className="text-sm text-ink leading-relaxed">
               The BrandKit PDF documents four color variants of the full lockup
-              — cream/teal/gold combinations for light and dark backgrounds.
+              - cream/teal/gold combinations for light and dark backgrounds.
               Check <a href="/brand-kit.pdf" className="text-teal underline font-semibold">brand-kit.pdf</a>{" "}
               pages 1–4 before creating a new treatment. Never flatten the logo
               to a single color when color printing is available, and never crop,
@@ -350,7 +350,7 @@ export default function BrandGuidelinesPage() {
           <p className="text-cream/90 text-xl leading-relaxed max-w-3xl mb-10 font-display">
             Classic, dignified, warm, and grounded. A serif-forward,
             gold-and-teal aesthetic that nods to southern tradition, judicial
-            seriousness, and approachability. Think engraved invitation — not
+            seriousness, and approachability. Think engraved invitation - not
             startup landing page.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm text-cream/85 max-w-3xl">
@@ -358,7 +358,7 @@ export default function BrandGuidelinesPage() {
             <p><strong className="text-gold">Warm backgrounds</strong>, not stark white.</p>
             <p><strong className="text-gold">Sharp but elegant</strong>, not blocky or tech-like.</p>
             <p><strong className="text-gold">Gold accents</strong> signal prestige without being flashy.</p>
-            <p className="sm:col-span-2"><strong className="text-gold">Teal</strong> grounds the brand — authoritative without being cold.</p>
+            <p className="sm:col-span-2"><strong className="text-gold">Teal</strong> grounds the brand - authoritative without being cold.</p>
           </div>
         </div>
       </section>
@@ -377,7 +377,7 @@ export default function BrandGuidelinesPage() {
                 <li>Use the <strong>exact hex values</strong> above. No substitutes.</li>
                 <li>Pair <strong>teal with gold</strong> for highest impact.</li>
                 <li>Keep <strong>generous whitespace</strong> on the cream background.</li>
-                <li>Use <strong>Allura sparingly</strong> — single-letter flourishes or sign-offs only.</li>
+                <li>Use <strong>Allura sparingly</strong> - single-letter flourishes or sign-offs only.</li>
                 <li>Read this page and <strong>brand-kit.pdf</strong> before starting any new piece.</li>
               </ul>
             </div>
@@ -385,7 +385,7 @@ export default function BrandGuidelinesPage() {
               <p className="font-display text-xl font-bold text-teal-dark mb-4">Don&apos;t</p>
               <ul className="space-y-3 text-ink text-sm leading-relaxed">
                 <li>Don&apos;t use <strong>forest green</strong> (#1B4332), navy, red, or other accent colors.</li>
-                <li>Don&apos;t use <strong>sans-serif fonts</strong> anywhere — no Inter, Poppins, Geist, Helvetica.</li>
+                <li>Don&apos;t use <strong>sans-serif fonts</strong> anywhere - no Inter, Poppins, Geist, Helvetica.</li>
                 <li>Don&apos;t flatten the logo to <strong>a single color</strong> when color is available.</li>
                 <li>Don&apos;t <strong>crop, rotate, or modify</strong> the logo mark.</li>
                 <li>Don&apos;t use <strong>Allura for body copy</strong>. It&apos;s a flourish, not a text face.</li>
@@ -433,7 +433,7 @@ export default function BrandGuidelinesPage() {
 
             <div className="bg-teal text-cream p-6 font-mono text-xs leading-relaxed overflow-x-auto">
               <p className="text-gold/80 tracking-[0.2em] uppercase text-[10px] mb-3" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                Tailwind v4 — @theme block
+                Tailwind v4 - @theme block
               </p>
               <pre className="whitespace-pre">
 {`@theme inline {
@@ -459,7 +459,7 @@ export default function BrandGuidelinesPage() {
               <pre className="whitespace-pre">
 {`font-family: 'Cormorant Garamond', 'Times New Roman', Times, serif;
 
-/* Most email clients don't load web fonts — Times New Roman is the
+/* Most email clients don't load web fonts - Times New Roman is the
    brand's explicit fallback per brand/BRAND.md § Typography. */`}
               </pre>
             </div>
@@ -472,7 +472,7 @@ export default function BrandGuidelinesPage() {
             <p className="text-sm text-ink leading-relaxed">
               This page is generated from <code className="text-xs px-1.5 py-0.5 bg-cream-dark rounded">site/brand/BRAND.md</code>{" "}
               and <code className="text-xs px-1.5 py-0.5 bg-cream-dark rounded">site/brand/BrandKit.pdf</code>.
-              If something conflicts with the PDF, the PDF wins — flag it and
+              If something conflicts with the PDF, the PDF wins - flag it and
               we&apos;ll update this page to match. Share this URL with any
               vendor, designer, or engineer picking up brand work.
             </p>

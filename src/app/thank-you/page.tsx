@@ -16,10 +16,10 @@ interface PageProps {
 }
 
 export const metadata: Metadata = {
-  title: "Thank You — Carroll for Judge",
+  title: "Thank You - Carroll for Judge",
   description: "Thank you for your contribution.",
   // Don't let this page surface via search or social previews. The
-  // URL carries donor info that shouldn't propagate — the downloaded
+  // URL carries donor info that shouldn't propagate - the downloaded
   // image is the share asset.
   robots: { index: false, follow: false, nocache: true },
 };
@@ -60,7 +60,7 @@ export default async function ThankYouPage({ searchParams }: PageProps) {
           </p>
         </div>
 
-        {/* Cue right above the card — also a download trigger */}
+        {/* Cue right above the card - also a download trigger */}
         <div className="text-center mb-4">
           <a
             href={ogImageUrl}
