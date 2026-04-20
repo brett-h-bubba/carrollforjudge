@@ -193,7 +193,7 @@ export default function BrandGuidelinesPage() {
                 </p>
               </div>
               <p className="font-display text-6xl font-bold text-teal leading-tight">
-                Experienced. Fair. Ready.
+                Experience. Fairness. Family.
               </p>
               <p className="font-display text-4xl font-bold text-ink mt-4">
                 Abcdefghijklmnopqrstuvwxyz
@@ -241,7 +241,7 @@ export default function BrandGuidelinesPage() {
                 className="text-5xl font-bold text-teal"
                 style={{ fontFamily: "'Times New Roman', Times, serif" }}
               >
-                Experienced. Fair. Ready.
+                Experience. Fairness. Family.
               </p>
               <p
                 className="text-sm text-ink-muted mt-4"

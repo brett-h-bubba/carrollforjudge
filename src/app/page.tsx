@@ -155,10 +155,10 @@ export default async function Page() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-10 lg:gap-14">
-            {/* Pillar 1: Experienced */}
+            {/* Pillar 1: Experience */}
             <div className="border-t-2 border-gold pt-8">
               <h3 className="text-3xl sm:text-4xl font-bold text-teal-dark tracking-normal mb-5">
-                Experienced
+                Experience
               </h3>
               <p className="text-slate-light text-lg leading-loose">
                 21 years practicing in the exact cases chancery court handles
@@ -167,28 +167,30 @@ export default async function Page() {
               </p>
             </div>
 
-            {/* Pillar 2: Prepared */}
+            {/* Pillar 2: Fairness */}
             <div className="border-t-2 border-gold pt-8">
               <h3 className="text-3xl sm:text-4xl font-bold text-teal-dark tracking-normal mb-5">
-                Prepared
+                Fairness
               </h3>
               <p className="text-slate-light text-lg leading-loose">
-                Supreme Court clerkship under Chief Justice Smith. Solo
-                practice owner. Public defender. Adjunct professor at MC
-                School of Law. A career built on preparation, service, and
-                the law.
+                Four years on the bench as Family Master &mdash; actually
+                making the decisions this court makes every day. Listen
+                carefully. Follow the law. Treat every family with respect,
+                regardless of means or circumstance.
               </p>
             </div>
 
-            {/* Pillar 3: Ready */}
+            {/* Pillar 3: Family */}
             <div className="border-t-2 border-gold pt-8">
               <h3 className="text-3xl sm:text-4xl font-bold text-teal-dark tracking-normal mb-5">
-                Ready
+                Family
               </h3>
               <p className="text-slate-light text-lg leading-loose">
-                Other candidates will need time to learn the job. Keri has
-                spent 21 years doing it. Ready to serve Rankin County
-                families from Day One.
+                Chancery court touches families at their most vulnerable
+                moments &mdash; in adoption, custody, divorce, and
+                guardianship. Keri has spent her entire career standing with
+                Rankin County families through those moments. That&apos;s the
+                work.
               </p>
             </div>
           </div>
