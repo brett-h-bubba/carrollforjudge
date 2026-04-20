@@ -10,6 +10,7 @@
 
 import { sendAdminMail } from "@/lib/mailer";
 import { getServerSupabase } from "@/lib/supabase";
+import { getGA4Metrics, type GA4Metrics } from "@/lib/ga4-server";
 
 type Window = "yesterday" | "7day" | "30day";
 
@@ -26,6 +27,13 @@ interface Metrics {
     volunteer: Record<Window, number>;
     yard_sign: Record<Window, number>;
   };
+  pending: {
+    endorsements: number;
+    signups: number;
+    donations: number;
+    inbound_emails: number;
+  };
+  ga4: GA4Metrics | null;
 }
 
 // Returns ISO timestamp for America/Chicago midnight N days before today.
@@ -146,6 +154,21 @@ async function countSignups(
   return { count, volunteer, yard_sign };
 }
 
+async function countPending(
+  supabase: ReturnType<typeof getServerSupabase>,
+  table: "endorsements" | "signups" | "donations" | "inbound_emails",
+): Promise<number> {
+  const { count, error } = await supabase
+    .from(table)
+    .select("id", { count: "exact", head: true })
+    .is("reviewed_at", null);
+  if (error) {
+    console.error(`[digest] pending ${table} query failed:`, error);
+    return 0;
+  }
+  return count ?? 0;
+}
+
 export async function buildMetrics(): Promise<Metrics> {
   const supabase = getServerSupabase();
   const ranges = windowRanges();
@@ -160,6 +183,14 @@ export async function buildMetrics(): Promise<Metrics> {
   const signups = await Promise.all(
     windows.map((w) => countSignups(supabase, ranges[w].start, ranges[w].end)),
   );
+  const [pendingEndorsements, pendingSignups, pendingDonations, pendingInbound, ga4] =
+    await Promise.all([
+      countPending(supabase, "endorsements"),
+      countPending(supabase, "signups"),
+      countPending(supabase, "donations"),
+      countPending(supabase, "inbound_emails"),
+      getGA4Metrics(),
+    ]);
 
   const byWindow = <T>(arr: T[]): Record<Window, T> =>
     windows.reduce(
@@ -183,6 +214,13 @@ export async function buildMetrics(): Promise<Metrics> {
       volunteer: byWindow(signups.map((s) => s.volunteer)),
       yard_sign: byWindow(signups.map((s) => s.yard_sign)),
     },
+    pending: {
+      endorsements: pendingEndorsements,
+      signups: pendingSignups,
+      donations: pendingDonations,
+      inbound_emails: pendingInbound,
+    },
+    ga4,
   };
 }
 
@@ -201,11 +239,21 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
     month: "long",
     day: "numeric",
   });
-  const subject = `Carroll for Judge — Morning Digest, ${today}`;
+  const pendingTotal =
+    metrics.pending.endorsements +
+    metrics.pending.signups +
+    metrics.pending.donations +
+    metrics.pending.inbound_emails;
+  const subject = pendingTotal > 0
+    ? `Carroll for Judge — ${pendingTotal} pending · ${today}`
+    : `Carroll for Judge — Morning Digest, ${today}`;
 
   const teal = "#215b64";
   const gold = "#b08a49";
   const cream = "#f7f1e8";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.carrollforjudge.com";
+  const vercelAnalyticsUrl = process.env.DIGEST_VERCEL_ANALYTICS_URL ?? "";
+  const ga4DashboardUrl = process.env.DIGEST_GA4_DASHBOARD_URL ?? "";
 
   const row = (label: string, yesterday: string, seven: string, thirty: string, bold = false) => `
     <tr>
@@ -215,6 +263,120 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
       <td style="padding:10px 16px;border-bottom:1px solid #e5dfd3;text-align:right;${bold ? "font-weight:700;" : ""}color:${teal};">${thirty}</td>
     </tr>
   `;
+
+  const pendingRow = (label: string, count: number, href: string) => {
+    if (count === 0) return "";
+    return `
+      <tr>
+        <td style="padding:12px 20px;border-bottom:1px solid #e5dfd3;color:${teal};font-weight:600;">${label}</td>
+        <td style="padding:12px 20px;border-bottom:1px solid #e5dfd3;text-align:right;color:${gold};font-weight:700;font-size:18px;">${count}</td>
+        <td style="padding:12px 20px;border-bottom:1px solid #e5dfd3;text-align:right;">
+          <a href="${href}" style="color:${teal};text-decoration:underline;font-size:13px;">Review →</a>
+        </td>
+      </tr>
+    `;
+  };
+
+  const pendingSection = pendingTotal > 0
+    ? `
+      <tr>
+        <td style="padding:24px 24px 8px;">
+          <p style="margin:0;color:${gold};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Needs your attention</p>
+          <h2 style="margin:4px 0 12px;font-size:18px;color:${teal};">${pendingTotal} pending review</h2>
+          <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;">
+            ${pendingRow("Pending endorsements", metrics.pending.endorsements, `${siteUrl}/admin`)}
+            ${pendingRow("New signups", metrics.pending.signups, `${siteUrl}/admin/signups`)}
+            ${pendingRow("New donations", metrics.pending.donations, `${siteUrl}/admin/donations`)}
+            ${pendingRow("Unread inbox messages", metrics.pending.inbound_emails, `${siteUrl}/admin/inbox`)}
+          </table>
+        </td>
+      </tr>
+    `
+    : `
+      <tr>
+        <td style="padding:24px 24px 8px;">
+          <p style="margin:0;color:${gold};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Needs your attention</p>
+          <p style="margin:8px 0 0;color:${teal};font-size:15px;">✓ Inbox zero — no items pending review.</p>
+        </td>
+      </tr>
+    `;
+
+  const ga4Section = metrics.ga4
+    ? (() => {
+        const g = metrics.ga4!;
+        const topPages = g.topPages
+          .map(
+            (p) =>
+              `<tr><td style="padding:6px 0;color:${teal};font-size:13px;">${p.path}</td><td style="padding:6px 0;text-align:right;color:#6b6b6b;font-size:13px;">${p.views}</td></tr>`,
+          )
+          .join("");
+        const topRefs = g.topReferrers
+          .map(
+            (r) =>
+              `<tr><td style="padding:6px 0;color:${teal};font-size:13px;">${r.source}</td><td style="padding:6px 0;text-align:right;color:#6b6b6b;font-size:13px;">${r.users}</td></tr>`,
+          )
+          .join("");
+        return `
+          <tr>
+            <td style="padding:24px 24px 8px;">
+              <p style="margin:0;color:${gold};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Site traffic</p>
+              <h2 style="margin:4px 0 12px;font-size:18px;color:${teal};">Google Analytics</h2>
+              <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;font-size:14px;">
+                <thead>
+                  <tr style="background:${teal};color:${cream};">
+                    <th style="padding:8px 16px;text-align:left;font-size:11px;letter-spacing:2px;text-transform:uppercase;"></th>
+                    <th style="padding:8px 16px;text-align:right;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Visitors</th>
+                    <th style="padding:8px 16px;text-align:right;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Sessions</th>
+                    <th style="padding:8px 16px;text-align:right;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Pageviews</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${row("Yesterday", String(g.yesterday.users), String(g.yesterday.sessions), String(g.yesterday.pageViews), true)}
+                  ${row("7 days", String(g.sevenDay.users), String(g.sevenDay.sessions), String(g.sevenDay.pageViews))}
+                </tbody>
+              </table>
+              ${
+                topPages || topRefs
+                  ? `
+                <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;margin-top:16px;">
+                  <tr>
+                    <td style="width:50%;vertical-align:top;padding-right:12px;">
+                      <p style="margin:0 0 6px;color:${gold};font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">Top pages (7d)</p>
+                      <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;">${topPages}</table>
+                    </td>
+                    <td style="width:50%;vertical-align:top;padding-left:12px;">
+                      <p style="margin:0 0 6px;color:${gold};font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;">Top referrers (7d)</p>
+                      <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;">${topRefs}</table>
+                    </td>
+                  </tr>
+                </table>
+              `
+                  : ""
+              }
+            </td>
+          </tr>
+        `;
+      })()
+    : `
+      <tr>
+        <td style="padding:24px 24px 8px;">
+          <p style="margin:0;color:${gold};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Site traffic</p>
+          <p style="margin:8px 0 0;color:#6b6b6b;font-size:13px;">Google Analytics not configured yet. Set <code>GA4_PROPERTY_ID</code> and <code>GA4_SERVICE_ACCOUNT_JSON</code> in Vercel to see visitor stats here.</p>
+        </td>
+      </tr>
+    `;
+
+  const footerLinks = [
+    `<a href="${siteUrl}/admin" style="color:${teal};text-decoration:underline;">Admin panel</a>`,
+    vercelAnalyticsUrl
+      ? `<a href="${vercelAnalyticsUrl}" style="color:${teal};text-decoration:underline;">Vercel Analytics</a>`
+      : "",
+    ga4DashboardUrl
+      ? `<a href="${ga4DashboardUrl}" style="color:${teal};text-decoration:underline;">Google Analytics</a>`
+      : "",
+  ]
+    .filter(Boolean)
+    .join(" &nbsp;·&nbsp; ");
 
   const html = `
 <!doctype html>
@@ -228,8 +390,14 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
         <p style="margin:4px 0 0;color:#6b6b6b;font-size:14px;">${today}</p>
       </td>
     </tr>
+    ${pendingSection}
     <tr>
-      <td style="padding:0;">
+      <td style="padding:24px 24px 8px;">
+        <p style="margin:0;color:${gold};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Campaign metrics</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:0 0 16px;">
         <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;font-size:14px;">
           <thead>
             <tr style="background:${teal};color:${cream};">
@@ -250,11 +418,10 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
         </table>
       </td>
     </tr>
+    ${ga4Section}
     <tr>
       <td style="padding:20px 24px;color:#6b6b6b;font-size:12px;border-top:1px solid #e5dfd3;">
-        Digest fires daily from the campaign platform. Reply to this email or visit the
-        <a href="${process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.carrollforjudge.com"}/admin" style="color:${teal};">admin panel</a>
-        for details.
+        ${footerLinks}
       </td>
     </tr>
   </table>
@@ -262,10 +429,27 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
 </html>
   `.trim();
 
-  const text = [
+  const textLines: string[] = [
     `Carroll for Judge — Morning Digest`,
     today,
     ``,
+    `NEEDS YOUR ATTENTION`,
+  ];
+  if (pendingTotal === 0) {
+    textLines.push(`  Inbox zero — no items pending review.`);
+  } else {
+    if (metrics.pending.endorsements > 0)
+      textLines.push(`  ${metrics.pending.endorsements} pending endorsements → ${siteUrl}/admin`);
+    if (metrics.pending.signups > 0)
+      textLines.push(`  ${metrics.pending.signups} new signups → ${siteUrl}/admin/signups`);
+    if (metrics.pending.donations > 0)
+      textLines.push(`  ${metrics.pending.donations} new donations → ${siteUrl}/admin/donations`);
+    if (metrics.pending.inbound_emails > 0)
+      textLines.push(`  ${metrics.pending.inbound_emails} unread inbox messages → ${siteUrl}/admin/inbox`);
+  }
+  textLines.push(
+    ``,
+    `CAMPAIGN METRICS`,
     `                           Yesterday   7 days   30 days`,
     `Donations                  ${metrics.donations.count.yesterday.toString().padStart(4)}      ${metrics.donations.count["7day"].toString().padStart(4)}     ${metrics.donations.count["30day"].toString().padStart(4)}`,
     `  Amount raised          ${formatCurrency(metrics.donations.amount.yesterday).padStart(8)}   ${formatCurrency(metrics.donations.amount["7day"]).padStart(7)}  ${formatCurrency(metrics.donations.amount["30day"]).padStart(7)}`,
@@ -274,8 +458,33 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
     `  Volunteers               ${metrics.signups.volunteer.yesterday.toString().padStart(4)}      ${metrics.signups.volunteer["7day"].toString().padStart(4)}     ${metrics.signups.volunteer["30day"].toString().padStart(4)}`,
     `  Yard signs               ${metrics.signups.yard_sign.yesterday.toString().padStart(4)}      ${metrics.signups.yard_sign["7day"].toString().padStart(4)}     ${metrics.signups.yard_sign["30day"].toString().padStart(4)}`,
     ``,
-    `Admin panel: ${process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.carrollforjudge.com"}/admin`,
-  ].join("\n");
+  );
+  if (metrics.ga4) {
+    const g = metrics.ga4;
+    textLines.push(
+      `SITE TRAFFIC (Google Analytics)`,
+      `  Yesterday: ${g.yesterday.users} visitors, ${g.yesterday.sessions} sessions, ${g.yesterday.pageViews} pageviews`,
+      `  7 days:    ${g.sevenDay.users} visitors, ${g.sevenDay.sessions} sessions, ${g.sevenDay.pageViews} pageviews`,
+    );
+    if (g.topPages.length > 0) {
+      textLines.push(`  Top pages (7d):`);
+      for (const p of g.topPages) textLines.push(`    ${p.path}  —  ${p.views}`);
+    }
+    if (g.topReferrers.length > 0) {
+      textLines.push(`  Top referrers (7d):`);
+      for (const r of g.topReferrers) textLines.push(`    ${r.source}  —  ${r.users}`);
+    }
+    textLines.push(``);
+  } else {
+    textLines.push(`SITE TRAFFIC: Google Analytics not configured.`, ``);
+  }
+  textLines.push(
+    `Admin panel: ${siteUrl}/admin`,
+  );
+  if (vercelAnalyticsUrl) textLines.push(`Vercel Analytics: ${vercelAnalyticsUrl}`);
+  if (ga4DashboardUrl) textLines.push(`Google Analytics: ${ga4DashboardUrl}`);
+
+  const text = textLines.join("\n");
 
   return { subject, html, text };
 }
