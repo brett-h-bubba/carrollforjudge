@@ -120,6 +120,12 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Keri H. Carroll for Chancery Court
             Judge. All rights reserved.
           </p>
+          <Link
+            href="/brand-guidelines"
+            className="hover:text-gold transition-colors tracking-wide"
+          >
+            Brand guidelines
+          </Link>
           <p>Paid for by the Friends of Keri H. Carroll. Approved by Keri H. Carroll.</p>
         </div>
       </div>
