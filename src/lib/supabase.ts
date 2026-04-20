@@ -40,6 +40,20 @@ export type EndorsementCategory =
 
 export type EndorsementStatus = "pending" | "approved" | "rejected";
 
+/**
+ * Which of the three campaign pillars the endorsement is testifying to.
+ * See brand/BRAND.md + the "Experience · Fairness · Family" framework.
+ * Nullable on legacy rows that predate the field.
+ */
+export type EndorsementPillar = "experience" | "fairness" | "family" | "other";
+
+export const ENDORSEMENT_PILLARS: EndorsementPillar[] = [
+  "experience",
+  "fairness",
+  "family",
+  "other",
+];
+
 export interface Endorsement {
   id: string;
   name: string;
@@ -47,6 +61,7 @@ export interface Endorsement {
   location: string | null;
   endorsement: string;
   category: EndorsementCategory | null;
+  pillar: EndorsementPillar | null;
   zinger: string | null;
   share_caption: string | null;
   safe_to_publish: boolean;

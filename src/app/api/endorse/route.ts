@@ -55,6 +55,7 @@ export async function POST(req: NextRequest) {
     // Fallback — still accept the endorsement, just without AI enrichment
     analysis = {
       category: "other" as const,
+      pillar: "other" as const,
       zinger: `${name.split(" ")[0]} is with Keri.`,
       share_caption: `I'm endorsing Keri H. Carroll for Chancery Court Judge. Join me at carrollforjudge.com.`,
       safe_to_publish: true,
@@ -71,12 +72,13 @@ export async function POST(req: NextRequest) {
       location,
       endorsement,
       category:         analysis.category,
+      pillar:           analysis.pillar,
       zinger:           analysis.zinger,
       share_caption:    analysis.share_caption,
       safe_to_publish:  analysis.safe_to_publish,
       status:           "pending",
     })
-    .select("id, zinger, share_caption, category, safe_to_publish")
+    .select("id, zinger, share_caption, category, pillar, safe_to_publish")
     .single();
 
   if (error || !data) {
@@ -95,6 +97,7 @@ export async function POST(req: NextRequest) {
       `Email: ${email}`,
       location ? `Location: ${location}` : null,
       `Category: ${analysis.category}`,
+      `Pillar: ${analysis.pillar}`,
       `Zinger: ${analysis.zinger}`,
       `Safe to publish: ${analysis.safe_to_publish ? "yes" : "NO — review carefully"}`,
       ``,
@@ -119,6 +122,7 @@ export async function POST(req: NextRequest) {
     <tr><td style="padding:6px 0;color:#6b7280;">Email</td><td style="padding:6px 0;"><a href="mailto:${esc(email)}" style="color:#215b64;">${esc(email)}</a></td></tr>
     ${location ? `<tr><td style="padding:6px 0;color:#6b7280;">Location</td><td style="padding:6px 0;">${esc(location)}</td></tr>` : ""}
     <tr><td style="padding:6px 0;color:#6b7280;">Category</td><td style="padding:6px 0;">${esc(analysis.category)}</td></tr>
+    <tr><td style="padding:6px 0;color:#6b7280;">Pillar</td><td style="padding:6px 0;"><strong style="color:#b08a49;text-transform:capitalize;">${esc(analysis.pillar)}</strong></td></tr>
     <tr><td style="padding:6px 0;color:#6b7280;">Safety</td><td style="padding:6px 0;">${analysis.safe_to_publish ? '<span style="color:#059669;">Safe to publish</span>' : '<strong style="color:#dc2626;">REVIEW CAREFULLY</strong>'}</td></tr>
   </table>
   <div style="margin:20px 0;padding:14px 16px;background:#f7f1e8;border-left:3px solid #b08a49;font-style:italic;font-size:15px;color:#215b64;">

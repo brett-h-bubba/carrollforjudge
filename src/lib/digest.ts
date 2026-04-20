@@ -33,6 +33,12 @@ interface Metrics {
     donations: number;
     inbound_emails: number;
   };
+  pillarCoverage: {
+    experience: number;
+    fairness: number;
+    family: number;
+    unclassified: number; // approved endorsements with NULL or "other" pillar
+  };
   ga4: GA4Metrics | null;
 }
 
@@ -154,6 +160,32 @@ async function countSignups(
   return { count, volunteer, yard_sign };
 }
 
+async function countApprovedByPillar(
+  supabase: ReturnType<typeof getServerSupabase>,
+): Promise<{ experience: number; fairness: number; family: number; unclassified: number }> {
+  const { data, error } = await supabase
+    .from("endorsements")
+    .select("pillar")
+    .eq("status", "approved");
+  if (error) {
+    console.error("[digest] approved-by-pillar query failed:", error);
+    return { experience: 0, fairness: 0, family: 0, unclassified: 0 };
+  }
+  let experience = 0,
+    fairness = 0,
+    family = 0,
+    unclassified = 0;
+  for (const row of data ?? []) {
+    switch ((row as { pillar: string | null }).pillar) {
+      case "experience": experience++; break;
+      case "fairness":   fairness++;   break;
+      case "family":     family++;     break;
+      default:           unclassified++;
+    }
+  }
+  return { experience, fairness, family, unclassified };
+}
+
 async function countPending(
   supabase: ReturnType<typeof getServerSupabase>,
   table: "endorsements" | "signups" | "donations" | "inbound_emails",
@@ -183,14 +215,21 @@ export async function buildMetrics(): Promise<Metrics> {
   const signups = await Promise.all(
     windows.map((w) => countSignups(supabase, ranges[w].start, ranges[w].end)),
   );
-  const [pendingEndorsements, pendingSignups, pendingDonations, pendingInbound, ga4] =
-    await Promise.all([
-      countPending(supabase, "endorsements"),
-      countPending(supabase, "signups"),
-      countPending(supabase, "donations"),
-      countPending(supabase, "inbound_emails"),
-      getGA4Metrics(),
-    ]);
+  const [
+    pendingEndorsements,
+    pendingSignups,
+    pendingDonations,
+    pendingInbound,
+    pillarCoverage,
+    ga4,
+  ] = await Promise.all([
+    countPending(supabase, "endorsements"),
+    countPending(supabase, "signups"),
+    countPending(supabase, "donations"),
+    countPending(supabase, "inbound_emails"),
+    countApprovedByPillar(supabase),
+    getGA4Metrics(),
+  ]);
 
   const byWindow = <T>(arr: T[]): Record<Window, T> =>
     windows.reduce(
@@ -220,6 +259,7 @@ export async function buildMetrics(): Promise<Metrics> {
       donations: pendingDonations,
       inbound_emails: pendingInbound,
     },
+    pillarCoverage,
     ga4,
   };
 }
@@ -305,6 +345,55 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
         <td style="padding:28px 28px 12px;">
           <p style="margin:0;color:${gold};font-family:${serif};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Needs your attention</p>
           <p style="margin:10px 0 0;color:${teal};font-family:${serif};font-size:16px;font-style:italic;">Inbox zero — nothing pending review.</p>
+        </td>
+      </tr>
+    `;
+
+  const pc = metrics.pillarCoverage;
+  const pcTotal = pc.experience + pc.fairness + pc.family + pc.unclassified;
+  const pcBar = (n: number) => {
+    const max = Math.max(pc.experience, pc.fairness, pc.family, 1);
+    const pct = Math.round((n / max) * 100);
+    return `
+      <div style="background:${rule};height:8px;position:relative;overflow:hidden;">
+        <div style="background:${gold};width:${pct}%;height:100%;"></div>
+      </div>
+    `;
+  };
+  const pillarCoverageSection = pcTotal === 0
+    ? ""
+    : `
+      <tr>
+        <td style="padding:28px 28px 12px;">
+          <p style="margin:0;color:${gold};font-family:${serif};font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Endorsement coverage</p>
+          <h2 style="margin:6px 0 4px;font-family:${serif};font-size:22px;font-weight:700;color:${teal};">Approved voices by pillar</h2>
+          <p style="margin:0 0 16px;color:${inkMuted};font-family:${serif};font-size:13px;font-style:italic;">Recruit where the bar is shortest.</p>
+          <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;font-family:${serif};font-size:14px;">
+            <tr>
+              <td style="padding:6px 0;color:${teal};font-weight:700;width:120px;">Experience</td>
+              <td style="padding:6px 12px;">${pcBar(pc.experience)}</td>
+              <td style="padding:6px 0;text-align:right;color:${teal};font-weight:700;width:40px;">${pc.experience}</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;color:${teal};font-weight:700;">Fairness</td>
+              <td style="padding:6px 12px;">${pcBar(pc.fairness)}</td>
+              <td style="padding:6px 0;text-align:right;color:${teal};font-weight:700;">${pc.fairness}</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 0;color:${teal};font-weight:700;">Family</td>
+              <td style="padding:6px 12px;">${pcBar(pc.family)}</td>
+              <td style="padding:6px 0;text-align:right;color:${teal};font-weight:700;">${pc.family}</td>
+            </tr>
+            ${
+              pc.unclassified > 0
+                ? `<tr>
+                    <td style="padding:6px 0;color:${inkMuted};">Unclassified</td>
+                    <td style="padding:6px 12px;">${pcBar(pc.unclassified)}</td>
+                    <td style="padding:6px 0;text-align:right;color:${inkMuted};">${pc.unclassified}</td>
+                  </tr>`
+                : ""
+            }
+          </table>
         </td>
       </tr>
     `;
@@ -427,6 +516,7 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
         </table>
       </td>
     </tr>
+    ${pillarCoverageSection}
     ${ga4Section}
     <tr>
       <td style="padding:22px 28px;color:${inkMuted};font-family:${serif};font-size:12px;border-top:1px solid ${rule};">
@@ -468,6 +558,16 @@ export function renderDigest(metrics: Metrics): { subject: string; html: string;
     `  Yard signs               ${metrics.signups.yard_sign.yesterday.toString().padStart(4)}      ${metrics.signups.yard_sign["7day"].toString().padStart(4)}     ${metrics.signups.yard_sign["30day"].toString().padStart(4)}`,
     ``,
   );
+  if (pcTotal > 0) {
+    textLines.push(
+      `ENDORSEMENT COVERAGE (approved, by pillar)`,
+      `  Experience    ${pc.experience}`,
+      `  Fairness      ${pc.fairness}`,
+      `  Family        ${pc.family}`,
+    );
+    if (pc.unclassified > 0) textLines.push(`  Unclassified  ${pc.unclassified}`);
+    textLines.push(``);
+  }
   if (metrics.ga4) {
     const g = metrics.ga4;
     textLines.push(

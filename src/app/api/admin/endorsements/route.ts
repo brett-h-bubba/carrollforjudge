@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSupabase, MAX_FEATURED } from "@/lib/supabase";
+import { getServerSupabase, MAX_FEATURED, ENDORSEMENT_PILLARS } from "@/lib/supabase";
+import type { EndorsementPillar } from "@/lib/supabase";
 
 // Access to these routes is gated by middleware.ts (HTTP Basic Auth).
 // If a request reaches here, the caller has already authenticated.
@@ -33,11 +34,12 @@ export async function PATCH(req: NextRequest) {
   if (!body || typeof body.id !== "string") {
     return NextResponse.json({ error: "Bad request" }, { status: 400 });
   }
-  const { id, status, zinger, featured } = body as {
+  const { id, status, zinger, featured, pillar } = body as {
     id: string;
     status?: string;
     zinger?: string;
     featured?: boolean;
+    pillar?: string;
   };
 
   const supabase = getServerSupabase();
@@ -62,6 +64,14 @@ export async function PATCH(req: NextRequest) {
   // ── Zinger edit ───────────────────────────────────────
   if (typeof zinger === "string" && zinger.trim()) {
     update.zinger = zinger.trim();
+  }
+
+  // ── Pillar edit — admin override of AI classification ──
+  if (typeof pillar === "string") {
+    if (!ENDORSEMENT_PILLARS.includes(pillar as EndorsementPillar)) {
+      return NextResponse.json({ error: "Invalid pillar" }, { status: 400 });
+    }
+    update.pillar = pillar;
   }
 
   // ── Featured toggle — enforce 3-item cap & approved-only ──

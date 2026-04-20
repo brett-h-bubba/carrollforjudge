@@ -3,8 +3,29 @@ import Link from "next/link";
 import EndorseCTA from "@/components/EndorseCTA";
 import FloatingEndorse from "@/components/FloatingEndorse";
 import { getServerSupabase } from "@/lib/supabase";
-import type { Endorsement, EndorsementCategory } from "@/lib/supabase";
+import type { Endorsement, EndorsementCategory, EndorsementPillar } from "@/lib/supabase";
 import { DONATE_URL } from "@/lib/donate";
+
+const PILLAR_SECTIONS: Array<{ pillar: EndorsementPillar; title: string; blurb: string }> = [
+  {
+    pillar: "experience",
+    title: "On her Experience",
+    blurb:
+      "21 years practicing the exact cases chancery court hears — attorneys, peers, and former clients speaking to the depth of her preparation.",
+  },
+  {
+    pillar: "fairness",
+    title: "On her Fairness",
+    blurb:
+      "Four years on the bench as Family Master. Those who have watched her listen, rule, and treat everyone with respect.",
+  },
+  {
+    pillar: "family",
+    title: "On her commitment to Family",
+    blurb:
+      "Clients, community leaders, and neighbors who have seen her stand with Rankin County families in their hardest moments.",
+  },
+];
 
 // Pull fresh each request so newly-approved endorsements appear immediately
 export const dynamic = "force-dynamic";
@@ -133,15 +154,7 @@ export default async function EndorsementsPage() {
       {count === 0 ? (
         <EmptyState />
       ) : (
-        <section className="bg-cream py-20 sm:py-28">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-              {approved.map((e) => (
-                <EndorsementCard key={e.id} endorsement={e} />
-              ))}
-            </div>
-          </div>
-        </section>
+        <PillarGroups approved={approved} />
       )}
 
       {/* ── Add Your Endorsement ───────────────────────────── */}
@@ -257,6 +270,100 @@ function EndorsementCard({ endorsement: e }: { endorsement: Endorsement }) {
         </cite>
       </div>
     </article>
+  );
+}
+
+// ───────────────────────────────────────────────────────────────
+// Grouped-by-pillar render. If none are classified yet, falls back
+// to a single grid so legacy rows still show up.
+// ───────────────────────────────────────────────────────────────
+function PillarGroups({ approved }: { approved: Endorsement[] }) {
+  const unclassified = approved.filter((e) => !e.pillar || e.pillar === "other");
+  const classified = approved.filter((e) => e.pillar && e.pillar !== "other");
+
+  // Legacy / pre-pillar fallback — all rows unclassified → original single grid
+  if (classified.length === 0) {
+    return (
+      <section className="bg-cream py-20 sm:py-28">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+            {approved.map((e) => (
+              <EndorsementCard key={e.id} endorsement={e} />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="bg-cream py-16 sm:py-20">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Jump-nav — shows pillars with at least 1 endorsement */}
+        <nav
+          aria-label="Jump to pillar"
+          className="flex flex-wrap items-center justify-center gap-3 mb-14 pb-8 border-b border-cream-dark"
+        >
+          <span className="text-[10px] font-bold text-gold tracking-[0.3em] uppercase">
+            Filter by pillar
+          </span>
+          {PILLAR_SECTIONS.filter(
+            (s) => approved.some((e) => e.pillar === s.pillar),
+          ).map((s) => (
+            <a
+              key={s.pillar}
+              href={`#pillar-${s.pillar}`}
+              className="text-xs font-semibold tracking-wider uppercase text-teal-dark border border-teal/30 px-3 py-1.5 hover:bg-teal hover:text-cream transition-colors"
+            >
+              {s.title.replace("On her ", "").replace("On her commitment to ", "")}
+            </a>
+          ))}
+        </nav>
+
+        {PILLAR_SECTIONS.map((s) => {
+          const rows = approved.filter((e) => e.pillar === s.pillar);
+          if (rows.length === 0) return null;
+          return (
+            <div key={s.pillar} id={`pillar-${s.pillar}`} className="mb-16 last:mb-0 scroll-mt-24">
+              <header className="mb-8">
+                <p className="text-gold font-semibold tracking-[0.3em] uppercase text-[11px] mb-2">
+                  {rows.length} {rows.length === 1 ? "voice" : "voices"}
+                </p>
+                <h2 className="text-3xl sm:text-4xl font-bold text-teal-dark mb-3">
+                  {s.title}
+                </h2>
+                <p className="text-slate max-w-2xl leading-relaxed">{s.blurb}</p>
+                <div className="w-16 h-[2px] bg-gold mt-5" />
+              </header>
+              <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+                {rows.map((e) => (
+                  <EndorsementCard key={e.id} endorsement={e} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
+
+        {unclassified.length > 0 && (
+          <div id="pillar-other" className="mb-0 scroll-mt-24 pt-12 mt-12 border-t border-cream-dark">
+            <header className="mb-8">
+              <p className="text-gold font-semibold tracking-[0.3em] uppercase text-[11px] mb-2">
+                {unclassified.length} more
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-teal-dark mb-3">
+                More voices for Keri
+              </h2>
+              <div className="w-16 h-[2px] bg-gold mt-5" />
+            </header>
+            <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+              {unclassified.map((e) => (
+                <EndorsementCard key={e.id} endorsement={e} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 

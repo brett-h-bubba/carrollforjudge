@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import type { Endorsement, EndorsementStatus } from "@/lib/supabase";
+import type { Endorsement, EndorsementStatus, EndorsementPillar } from "@/lib/supabase";
+import { ENDORSEMENT_PILLARS } from "@/lib/supabase";
+import { labelForPillar } from "@/lib/ai";
 import AdminTabs from "@/components/AdminTabs";
 
 const MAX_FEATURED = 3;
@@ -12,6 +14,7 @@ interface PatchBody {
   status?: EndorsementStatus;
   zinger?: string;
   featured?: boolean;
+  pillar?: EndorsementPillar;
 }
 
 export default function AdminPage() {
@@ -62,6 +65,10 @@ export default function AdminPage() {
 
   async function toggleFeatured(id: string, nextValue: boolean) {
     await patch(id, { featured: nextValue });
+  }
+
+  async function updatePillar(id: string, pillar: EndorsementPillar) {
+    await patch(id, { pillar });
   }
 
   return (
@@ -127,6 +134,7 @@ export default function AdminPage() {
                 endorsement={e}
                 onAction={updateStatus}
                 onToggleFeatured={toggleFeatured}
+                onUpdatePillar={updatePillar}
                 featuredCount={featuredCount}
               />
             ))}
@@ -142,11 +150,13 @@ function EndorsementCard({
   endorsement,
   onAction,
   onToggleFeatured,
+  onUpdatePillar,
   featuredCount,
 }: {
   endorsement: Endorsement;
   onAction: (id: string, status: EndorsementStatus, zinger?: string) => Promise<void>;
   onToggleFeatured: (id: string, nextValue: boolean) => Promise<void>;
+  onUpdatePillar: (id: string, pillar: EndorsementPillar) => Promise<void>;
   featuredCount: number;
 }) {
   const [zinger, setZinger] = useState(endorsement.zinger || "");
@@ -199,8 +209,32 @@ function EndorsementCard({
           <div className="text-sm text-ink-muted">
             {endorsement.email} · {new Date(endorsement.created_at).toLocaleString()}
           </div>
-          <div className="text-xs text-gold font-semibold tracking-wider uppercase mt-1">
-            {endorsement.category?.replace(/_/g, " ")}
+          <div className="flex items-center gap-3 flex-wrap mt-1.5">
+            <span className="text-xs text-gold font-semibold tracking-wider uppercase">
+              {endorsement.category?.replace(/_/g, " ") || "uncategorized"}
+            </span>
+            <span className="text-ink-muted text-xs">·</span>
+            <label className="inline-flex items-center gap-2">
+              <span className="text-[10px] font-bold text-teal uppercase tracking-[0.2em]">Pillar</span>
+              <select
+                value={endorsement.pillar ?? ""}
+                onChange={(e) => {
+                  const v = e.target.value as EndorsementPillar;
+                  if (v) onUpdatePillar(endorsement.id, v);
+                }}
+                className="text-xs px-2 py-0.5 border border-teal/30 bg-cream text-teal-dark font-semibold focus:border-gold focus:outline-none"
+                title="What pillar this endorsement testifies to"
+              >
+                <option value="" disabled>
+                  {endorsement.pillar ? labelForPillar(endorsement.pillar) : "— set pillar —"}
+                </option>
+                {ENDORSEMENT_PILLARS.map((p) => (
+                  <option key={p} value={p}>
+                    {labelForPillar(p)}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
         </div>
       </div>
