@@ -12,6 +12,7 @@
     "@google-analytics/data": "^5.2.1",
     "@google/generative-ai": "^0.24.1",
     "@supabase/supabase-js": "^2.103.0",
+    "@vercel/analytics": "^2.0.1",
     "next": "16.2.3",
     "nodemailer": "^6.10.1",
     "react": "19.2.4",
