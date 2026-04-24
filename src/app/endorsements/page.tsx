@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import EndorseCTA from "@/components/EndorseCTA";
 import FloatingEndorse from "@/components/FloatingEndorse";
+import { EndorsementCard } from "@/components/EndorsementCard";
 import { getServerSupabase } from "@/lib/supabase";
-import type { Endorsement, EndorsementCategory, EndorsementPillar } from "@/lib/supabase";
+import type { Endorsement, EndorsementPillar } from "@/lib/supabase";
 import { DONATE_URL } from "@/lib/donate";
 
 const PILLAR_SECTIONS: Array<{ pillar: EndorsementPillar; title: string; blurb: string }> = [
@@ -37,17 +38,6 @@ export const metadata: Metadata = {
     "See who supports Keri H. Carroll for Chancery Court Judge in Mississippi's 20th District. Endorsements from legal professionals, community leaders, and neighbors across Rankin County.",
   alternates: { canonical: "/endorsements" },
 };
-
-function categoryLabel(category: EndorsementCategory | null): string {
-  switch (category) {
-    case "former_client":          return "Former Client";
-    case "professional_reference": return "Professional Reference";
-    case "community_leader":       return "Community Leader";
-    case "fellow_attorney":        return "Fellow Attorney";
-    case "friend_family":          return "Friend of the Campaign";
-    default:                       return "Supporter";
-  }
-}
 
 async function fetchApproved(): Promise<Endorsement[]> {
   try {
@@ -207,69 +197,6 @@ export default async function EndorsementsPage() {
         </div>
       </section>
     </div>
-  );
-}
-
-// ───────────────────────────────────────────────────────────────
-// Single endorsement card
-// ───────────────────────────────────────────────────────────────
-function EndorsementCard({ endorsement: e }: { endorsement: Endorsement }) {
-  const headline = e.zinger?.trim() || null;
-  const fullText = e.endorsement.trim();
-  const isFeatured = e.featured;
-
-  return (
-    <article
-      id={`endorsement-${e.id}`}
-      className={`bg-white flex flex-col shadow-sm hover:shadow-xl transition-shadow ${
-        isFeatured ? "ring-1 ring-gold/30" : "border-l-4 border-gold"
-      }`}
-    >
-      {/* Featured ribbon */}
-      {isFeatured && (
-        <div className="bg-gold text-teal-dark px-7 py-2 text-xs font-bold uppercase tracking-[0.25em] flex items-center gap-2">
-          <span aria-hidden="true">✦</span> Featured Endorsement
-        </div>
-      )}
-
-      <div className="p-7 sm:p-8 flex flex-col flex-1">
-        {/* Category + location (meta row) */}
-        <div className="flex items-center gap-2 flex-wrap mb-5 text-xs">
-          <span className="text-gold font-semibold uppercase tracking-[0.25em]">
-            {categoryLabel(e.category)}
-          </span>
-          {e.location && (
-            <>
-              <span className="text-slate-light" aria-hidden="true">·</span>
-              <span className="text-slate-light uppercase tracking-[0.2em]">
-                {e.location}
-              </span>
-            </>
-          )}
-        </div>
-
-        {/* Zinger (pull quote) */}
-        {headline && (
-          <blockquote
-            cite={typeof window === "undefined" ? undefined : window.location.href}
-            className="text-xl sm:text-2xl text-teal-dark font-semibold italic leading-snug mb-5"
-          >
-            &ldquo;{headline}&rdquo;
-          </blockquote>
-        )}
-
-        {/* Full endorsement text */}
-        <p className="text-slate leading-relaxed text-[15px] flex-1 whitespace-pre-line">
-          {fullText}
-        </p>
-
-        {/* Attribution */}
-        <cite className="mt-6 pt-4 border-t border-cream-dark not-italic flex items-baseline gap-2">
-          <span className="text-slate-light" aria-hidden="true">-</span>
-          <span className="font-semibold text-teal-dark">{e.name}</span>
-        </cite>
-      </div>
-    </article>
   );
 }
 
