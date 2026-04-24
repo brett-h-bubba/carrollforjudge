@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Why Chancery Court Matters",
@@ -258,6 +259,81 @@ export default function ChanceryCourtPage() {
                 </h3>
                 <p className="text-slate-light leading-relaxed">
                   {pillar.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Editorial portrait band ─────────────────────────── */}
+      <section className="bg-cream">
+        <div className="relative w-full aspect-[3/2] max-h-[560px] overflow-hidden border-y-2 border-gold">
+          <Image
+            src="/images/keri-window-landscape.jpg"
+            alt="Keri H. Carroll, candidate for Chancery Court Judge, 20th District"
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
+        <p className="text-center text-sm uppercase tracking-[0.3em] text-slate-light py-5">
+          Keri H. Carroll &middot; Rankin County Chancery
+        </p>
+      </section>
+
+      {/* ── Keri's Rankin Chancery Record ─────────────────────── */}
+      <section className="py-20 sm:py-28 bg-cream">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gold font-semibold mb-4">
+              The Qualities Above, In Numbers
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-teal mb-2">
+              Keri Carroll in Rankin Chancery
+            </h2>
+            <div className="w-20 h-[3px] bg-gold mx-auto mb-6" />
+            <p className="text-slate-light text-lg max-w-2xl mx-auto">
+              Every one of these numbers was built inside Rankin County Chancery Court.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                stat: "10+",
+                unit: "Years",
+                desc: "as Guardian ad Litem in Rankin County Chancery Court",
+              },
+              {
+                stat: "3,000+",
+                unit: "Cases",
+                desc: "presided as Family Master in Rankin County Chancery Court",
+              },
+              {
+                stat: "500+",
+                unit: "Cases",
+                desc: "litigated in Rankin County Chancery Court",
+              },
+              {
+                stat: "100%",
+                unit: "Rankin County",
+                desc: "home, law office, and bench service - every year of her career",
+              },
+            ].map((item) => (
+              <div
+                key={item.desc}
+                className="bg-white p-8 text-center border-l-4 border-gold shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="text-5xl sm:text-6xl font-bold text-teal-dark leading-none tracking-tight">
+                  {item.stat}
+                </div>
+                <div className="mt-3 text-xs font-semibold tracking-[0.25em] uppercase text-gold">
+                  {item.unit}
+                </div>
+                <div className="mx-auto mt-4 w-10 h-px bg-gold/60" />
+                <p className="mt-4 text-slate text-base leading-relaxed italic">
+                  {item.desc}
                 </p>
               </div>
             ))}

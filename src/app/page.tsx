@@ -197,6 +197,62 @@ export default async function Page() {
         </div>
       </section>
 
+      {/* ===== BY THE NUMBERS - RANKIN CHANCERY ===== */}
+      <section className="bg-cream py-20 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-4">
+              A Record Only in Rankin County
+            </p>
+            <h2 className="text-4xl sm:text-5xl font-bold text-teal-dark tracking-normal">
+              Rankin County Chancery, By the Numbers
+            </h2>
+            <div className="mt-6 w-20 h-[2px] bg-gold mx-auto" />
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5">
+            {[
+              {
+                stat: "10+",
+                unit: "Years",
+                desc: "as Guardian ad Litem in Rankin County Chancery Court",
+              },
+              {
+                stat: "3,000+",
+                unit: "Cases",
+                desc: "presided as Family Master in Rankin County Chancery Court",
+              },
+              {
+                stat: "500+",
+                unit: "Cases",
+                desc: "litigated in Rankin County Chancery Court",
+              },
+              {
+                stat: "100%",
+                unit: "Rankin County",
+                desc: "home, law office, and bench service - every year of her career",
+              },
+            ].map((item) => (
+              <div
+                key={item.desc}
+                className="bg-white border-t-2 border-gold p-8 text-center shadow-md"
+              >
+                <div className="text-5xl sm:text-6xl font-bold text-teal-dark leading-none tracking-tight">
+                  {item.stat}
+                </div>
+                <div className="mt-3 text-xs font-semibold tracking-[0.25em] uppercase text-gold">
+                  {item.unit}
+                </div>
+                <div className="mx-auto mt-4 w-10 h-px bg-gold/60" />
+                <p className="mt-4 text-slate text-base leading-relaxed italic">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ===== ABOUT PREVIEW ===== */}
       <section className="bg-teal-dark py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

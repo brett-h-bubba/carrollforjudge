@@ -163,10 +163,10 @@ export default function AboutPage() {
                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-gold" />
                 <div className="ml-4 aspect-[3/4] w-full overflow-hidden relative shadow-xl">
                   <Image
-                    src="/images/headshot-2.jpg"
-                    alt="Keri H. Carroll in cream blazer"
+                    src="/images/keri-courtroom-seal.jpg"
+                    alt="Keri H. Carroll in the courtroom, before the Great Seal of the State of Mississippi"
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, 40vw"
                     priority
                   />
@@ -244,37 +244,54 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ═══════ SECTION 3: KEY QUALIFICATIONS ═══════ */}
+      {/* ═══════ SECTION 3: RANKIN CHANCERY RECORD ═══════ */}
       <section className="py-20 sm:py-28 bg-teal">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+          <div className="text-center mb-14">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gold font-semibold mb-4">
+              A Record Built in One Courthouse
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+              Rankin County Chancery, By the Numbers
+            </h2>
+            <div className="mx-auto mt-6 w-16 h-1 bg-gold" />
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5">
             {[
               {
-                stat: "21 YEARS",
-                desc: "of family law practice",
+                stat: "10+",
+                unit: "Years",
+                desc: "as Guardian ad Litem in Rankin County Chancery Court",
               },
               {
-                stat: "SUPREME COURT",
-                desc: "clerkship experience",
+                stat: "3,000+",
+                unit: "Cases",
+                desc: "presided as Family Master in Rankin County Chancery Court",
               },
               {
-                stat: "10 PRACTICE AREAS",
-                desc: "matching chancery jurisdiction",
+                stat: "500+",
+                unit: "Cases",
+                desc: "litigated in Rankin County Chancery Court",
               },
               {
-                stat: "READY",
-                desc: "on Day One",
+                stat: "100%",
+                unit: "Rankin County",
+                desc: "home, law office, and bench service - every year of her career",
               },
             ].map((item) => (
               <div
-                key={item.stat}
-                className="text-center py-10 px-6 border border-white/10"
+                key={item.desc}
+                className="text-center py-10 px-6 border border-white/10 bg-teal-dark/30"
               >
-                <div className="text-2xl sm:text-3xl font-bold uppercase tracking-[0.15em] text-gold">
+                <div className="text-5xl sm:text-6xl font-bold text-gold leading-none tracking-tight">
                   {item.stat}
                 </div>
+                <div className="mt-3 text-xs font-semibold tracking-[0.25em] uppercase text-gold/90">
+                  {item.unit}
+                </div>
                 <div className="mx-auto mt-4 w-8 h-px bg-gold/60" />
-                <div className="mt-4 text-lg text-white/90 italic">
+                <div className="mt-4 text-base text-white/90 italic leading-relaxed">
                   {item.desc}
                 </div>
               </div>
